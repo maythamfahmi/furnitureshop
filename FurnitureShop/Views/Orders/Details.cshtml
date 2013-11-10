@@ -1,0 +1,32 @@
+@model FurnitureShop.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">OrderDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.OrderDate)</div>
+
+    <div class="display-label">ShippingDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ShippingDate)</div>
+
+    <div class="display-label">DeliveryDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DeliveryDate)</div>
+
+    <div class="display-label">TrackingNumber</div>
+    <div class="display-field">@Model.TrackingNumber</div>
+
+    <div class="display-label">Note</div>
+    <div class="display-field">@Model.Note</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

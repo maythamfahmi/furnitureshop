@@ -1,0 +1,35 @@
+@model FurnitureShop.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">OrderDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.OrderDate)</div>
+
+    <div class="display-label">ShippingDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ShippingDate)</div>
+
+    <div class="display-label">DeliveryDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DeliveryDate)</div>
+
+    <div class="display-label">TrackingNumber</div>
+    <div class="display-field">@Model.TrackingNumber</div>
+
+    <div class="display-label">Note</div>
+    <div class="display-field">@Model.Note</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

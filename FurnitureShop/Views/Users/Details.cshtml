@@ -1,0 +1,41 @@
+@model FurnitureShop.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">@Model.Email</div>
+
+    <div class="display-label">Password</div>
+    <div class="display-field">@Model.Password</div>
+
+    <div class="display-label">FirstName</div>
+    <div class="display-field">@Model.FirstName</div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">@Model.LastName</div>
+
+    <div class="display-label">Phone</div>
+    <div class="display-field">@Model.Phone</div>
+
+    <div class="display-label">ImageSrc</div>
+    <div class="display-field">@Model.ImageSrc</div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">@(Model.Address == null ? "None" : Model.Address.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

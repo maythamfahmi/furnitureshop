@@ -1,0 +1,26 @@
+@model FurnitureShop.Models.ProductSubCategory
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    Product
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ProductId, ((IEnumerable<FurnitureShop.Models.Product>)ViewBag.PossibleProducts).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ProductId.ToString(),
+        Selected = (Model != null) && (option.ProductId == Model.ProductId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ProductId)
+</div>
+<div class="editor-label">
+    SubCategory
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.SubCategoryId, ((IEnumerable<FurnitureShop.Models.SubCategory>)ViewBag.PossibleSubCategories).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.SubCategoryId.ToString(),
+        Selected = (Model != null) && (option.SubCategoryId == Model.SubCategoryId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.SubCategoryId)
+</div>

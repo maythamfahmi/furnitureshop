@@ -1,0 +1,73 @@
+@model FurnitureShop.Models.User
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Email)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Email)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Password)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Password)
+    @Html.ValidationMessageFor(model => model.Password)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FirstName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FirstName)
+    @Html.ValidationMessageFor(model => model.FirstName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.LastName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.LastName)
+    @Html.ValidationMessageFor(model => model.LastName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Phone)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Phone)
+    @Html.ValidationMessageFor(model => model.Phone)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ImageSrc)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ImageSrc)
+    @Html.ValidationMessageFor(model => model.ImageSrc)
+</div>
+
+@Html.EditorFor(model => model.Address)
+
+<div class="editor-label">
+    UserRole
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.UserRoleId, ((IEnumerable<FurnitureShop.Models.UserRole>)ViewBag.PossibleUserRoles).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.UserRoleId.ToString(),
+        Selected = (Model != null) && (option.UserRoleId == Model.UserRoleId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.UserRoleId)
+</div>

@@ -1,0 +1,77 @@
+@model IEnumerable<FurnitureShop.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            SubCategories
+        </th>
+        <th>
+            ImageSrc
+        </th>
+        <th>
+            ImageData
+        </th>
+        <th>
+            ImageMimeType
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+        </td>
+        <td>
+			@item.Name
+        </td>
+        <td>
+			@item.Description
+        </td>
+        <td>
+			@String.Format("{0:F}", item.Price)
+        </td>
+        <td>
+			@(item.Category == null ? "None" : item.Category.Name)
+        </td>
+        <td>
+			@(item.SubCategories == null ? "None" : item.SubCategories.Count.ToString())
+        </td>
+        <td>
+			@item.ImageSrc
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.ImageData).ToString()
+        </td>
+        <td>
+			@item.ImageMimeType
+        </td>
+    </tr>
+}
+
+</table>
+
+

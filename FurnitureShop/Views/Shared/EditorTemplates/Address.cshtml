@@ -1,0 +1,45 @@
+﻿@model FurnitureShop.Models.Address
+
+<div class="editor-label">
+    @Html.LabelFor(x => x.AddressLine1)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.AddressLine1)
+    @Html.ValidationMessageFor(x => x.AddressLine1)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(x => x.AddressLine2)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.AddressLine2)
+    @Html.ValidationMessageFor(x => x.AddressLine2)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(x => x.AddressLine3)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.AddressLine3)
+    @Html.ValidationMessageFor(x => x.AddressLine3)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(x => x.Postal)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.Postal)
+    @Html.ValidationMessageFor(x => x.Postal)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(x => x.City)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.City)
+    @Html.ValidationMessageFor(x => x.City)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(x => x.Country)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(x => x.Country)
+    @Html.ValidationMessageFor(x => x.Country)
+</div>
+@Html.HiddenFor(x => x.UserId)

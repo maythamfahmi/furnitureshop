@@ -1,0 +1,41 @@
+@model IEnumerable<FurnitureShop.Models.RatePlusComment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Rate
+        </th>
+        <th>
+            Comment
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RateId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RateId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RateId })
+        </td>
+        <td>
+			@item.Rate
+        </td>
+        <td>
+			@item.Comment
+        </td>
+    </tr>
+}
+
+</table>
+
+

@@ -1,0 +1,65 @@
+@model IEnumerable<FurnitureShop.Models.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            AddressLine1
+        </th>
+        <th>
+            AddressLine2
+        </th>
+        <th>
+            AddressLine3
+        </th>
+        <th>
+            Postal
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AddressId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AddressId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AddressId })
+        </td>
+        <td>
+			@item.AddressLine1
+        </td>
+        <td>
+			@item.AddressLine2
+        </td>
+        <td>
+			@item.AddressLine3
+        </td>
+        <td>
+			@item.Postal
+        </td>
+        <td>
+			@item.City
+        </td>
+        <td>
+			@item.Country
+        </td>
+    </tr>
+}
+
+</table>
+
+

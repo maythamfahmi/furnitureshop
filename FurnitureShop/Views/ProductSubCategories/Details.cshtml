@@ -1,0 +1,23 @@
+@model FurnitureShop.Models.ProductSubCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ProductSubCategory</legend>
+
+    <div class="display-label">Product</div>
+    <div class="display-field">@(Model.Product == null ? "None" : Model.Product.Name)</div>
+
+    <div class="display-label">SubCategory</div>
+    <div class="display-field">@(Model.SubCategory == null ? "None" : Model.SubCategory.Name)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ProductSubCategoryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

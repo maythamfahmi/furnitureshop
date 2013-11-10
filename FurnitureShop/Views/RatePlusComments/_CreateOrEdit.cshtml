@@ -1,0 +1,42 @@
+@model FurnitureShop.Models.RatePlusComment
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Rate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Rate)
+    @Html.ValidationMessageFor(model => model.Rate)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Comment)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Comment)
+    @Html.ValidationMessageFor(model => model.Comment)
+</div>
+
+<div class="editor-label">
+    Product
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ProductId, ((IEnumerable<FurnitureShop.Models.Product>)ViewBag.PossibleProducts).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ProductId.ToString(),
+        Selected = (Model != null) && (option.ProductId == Model.ProductId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ProductId)
+</div>
+<div class="editor-label">
+    User
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.UserId, ((IEnumerable<FurnitureShop.Models.User>)ViewBag.PossibleUsers).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.UserId.ToString(),
+        Selected = (Model != null) && (option.UserId == Model.UserId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.UserId)
+</div>
