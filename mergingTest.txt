@@ -1,2 +1,3 @@
 secondRepo line1
+secondRepoChange line2
 first line2
