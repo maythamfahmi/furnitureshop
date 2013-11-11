@@ -30,12 +30,12 @@ namespace FurnitureShop.Controllers
             ViewBag.SelectedCategory = category;
 
 
-            //IEnumerable<string>
-            //IQueryable
             IEnumerable<string> categories = categoryRepository.All.ToList().Select(c => c.Name).ToArray(); //productRepository.AllIncluding(product => product.Categories, product => product.SubCategories) //categoryRepository.All.ToList().Select(c => c.Name).ToArray(); /*productRepository.All
-            //.Select(x => x.Categories)
-            //.Distinct()
-            //.OrderBy(x => x);
+
+            //IEnumerable<string> categories = productRepository.All
+            //    .Select(x => x.Category)
+            //    .Distinct()
+            //    .OrderBy(x => x);
 
             return PartialView(categories);
 

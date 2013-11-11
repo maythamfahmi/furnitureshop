@@ -76,7 +76,7 @@ namespace FurnitureShop.Controllers
         {
 			ViewBag.PossibleUsers = userRepository.All;
 			ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-             return View(orderRepository.Find(id));
+            return View(orderRepository.Find(id));
         }
 
         //
@@ -115,6 +115,32 @@ namespace FurnitureShop.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ViewResult CustomerOrder()
+        {
+            //ViewBag.PossibleUsers = userRepository.Find(2);
+            //ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            return View(orderRepository.All);
+            //List<OrderRepository> viewModelList = new List<OrderRepository>();
+            //OrderRepository orderRepository = new OrderRepository();
+            //viewModelList.Add(orderRepository);
+            //return View(viewModelList.AsEnumerable());
+        }
+
+        //public ViewResult Test1(int id)
+        //{
+
+        //    //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All;
+        //    //ViewBag.SelectedCategory = id;
+            
+
+        //    //IEnumerable<string> testee = orderRepository.All.ToList().Select(c => c.OrderDate).ToArray();
+        //    //testee = orderRepository.AllIncluding(order => order..OrderDeliveries) //categoryRepository.All.ToList().Select(c => c.Name).ToArray(); /*productRepository.All
+
+        //    //return View(testee);
+
+        //}
+
 
         protected override void Dispose(bool disposing)
         {

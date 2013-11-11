@@ -18,7 +18,7 @@ namespace FurnitureShop.Models
 
         public int OProdcutId { get; set; }
 
-        public int OProdcutName { get; set; }
+        public string OProdcutName { get; set; }
 
         public int OProdcutQty { get; set; }
 

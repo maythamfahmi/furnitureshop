@@ -4,22 +4,162 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- default style is disabled
+    @Styles.Render("~/Content/css")  // defalut css is taken over by customcontent css.
+    @Scripts.Render("~/bundles/modernizr") // is render in the button
+    -->
+
+
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    @Styles.Render("~/Content/themes/base/jquery.ui.datepicker.css")
+
+    <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+    <!-- bootstrap -->
+    @Styles.Render("~/CustomContent/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/CustomContent/bootstrap/css/bootstrap-responsive.min.css")
+    @Styles.Render("~/CustomContent/themes/css/bootstrappage.css")
+
+    <!-- global styles -->
+    @Styles.Render("~/CustomContent/themes/css/flexslider.css")
+    @Styles.Render("~/CustomContent/themes/css/main.css")
+
 </head>
 <body>
 
-    <div id="header">
-        <div class="title">SPORTS STORE</div>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <!--<form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" placeholder="eg. T-sirt">
+                </form>-->
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="/Cart/Index">Your Cart @{Html.RenderAction("Summary", "Cart");}</a></li>
+                        <li><a href="/Cart/Checkout">Checkout</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="categories">
-        @{ Html.RenderAction("Menu", "Navi"); }
-    </div>
-    <div id="content">
-        @RenderBody()
-    </div>
+    <div id="wrapper" class="container">
 
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">
+                <a href="/" class="logo pull-left">
+                    <img src="~/CustomContent/themes/images/logo_seventh.png" class="site_logo" alt=""></a>
+                <nav id="menu" class="pull-right">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/List">Products</a>
+                            <ul>
+                                <li>@{Html.RenderAction("Menu", "Navi"); }</li>
+                            </ul>
+                        </li>
+                        <li><a href="/">Admin</a>
+                            <ul>
+                                <li><a href="/Categories/Index">Category</a></li>
+                                <li><a href="/OrderDeliveries/Index">Order delivery</a></li>
+                                <li><a href="/UserRoles/Index">User role</a></li>
+                                <li><a href="/Products/Index">Products</a></li>
+                                <li><a href="/SpecialOffers/Index">Special Offer</a></li>
+                                <li><a href="/Users/Index">Users</a></li>
+                            </ul>
+                        </li>
+
+                        <!--<li><a href="./products.html">Menu1</a></li>-->
+                        <!--<li><a href="./products.html">Menu2</a>
+                            <ul>
+                                <li><a href="./products.html">SubMenu1</a></li>
+                                <li><a href="./products.html">SubMenu2</a></li>
+                                <li><a href="./products.html">SubMenu3</a></li>
+                            </ul>
+                        </li>
+                        -->
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <div id="content">
+            @RenderBody()
+        </div>
+
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigation</h4>
+                    <ul class="nav">
+                        <li><a href="./index.html">Homepage</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contac Us</a></li>
+                        <li><a href="./cart.html">Your Cart</a></li>
+                        <li><a href="./register.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>My Account</h4>
+                    <ul class="nav">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order History</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <p class="logo">
+                        <img src="~/CustomContent/themes/images/logo_seventh.png" class="site_logo" alt="">
+                    </p>
+                    <p>When it comes to high quality and design interiors, Seventh Room is your choice. Please visit us at our show room in Copenhagen.</p>
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="copyright">
+            <span>Copyright 2013 Seventh Room | FurnitureShop,  All right reserved.</span>
+        </section>
+
+    </div>
+    <!-- scripts -->
+    <!-- Menu system in this template is not compatible with latest Jquery 2.x, No opgrade or install please. -->
+    <!-- Date picker is a little bit craized here. -->
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @*Scripts.Render("~/CustomContent/themes/js/jquery-1.7.2.min.js")*@
+    @Scripts.Render("~/CustomContent/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/CustomContent/themes/js/superfish.js")
+    @Scripts.Render("~/CustomContent/themes/js/jquery.scrolltotop.js")
+    <!--[if lt IE 9]>			
+            @Scripts.Render("http://html5shim.googlecode.com/svn/trunk/html5.js")
+			@Scripts.Render("~/CustomContent/js/respond.min.js")
+	<![endif]-->
+
+    <script src="CustomContent/themes/js/common.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#checkout').click(function (e) {
+                document.location.href = "checkout.html";
+            })
+        });
+    </script>
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $(".date").datepicker({ dateFormat: "dd/mm/yy" });
+        });
+    </script>*@
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

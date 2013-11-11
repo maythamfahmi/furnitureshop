@@ -1,4 +1,5 @@
 ﻿using FurnitureShop.Infrastructure;
+using FurnitureShop.Binders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FurnitureShop.Models;
 
 namespace FurnitureShop
 {
@@ -17,7 +19,7 @@ namespace FurnitureShop
     {
         protected void Application_Start()
         {
-			System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
+			//System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -26,6 +28,8 @@ namespace FurnitureShop
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            // new line
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

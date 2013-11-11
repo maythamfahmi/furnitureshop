@@ -1,5 +1,6 @@
 ﻿@model FurnitureShop.Models.Product
 
+@* original view
 <div class="item">
     <h3>@Model.Name</h3>
     @Model.Description
@@ -12,3 +13,21 @@
     }
     <h4>@Model.Price.ToString("c")</h4>
 </div>
+*@
+<li class="span3">
+    <div class="product-box">
+        <a href="product_detail.html">
+            <img alt="" src="themes/images/ladies/5.jpg"></a><br />
+        <a href="product_detail.html" class="title">@Model.Name</a><br />
+        <!--<a href="#" class="category">Suspendisse aliquet</a>-->
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="actionButtons" value="+ Add to cart" />
+        }
+        <p class="price">@Model.Price.ToString("c")</p>
+    </div>
+</li>
+
+
