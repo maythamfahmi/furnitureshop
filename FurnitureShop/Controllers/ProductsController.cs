@@ -28,6 +28,7 @@ namespace FurnitureShop.Controllers
         //
         // GET: /Products/
 
+		
         public ViewResult Index()
         {
             return View(productRepository.AllIncluding(product => product.Category, product => product.SubCategories));

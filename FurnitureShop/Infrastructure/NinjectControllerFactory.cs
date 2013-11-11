@@ -11,6 +11,8 @@ using FurnitureShop.Models;
 using FurnitureShop.Repository;
 using FurnitureShop.Services;
 using FurnitureShop.Interface;
+using FurnitureShop.Infrastructure.Abstract;
+using FurnitureShop.Infrastructure.Concrete;
 
 namespace FurnitureShop.Infrastructure
 {
@@ -58,7 +60,10 @@ namespace FurnitureShop.Infrastructure
             ninjectKernel.Bind<IOrderRepository>().To<OrderRepository>();
             ninjectKernel.Bind<IOrderProductRepository>().To<OrderProductRepository>();
             ninjectKernel.Bind<IOrderDeliveryRepository>().To<OrderDeliveryRepository>();
-            
+			ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+			ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
+
+
             // new lines
             EmailSettings emailSettings = new EmailSettings
             {

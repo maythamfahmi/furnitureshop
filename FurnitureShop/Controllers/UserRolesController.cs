@@ -8,18 +8,16 @@ using FurnitureShop.Repository;
 
 namespace FurnitureShop.Controllers
 {   
+	[Authorize]
     public class UserRolesController : Controller
     {
 		private readonly IUserRoleRepository userroleRepository;
+		private readonly IUserRepository userRepository;
 
-		// If you are using Dependency Injection, you can delete the following constructor
-        public UserRolesController() : this(new UserRoleRepository())
-        {
-        }
-
-        public UserRolesController(IUserRoleRepository userroleRepository)
+        public UserRolesController(IUserRoleRepository userroleRepository, IUserRepository userRepository)
         {
 			this.userroleRepository = userroleRepository;
+			this.userRepository = userRepository;
         }
 
         //
