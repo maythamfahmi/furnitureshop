@@ -14,6 +14,7 @@ namespace FurnitureShop.Controllers
 		private readonly IOrderDeliveryRepository orderdeliveryRepository;
         private readonly IOrderRepository orderRepository;
         private readonly IOrderProductRepository orderproductRepository;
+        private readonly IAddressRepository addressRepository;
 
         //// If you are using Dependency Injection, you can delete the following constructor
         //public OrdersController()
@@ -21,12 +22,19 @@ namespace FurnitureShop.Controllers
         //{
         //}
 
-        public OrdersController(IUserRepository userRepository, IOrderDeliveryRepository orderdeliveryRepository, IOrderRepository orderRepository, IOrderProductRepository orderproductRepository)
+        public OrdersController(
+            IUserRepository userRepository,
+            IOrderDeliveryRepository orderdeliveryRepository,
+            IOrderRepository orderRepository,
+            IOrderProductRepository orderproductRepository,
+            IAddressRepository addressRepository
+            )
         {
 			this.userRepository = userRepository;
 			this.orderdeliveryRepository = orderdeliveryRepository;
 			this.orderRepository = orderRepository;
             this.orderproductRepository = orderproductRepository;
+            this.addressRepository = addressRepository;
         }
 
         //
@@ -121,13 +129,26 @@ namespace FurnitureShop.Controllers
 
         public ViewResult CustomerOrder()
         {
-            //ViewBag.PossibleUsers = userRepository.Find(2);
-            //ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All.ToList().Find(o => o.OrderDeliveryId == 1);
             return View(orderRepository.All);
             //List<OrderRepository> viewModelList = new List<OrderRepository>();
             //OrderRepository orderRepository = new OrderRepository();
             //viewModelList.Add(orderRepository);
             //return View(viewModelList.AsEnumerable());
+        }
+
+        public ViewResult CustomerOrderProducts(int id, int userid)
+        {
+            ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.SelectedOrders = orderRepository.All;
+            ViewBag.SelectedOrderProducts = orderproductRepository.All.ToList().FindAll(o => o.OrderId == id);
+            ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All;
+
+            ViewBag.totalPrice = orderproductRepository.All.ToList().FindAll(o => o.OrderId == id).Sum(p => p.OProdcutPrice * p.OProdcutQty);
+            return View(orderRepository.Find(id));
         }
 
         //public ViewResult Test1(int id)
