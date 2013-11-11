@@ -35,11 +35,20 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.ImageMimeType)
+    @Html.LabelFor(model => model.ImageData)
 </div>
 <div class="editor-field">
-    @Html.EditorFor(model => model.ImageMimeType)
-    @Html.ValidationMessageFor(model => model.ImageMimeType)
+    @*if (Model.ImageMimeType == null)
+    {
+        @:No image.
+    }
+    else
+    {
+        <img src="@Url.Action("GetImage", "Products", new { Id = Model.ProductId })" />
+    }*@
+    <div>
+        <input type="file" name="Image" />        
+    </div>
 </div>
 
 <div class="editor-label">

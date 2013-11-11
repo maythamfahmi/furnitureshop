@@ -27,3 +27,26 @@ C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop\FurnitureShop\bin\Moq.xml
 C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop\FurnitureShop\bin\Ninject.pdb
 C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop\FurnitureShop\bin\Ninject.xml
 C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop\FurnitureShop\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\FurnitureShop.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\FurnitureShop.pdb
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Net.Http.Formatting.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Http.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Http.WebHost.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Mvc.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Razor.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.Razor.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Net.Http.Formatting.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Http.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Http.WebHost.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Mvc.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.Razor.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\bin\System.Web.WebPages.Razor.xml
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\obj\Debug\FurnitureShop.dll
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\obj\Debug\FurnitureShop.pdb
+C:\Users\Maytham\Dropbox\KEA\WPN\Project\FurnitureShop Git\FurnitureShop\obj\Debug\FurnitureShop.csprojResolveAssemblyReference.cache

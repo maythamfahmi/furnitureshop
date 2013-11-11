@@ -12,18 +12,21 @@ namespace FurnitureShop.Controllers
     {
 		private readonly IUserRepository userRepository;
 		private readonly IOrderDeliveryRepository orderdeliveryRepository;
-		private readonly IOrderRepository orderRepository;
+        private readonly IOrderRepository orderRepository;
+        private readonly IOrderProductRepository orderproductRepository;
 
-		// If you are using Dependency Injection, you can delete the following constructor
-        public OrdersController() : this(new UserRepository(), new OrderDeliveryRepository(), new OrderRepository())
-        {
-        }
+        //// If you are using Dependency Injection, you can delete the following constructor
+        //public OrdersController()
+        //    : this(new UserRepository(), new OrderDeliveryRepository(), new OrderRepository(), new OrderProductRepository())
+        //{
+        //}
 
-        public OrdersController(IUserRepository userRepository, IOrderDeliveryRepository orderdeliveryRepository, IOrderRepository orderRepository)
+        public OrdersController(IUserRepository userRepository, IOrderDeliveryRepository orderdeliveryRepository, IOrderRepository orderRepository, IOrderProductRepository orderproductRepository)
         {
 			this.userRepository = userRepository;
 			this.orderdeliveryRepository = orderdeliveryRepository;
 			this.orderRepository = orderRepository;
+            this.orderproductRepository = orderproductRepository;
         }
 
         //

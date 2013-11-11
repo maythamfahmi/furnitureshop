@@ -36,7 +36,7 @@
         </td>
         <td>
             @*Html.DropDownListFor(model => model.OrderDeliveryId, ((IEnumerable<FurnitureShop.Models.OrderDelivery>)ViewBag.PossibleOrderDeliveries)*@
-			@Html.DisplayText(model => model.OrderDeliveryId, (IQueryable<FurnitureShop.Models.OrderDelivery>))
+			@*Html.DisplayText(model => model.OrderDeliveryId, (IQueryable<FurnitureShop.Models.OrderDelivery>))*@
         </td>
         <td>
 			@String.Format("{0:g}", item.OrderDate)

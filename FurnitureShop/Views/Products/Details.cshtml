@@ -28,7 +28,9 @@
     <div class="display-field">@Model.ImageSrc</div>
 
     <div class="display-label">ImageData</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.ImageData).ToString()</div>
+    <div class="display-field">@*Html.DisplayTextFor(_ => Model.ImageData).ToString()*@
+        <img src="@Url.Action("GetImage", "Products", new { Id = Model.ProductId })" />
+    </div>
 
     <div class="display-label">ImageMimeType</div>
     <div class="display-field">@Model.ImageMimeType</div>

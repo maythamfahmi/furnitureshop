@@ -54,10 +54,19 @@ namespace FurnitureShop.Controllers
         // POST: /Products/Create
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase image) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
+                // manually added 
+                if (image != null)
+                {
+                    product.ImageMimeType = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
+                // manually added end
+
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();
                 return RedirectToAction("Index");
@@ -82,10 +91,19 @@ namespace FurnitureShop.Controllers
         // POST: /Products/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase image) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
+                // manually added 
+                if (image != null)
+                {
+                    product.ImageMimeType = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
+                // manually added end
+
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();
                 return RedirectToAction("Index");
@@ -147,6 +165,21 @@ namespace FurnitureShop.Controllers
             };
             return View(model);
         }
+
+        public FileContentResult GetImage(int id)
+        {
+            Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
+
+            if (prod != null)
+            {
+                return File(prod.ImageData, prod.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {
