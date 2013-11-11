@@ -155,6 +155,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ItemCheckSelected.cs" />
     <Compile Include="HtmlHelpers\HtmlHelpers.cs" />
     <Compile Include="Infrastructure\Concrete\CustomMembershipProvider.cs" />
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />

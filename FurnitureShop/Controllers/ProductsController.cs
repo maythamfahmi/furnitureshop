@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
+using FurnitureShop.Helpers;
 
 namespace FurnitureShop.Controllers
 {
@@ -12,6 +13,8 @@ namespace FurnitureShop.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IProductRepository productRepository;
+		private readonly ISubCategoryRepository subCategoryRepository;
+		private readonly IProductSubCategoryRepository productSubCategoryRepository;
 
         public int PageSize = 4;
         // If you are using Dependency Injection, you can delete the following constructor
@@ -19,10 +22,12 @@ namespace FurnitureShop.Controllers
         //{
         //}
 
-        public ProductsController(ICategoryRepository categoryRepository, IProductRepository productRepository)
+		public ProductsController(ICategoryRepository categoryRepository, IProductRepository productRepository, ISubCategoryRepository subCategoryRepository, IProductSubCategoryRepository productSubCategoryRepository)
         {
             this.categoryRepository = categoryRepository;
             this.productRepository = productRepository;
+			this.subCategoryRepository = subCategoryRepository;
+			this.productSubCategoryRepository = productSubCategoryRepository;
         }
 
         //
@@ -47,6 +52,20 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
+			//Create a list containing both selected and non-selected subcategories for the product
+			List<SubCategory> SubCategoriesInSystem = subCategoryRepository.All.ToList();
+			List<ItemCheckSelected> SubCategoriesAvailable = new List<ItemCheckSelected>();
+
+			foreach (SubCategory subCategory in SubCategoriesInSystem)
+			{
+				SubCategoriesAvailable.Add(new ItemCheckSelected()
+				{
+					ItemId = subCategory.SubCategoryId,
+					Name = subCategory.Name,
+					Selected = false
+				});
+			}
+			ViewBag.SubCategories = SubCategoriesAvailable;
             ViewBag.PossibleCategories = categoryRepository.All;
             return View();
         }
@@ -55,7 +74,7 @@ namespace FurnitureShop.Controllers
         // POST: /Products/Create
 
         [HttpPost]
-        public ActionResult Create(Product product, HttpPostedFileBase image) // manually added HttpPostedFileBase image
+		public ActionResult Create(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
@@ -70,10 +89,24 @@ namespace FurnitureShop.Controllers
 
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();
+
+				//Add new connections
+				foreach (ItemCheckSelected SubCatSelected in ProductSubCategory.FindAll(c => c.Selected == true))
+				{
+					ProductSubCategory SubCatConnection = new ProductSubCategory()
+					{
+						ProductId = product.ProductId,
+						SubCategoryId = SubCatSelected.ItemId
+					};
+					productSubCategoryRepository.InsertOrUpdate(SubCatConnection);
+				}
+				productSubCategoryRepository.Save();
+
                 return RedirectToAction("Index");
             }
             else
             {
+				ViewBag.SubCategories = ProductSubCategory;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 return View();
             }
@@ -84,6 +117,22 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Edit(int id)
         {
+			Product product = productRepository.Find(id);
+			//Create a list containing both selected and non-selected subcategories for the product
+			List<SubCategory> SubCategoriesInSystem = subCategoryRepository.All.ToList();
+			List<SubCategory> ProductSubCategoriesSelected = product.SubCategories.Select(c => c.SubCategory).ToList();
+			List<ItemCheckSelected> SubCategoriesAvailable = new List<ItemCheckSelected>();
+
+			foreach (SubCategory subCategory in SubCategoriesInSystem)
+			{
+				SubCategoriesAvailable.Add(new ItemCheckSelected()
+				{
+					ItemId = subCategory.SubCategoryId,
+					Name = subCategory.Name,
+					Selected = (ProductSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
+				});
+			}
+			ViewBag.SubCategories = SubCategoriesAvailable;
             ViewBag.PossibleCategories = categoryRepository.All;
             return View(productRepository.Find(id));
         }
@@ -92,10 +141,34 @@ namespace FurnitureShop.Controllers
         // POST: /Products/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Product product, HttpPostedFileBase image) // manually added HttpPostedFileBase image
+		public ActionResult Edit(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
+				//Remove all existing ProductSubcategory entries for this product
+				List<ProductSubCategory> SubCatConnections = productSubCategoryRepository.All.ToList().FindAll(s => s.ProductId == product.ProductId).ToList();
+
+				//productSubCategoryRepository.All.ToList().RemoveAll(s => s.ProductId == product.ProductId);
+
+				foreach (ProductSubCategory SubCatConnection in SubCatConnections)
+				{
+					//context.ProductSubCategories.Remove(SubCatConnection);
+					productSubCategoryRepository.Delete(SubCatConnection.ProductSubCategoryId);
+				}
+				//productSubCategoryRepository.Save();
+
+				//Add new connections
+				foreach (ItemCheckSelected SubCatSelected in ProductSubCategory.FindAll(c => c.Selected == true))
+				{
+					ProductSubCategory SubCatConnection = new ProductSubCategory()
+					{
+						ProductId = product.ProductId,
+						SubCategoryId = SubCatSelected.ItemId
+					};
+					productSubCategoryRepository.InsertOrUpdate(SubCatConnection);
+					//context.ProductSubCategories.Add(SubCatConnection);
+				}
+				productSubCategoryRepository.Save();
                 // manually added 
                 if (image != null)
                 {
@@ -111,6 +184,7 @@ namespace FurnitureShop.Controllers
             }
             else
             {
+				ViewBag.SubCategories = ProductSubCategory;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 return View();
             }
