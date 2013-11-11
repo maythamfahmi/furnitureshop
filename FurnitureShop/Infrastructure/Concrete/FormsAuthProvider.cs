@@ -27,5 +27,9 @@ namespace FurnitureShop.Infrastructure.Concrete
 
 			return result;
 		}
+
+		public void logout() {
+			FormsAuthentication.SignOut();
+		}
 	}
 }

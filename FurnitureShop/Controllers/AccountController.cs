@@ -29,7 +29,7 @@ namespace FurnitureShop.Controllers
 			{
 				if (authProvider.Authenticate(model.userName, model.Password))
 				{
-					return Redirect(returnUrl ?? Url.Action("index"));
+					return Redirect(returnUrl ?? Url.Action("index", "products"));
 				}
 				else
 				{
@@ -43,5 +43,20 @@ namespace FurnitureShop.Controllers
 			}
 		}
 
+		public ActionResult Logout()
+		{
+			if (HttpContext.User.Identity.IsAuthenticated)
+			{
+				authProvider.logout();
+			}
+			return RedirectToAction("index", "products");
+		}
+
+		public PartialViewResult isLoggin()
+		{
+			string isLoggedin = HttpContext.User.Identity.IsAuthenticated.ToString();
+
+			return PartialView("isLoggin", (string)isLoggedin);
+		}
     }
 }

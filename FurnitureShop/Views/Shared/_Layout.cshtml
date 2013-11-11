@@ -40,7 +40,7 @@
                         <li><a href="/Users/MyAccount">My Account</a></li>
                         <li><a href="/Cart/Index">Your Cart @{Html.RenderAction("Summary", "Cart");}</a></li>
                         <li><a href="/Cart/Checkout">Checkout</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li>@{Html.RenderAction("isLoggin", "Account");} </li>
                     </ul>
                 </div>
             </div>

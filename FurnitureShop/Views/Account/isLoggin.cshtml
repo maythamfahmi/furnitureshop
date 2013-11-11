@@ -1,0 +1,14 @@
+﻿@model System.String
+
+
+@{
+    if (Model == "True")
+    {
+    @Html.ActionLink("Sign out", "Logout", "Account")
+    }
+    else
+    {
+    @Html.ActionLink("Login", "Login", "Account")
+        
+    }
+}

@@ -448,6 +448,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Users\myAccount.cshtml" />
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
+    <Content Include="Views\Account\isLoggin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
