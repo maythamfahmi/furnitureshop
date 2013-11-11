@@ -1,0 +1,75 @@
+﻿@model FurnitureShop.Models.Order
+@{
+    ViewBag.Title = "CustomerOrderProducts";
+}
+
+<h4>Customer order details</h4>
+
+<fieldset>
+    <legend>Your order @Model.OrderId</legend>
+    @{ FurnitureShop.Models.User user = ViewBag.SelectedUser;
+    }
+    @{ FurnitureShop.Models.Address address = ViewBag.SelectedAddress;
+    }
+    <table width="100%">
+        <tr>
+            <td width="50%" valign="top">
+                <div class="display-label">@user.FirstName @user.LastName</div>
+                <div class="display-label">@address.AddressLine1</div>
+                <div class="display-label">@address.AddressLine2</div>
+                <div class="display-label">@address.AddressLine3</div>
+                <div class="display-label">@address.Postal @address.City</div>
+                <div class="display-label">@address.Country</div>
+            </td>
+            <td width="50%" valign="top">
+                <div class="display-label">OrderDate: @String.Format("{0:dd-MM-yyyy}", Model.OrderDate)</div>
+                <div class="display-label">ShippingDate: @String.Format("{0:dd-MM-yyyy}", Model.ShippingDate)</div>
+                <div class="display-label">DeliveryDate: @String.Format("{0:dd-MM-yyyy}", Model.DeliveryDate)</div>
+                <div class="display-label">TrackingNumber: @Model.TrackingNumber</div>
+                <div class="display-label">Note: @Model.Note</div>
+            </td>
+        </tr>
+
+    </table>
+
+    <fieldset>
+        <table width="100%">
+            <tr>
+                <th width="15%">Product ID
+                </th>
+                <th width="50%">Product name
+                </th>
+                <th width="10px">Qty
+                </th>
+                <th width="25%px">Price
+                </th>
+            </tr>
+            @foreach (FurnitureShop.Models.OrderProduct item in ViewBag.SelectedOrderProducts)
+            {
+                <tr>
+                    <td>@item.OrderId
+                    </td>
+                    <td>@item.OProdcutName
+                    </td>
+                    <td>@item.OProdcutQty
+                    </td>
+                    <td align="right">@String.Format("{0:F}", item.OProdcutPrice)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="4">
+                    @String.Format("{0:F}", ViewBag.totalPrice)
+                </td>
+            </tr>
+
+        </table>
+    </fieldset>
+</fieldset>
+
+<p>
+    @*Html.ActionLink("Edit", "Edit", new { id = Model.OrderId }) |*@
+    @Html.ActionLink("Back to List", "/customerorder")
+</p>
+
+

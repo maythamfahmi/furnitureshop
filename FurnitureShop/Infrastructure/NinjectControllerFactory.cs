@@ -60,10 +60,10 @@ namespace FurnitureShop.Infrastructure
             ninjectKernel.Bind<IOrderRepository>().To<OrderRepository>();
             ninjectKernel.Bind<IOrderProductRepository>().To<OrderProductRepository>();
             ninjectKernel.Bind<IOrderDeliveryRepository>().To<OrderDeliveryRepository>();
-			ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
-			ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
-
-
+	    ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+	    ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
+            ninjectKernel.Bind<IAddressRepository>().To<AddressRepository>();
+            
             // new lines
             EmailSettings emailSettings = new EmailSettings
             {

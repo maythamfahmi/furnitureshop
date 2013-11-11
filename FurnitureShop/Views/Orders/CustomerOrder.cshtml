@@ -4,78 +4,47 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h4>Customer order list</h4>
 
-<table>
-    <tr>
-        <th></th>
-        <th>
-            OrderId
-        </th>
-        <th>
-            Delivery by
-        </th>
-        <th>
-            OrderDate
-        </th>
-        <th>
-            ShippingDate
-        </th>
-        <th>
-            DeliveryDate
-        </th>
-    </tr>
+<fieldset>
+    <table>
+        <tr>
+            <th width="5%"></th>
+            <th width="5%">OrderId
+            </th>
+            <th width="15%">OrderDate
+            </th>
+            <th width="15%">ShippingDate
+            </th>
+            <th width="15%">DeliveryDate
+            </th>
+            <th width="15%">Shipped by
+            </th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
-        </td>
-        <td>
-			@item.OrderId
-        </td>
-        <td>
-            @*Html.DropDownListFor(model => model.OrderDeliveryId, ((IEnumerable<FurnitureShop.Models.OrderDelivery>)ViewBag.PossibleOrderDeliveries)*@
-			@*Html.DisplayText(model => model.OrderDeliveryId, (IQueryable<FurnitureShop.Models.OrderDelivery>))*@
-        </td>
-        <td>
-			@String.Format("{0:g}", item.OrderDate)
-        </td>
-        <td>
-			@String.Format("{0:g}", item.ShippingDate)
-        </td>
-        <td>
-			@String.Format("{0:g}", item.DeliveryDate)
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("View", "CustomerOrderProducts", new { id = item.OrderId, userid = item.UserId }) |
+                </td>
+                <td>
+                    @item.OrderId
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.OrderDate)
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.ShippingDate)
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.DeliveryDate)
+                </td>
+                <td>
+                    @item.OrderDeliveryId
+                </td>
+            </tr>
+        }
 
-</table>
-
-
-
-
-
-@*
-<div class="editor-field">
-    @Html.DropDownListFor(model => model.UserId, ((IEnumerable<FurnitureShop.Models.User>)ViewBag.PossibleUsers).Select(option => new SelectListItem
-{
-    Text = (option == null ? "None" : option.Name),
-    Value = option.UserId.ToString(),
-    Selected = (Model != null) && (option.UserId == Model.UserId)
-}), "Choose...")
-    @Html.ValidationMessageFor(model => model.UserId)
-</div>
-<div class="editor-label">
-    OrderDelivery
-</div>
-<div class="editor-field">
-    @Html.DropDownListFor(model => model.OrderDeliveryId, ((IEnumerable<FurnitureShop.Models.OrderDelivery>)ViewBag.PossibleOrderDeliveries).Select(option => new SelectListItem
-{
-    Text = option.Methode.ToString(),
-    Value = option.OrderDeliveryId.ToString(),
-    Selected = (Model != null) && (option.OrderDeliveryId == Model.OrderDeliveryId)
-}), "Choose...")
-    @Html.ValidationMessageFor(model => model.OrderDeliveryId)
-
-*@
+    </table>
+</fieldset>
