@@ -124,6 +124,72 @@ namespace FurnitureShop.Controllers
             }
             base.Dispose(disposing);
         }
+
+		//
+		// Show account for the current user
+		//
+		[Authorize]
+		public ActionResult myAccount()
+		{
+			//Get the current user 
+			string userName = HttpContext.User.Identity.Name;
+			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+			//Is user authenticated? returns true or false
+			bool userAuth = HttpContext.User.Identity.IsAuthenticated;
+			TempData.Remove("UserId");
+			TempData.Remove("UserName");
+			TempData.Remove("UserUserRoleId");
+			TempData.Add("UserId", user.UserId);
+			TempData.Add("UserName", user.Name);
+			TempData.Add("UserUserRoleId", user.UserRoleId);
+
+			return View(userRepository.Find(user.UserId));
+		}
+
+		[HttpPost]
+		public ActionResult myAccount(User user)
+		{
+			//Get the authorized user
+			string userName = HttpContext.User.Identity.Name;
+			//User authedUser = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+			//Set the user role of the updated user
+			//user.UserRoleId = authedUser.UserRoleId;
+			//user.UserRole = authedUser.UserRole;
+			//user.UserId = authedUser.UserId;
+			
+			/*user.Name = authedUser.Name;
+			ModelState["Name"].Errors.Clear();
+			*/
+
+			//ModelState["UserId"].Errors.Clear();
+			//ModelState["UserRoleId"].Errors.Clear();
+
+			//ValidateModel(user);
+			//if (ModelState.IsValid)
+
+			user.UserRoleId = (int)TempData["UserUserRoleId"];
+			user.UserId = (int)TempData["UserId"];
+			user.Name = (string)TempData["UserName"];
+
+			//ModelState["UserRoleId"].Errors.Clear();
+			//ModelState["UserId"].Errors.Clear();
+			ModelState["Name"].Errors.Clear();
+			if (ModelState.IsValid)
+			{
+				userRepository.InsertOrUpdate(user);
+				userRepository.Save();
+				return RedirectToAction("list", "Products");
+
+			}
+			else
+			{
+				ViewBag.PossibleUserRoles = userroleRepository.All;
+				return View();
+			}
+		}
+
     }
 }
 

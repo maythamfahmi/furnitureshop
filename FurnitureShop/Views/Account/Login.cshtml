@@ -1,0 +1,13 @@
+﻿@model FurnitureShop.Models.LoginOnViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login In</h2>
+<p>Please log in to access your account</p>
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <p><input type="submit" value="Log in" /></p>
+}

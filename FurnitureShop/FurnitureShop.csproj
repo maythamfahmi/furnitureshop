@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Binders\CartModelBinder.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -154,12 +155,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ItemCheckSelected.cs" />
     <Compile Include="HtmlHelpers\HtmlHelpers.cs" />
+    <Compile Include="Infrastructure\Concrete\CustomMembershipProvider.cs" />
+    <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
+    <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
+    <Compile Include="Infrastructure\CustomRoleProvider.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Interface\IOrderProcessor.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartIndexView.cs" />
+    <Compile Include="Models\LoginOnViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductListView.cs" />
     <Compile Include="Models\ShippingDetails.cs" />
@@ -440,8 +447,11 @@
     <Content Include="Views\Cart\Summary.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Completed.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Users\myAccount.cshtml" />
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
     <Content Include="Views\Orders\CustomerCreateOrder.cshtml" />
+    <Content Include="Views\Account\isLoggin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

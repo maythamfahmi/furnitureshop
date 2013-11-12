@@ -5,6 +5,16 @@
 }
 
 <h2>Index</h2>
+@{
+    FurnitureShop.Models.User user = ViewBag.user;  
+}
+<h1>Username @ViewBag.username</h1>
+<p>
+    @ViewBag.userAuth
+   @* First name: @user.FirstName <br />
+    Last name: @user.LastName <br />*@
+
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
