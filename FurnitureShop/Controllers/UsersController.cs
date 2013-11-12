@@ -14,9 +14,9 @@ namespace FurnitureShop.Controllers
 		private readonly IUserRepository userRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public UsersController() : this(new UserRoleRepository(), new UserRepository())
+        /*public UsersController() : this(new UserRoleRepository(), new UserRepository())
         {
-        }
+        }*/
 
         public UsersController(IUserRoleRepository userroleRepository, IUserRepository userRepository)
         {
@@ -26,7 +26,6 @@ namespace FurnitureShop.Controllers
 
         //
         // GET: /Users/
-
         public ViewResult Index()
         {
             return View(userRepository.AllIncluding(user => user.Address));
@@ -67,13 +66,13 @@ namespace FurnitureShop.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleUserRoles = userroleRepository.All;
-				return View();
+				return View(user);
 			}
         }
         
         //
         // GET: /Users/Edit/5
- 
+		[HttpGet]
         public ActionResult Edit(int id)
         {
 			ViewBag.PossibleUserRoles = userroleRepository.All;
@@ -92,7 +91,7 @@ namespace FurnitureShop.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleUserRoles = userroleRepository.All;
-				return View();
+				return View(user);
 			}
         }
 
@@ -153,28 +152,9 @@ namespace FurnitureShop.Controllers
 			//Get the authorized user
 			string userName = HttpContext.User.Identity.Name;
 			//User authedUser = userRepository.All.FirstOrDefault(u => u.Name == userName);
-
-			//Set the user role of the updated user
-			//user.UserRoleId = authedUser.UserRoleId;
-			//user.UserRole = authedUser.UserRole;
-			//user.UserId = authedUser.UserId;
-			
-			/*user.Name = authedUser.Name;
-			ModelState["Name"].Errors.Clear();
-			*/
-
-			//ModelState["UserId"].Errors.Clear();
-			//ModelState["UserRoleId"].Errors.Clear();
-
-			//ValidateModel(user);
-			//if (ModelState.IsValid)
-
 			user.UserRoleId = (int)TempData["UserUserRoleId"];
 			user.UserId = (int)TempData["UserId"];
 			user.Name = (string)TempData["UserName"];
-
-			//ModelState["UserRoleId"].Errors.Clear();
-			//ModelState["UserId"].Errors.Clear();
 			ModelState["Name"].Errors.Clear();
 			if (ModelState.IsValid)
 			{
@@ -186,7 +166,7 @@ namespace FurnitureShop.Controllers
 			else
 			{
 				ViewBag.PossibleUserRoles = userroleRepository.All;
-				return View();
+				return View(user);
 			}
 		}
 
