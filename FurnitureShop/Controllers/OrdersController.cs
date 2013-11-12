@@ -7,11 +7,11 @@ using FurnitureShop.Models;
 using FurnitureShop.Repository;
 
 namespace FurnitureShop.Controllers
-{   
+{
     public class OrdersController : Controller
     {
-		private readonly IUserRepository userRepository;
-		private readonly IOrderDeliveryRepository orderdeliveryRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IOrderDeliveryRepository orderdeliveryRepository;
         private readonly IOrderRepository orderRepository;
         private readonly IOrderProductRepository orderproductRepository;
         private readonly IAddressRepository addressRepository;
@@ -30,9 +30,9 @@ namespace FurnitureShop.Controllers
             IAddressRepository addressRepository
             )
         {
-			this.userRepository = userRepository;
-			this.orderdeliveryRepository = orderdeliveryRepository;
-			this.orderRepository = orderRepository;
+            this.userRepository = userRepository;
+            this.orderdeliveryRepository = orderdeliveryRepository;
+            this.orderRepository = orderRepository;
             this.orderproductRepository = orderproductRepository;
             this.addressRepository = addressRepository;
         }
@@ -58,10 +58,11 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleUsers = userRepository.All;
-			ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            ViewBag.PossibleUsers = userRepository.All;
+            //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
             return View();
-        } 
+        }
 
         //
         // POST: /Orders/Create
@@ -69,24 +70,27 @@ namespace FurnitureShop.Controllers
         [HttpPost]
         public ActionResult Create(Order order)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 orderRepository.InsertOrUpdate(order);
                 orderRepository.Save();
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleUsers = userRepository.All;
-				ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                ViewBag.PossibleUsers = userRepository.All;
+                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+                return View();
+            }
         }
-        
+
         //
         // GET: /Orders/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleUsers = userRepository.All;
-			ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            ViewBag.PossibleUsers = userRepository.All;
+            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
             return View(orderRepository.Find(id));
         }
 
@@ -96,20 +100,23 @@ namespace FurnitureShop.Controllers
         [HttpPost]
         public ActionResult Edit(Order order)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 orderRepository.InsertOrUpdate(order);
                 orderRepository.Save();
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleUsers = userRepository.All;
-				ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                ViewBag.PossibleUsers = userRepository.All;
+                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+                return View();
+            }
         }
 
         //
         // GET: /Orders/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             return View(orderRepository.Find(id));
@@ -151,24 +158,68 @@ namespace FurnitureShop.Controllers
             return View(orderRepository.Find(id));
         }
 
-        //public ViewResult Test1(int id)
-        //{
+        public ActionResult CustomerCreateOrder()
+        {
+            //ViewBag.PossibleUsers = userRepository.All;
+            ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.UserId = 1;
+            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            return View();
+        }
 
-        //    //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All;
-        //    //ViewBag.SelectedCategory = id;
-            
+        //
+        // POST: /Orders/Create
 
-        //    //IEnumerable<string> testee = orderRepository.All.ToList().Select(c => c.OrderDate).ToArray();
-        //    //testee = orderRepository.AllIncluding(order => order..OrderDeliveries) //categoryRepository.All.ToList().Select(c => c.Name).ToArray(); /*productRepository.All
+        [HttpPost]
+        public ActionResult CustomerCreateOrder(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                orderRepository.InsertOrUpdate(order);
+                orderRepository.Save();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.PossibleUsers = userRepository.All;
+                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+                return View();
+            }
+        }
 
-        //    //return View(testee);
+        public ActionResult CustomerCreateOrderProducts()
+        {
+            ViewBag.SelectedOrder = orderRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.UserId = 1;
+            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            return View();
+        }
 
-        //}
+        //
+        // POST: /Orders/Create
+
+        [HttpPost]
+        public ActionResult CustomerCreateOrderProducts(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                orderRepository.InsertOrUpdate(order);
+                orderRepository.Save();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.PossibleUsers = userRepository.All;
+                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+                return View();
+            }
+        }
 
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) {
+            if (disposing)
+            {
                 userRepository.Dispose();
                 orderdeliveryRepository.Dispose();
                 orderRepository.Dispose();

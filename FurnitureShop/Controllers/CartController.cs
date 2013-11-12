@@ -13,10 +13,18 @@ namespace FurnitureShop.Controllers
     {
         private IProductRepository productRepository;
         private IOrderProcessor orderProcessor;
-        public CartController(IProductRepository repo, IOrderProcessor proc)
+        private IUserRepository userRepository;
+        private IAddressRepository addressRepository;
+        public CartController(
+            IProductRepository productRepository,
+            IOrderProcessor orderProcessor,
+            IUserRepository userRepository,
+            IAddressRepository addressRepository)
         {
-            productRepository = repo;
-            orderProcessor = proc;
+            this.productRepository = productRepository;
+            this.orderProcessor = orderProcessor;
+            this.userRepository = userRepository;
+            this.addressRepository = addressRepository;
         }
 
         // new content added
@@ -70,7 +78,7 @@ namespace FurnitureShop.Controllers
         }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, User shippingDetails)
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
             if (cart.Lines.Count() == 0)
             {
@@ -90,8 +98,9 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Checkout()
         {
-            //return View(userRepository.Find(1));
-            return View(); //new ShippingDetails()
+            ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            return View(new ShippingDetails());
         }
 
     }

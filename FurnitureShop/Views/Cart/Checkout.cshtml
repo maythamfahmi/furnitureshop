@@ -1,35 +1,27 @@
-﻿@model FurnitureShop.Models.Product
-
+﻿@model FurnitureShop.Models.ShippingDetails
 @{
     ViewBag.Title = "Checkout";
 }
-
-<h2>Checkout</h2>
-
+<h2>Check out now</h2>
 Please enter your details, and we'll ship your goods right away!
+
+@{ FurnitureShop.Models.User userInfo = ViewBag.SelectedUser;
+}
+@{ FurnitureShop.Models.Address userAddress = ViewBag.SelectedAddress;
+}
+
 @using (Html.BeginForm())
 {
     <h3>Ship to</h3>
-    <div>Shipping address drop down: </div>
+    <div>Name: @Html.TextBox("Name", (string)userInfo.FirstName+" "+userInfo.LastName )</div>
+    <h3>Address</h3>
+    <div>Line 1: @*Html.TextBoxFor(x => x.Line1, new { @Value = (string)userAddress.AddressLine1 })*@ @*Html.TextBoxFor(x => x.Line1, new { @Value = "maytham" })</div>
+    <div>Line 2: @*Html.TextBoxFor(x => x.Line2, new { @Value = (string)userAddress.AddressLine2 }) @*Html.EditorFor(x => x.Line2)*@</div>
+    <div>Line 3: @*Html.TextBoxFor(x => x.Line3, new { @Value = (string)userAddress.AddressLine3 }) @*Html.EditorFor(x => x.Line3)*@</div>
+    <div>City: @*Html.TextBoxFor(x => x.City, new { @Value = (string)userAddress.City })</div>
+    <div>Zip: @*Html.EditorFor(x => x.Zip)*@</div>
+    <div>Country: @*Html.EditorFor(x => x.Country)*@</div>
     <p align="center">
         <input class="actionButtons" type="submit" value="Complete order" />
     </p>
 }
-
-    @*Html.DropDownListFor(model => model.UserRoleId, ((IEnumerable<FurnitureShop.Models.UserRole>)ViewBag.PossibleUserRoles).Select(option => new SelectListItem {
-        Text = (option == null ? "None" : option.Name), 
-        Value = option.UserRoleId.ToString(),
-        Selected = (Model != null) && (option.UserRoleId == Model.UserRoleId)
-    }), "Choose...")*@
-    @*Html.ValidationMessageFor(model => model.UserRoleId)*@
-
-@*
-    <h3>Address</h3>
-    <div>Line 1: @Html.EditorFor(x => x.Line1)</div>
-    <div>Line 2: @Html.EditorFor(x => x.Line2)</div>
-    <div>Line 3: @Html.EditorFor(x => x.Line3)</div>
-    <div>City: @Html.EditorFor(x => x.City)</div>
-    <div>State: @Html.EditorFor(x => x.State)</div>
-    <div>Zip: @Html.EditorFor(x => x.Zip)</div>
-    <div>Country: @Html.EditorFor(x => x.Country)</div>
-*@
