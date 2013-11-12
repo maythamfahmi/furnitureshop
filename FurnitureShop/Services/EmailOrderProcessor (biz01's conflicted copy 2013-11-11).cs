@@ -19,7 +19,7 @@ namespace FurnitureShop.Services
         public string Password = "MySmtpPassword";
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
-        public bool WriteAsFile = false;
+        public bool WriteAsFile = true;
         public string FileLocation = @"c:\eshop_emails";
     }
 
@@ -30,7 +30,7 @@ namespace FurnitureShop.Services
         {
             emailSettings = settings;
         }
-        public void ProcessOrder(Cart cart, ShippingDetails shippingInfo)
+        public void ProcessOrder(Cart cart, User shippingInfo)
         {
             using (var smtpClient = new SmtpClient())
             {
@@ -61,15 +61,16 @@ namespace FurnitureShop.Services
                 }
                 body.AppendFormat("Total order value: {0:c}", cart.ComputeTotalValue())
                 .AppendLine("---")
-                .AppendLine("Ship to:")
-                .AppendLine(shippingInfo.Name)
-                .AppendLine(shippingInfo.Line1)
-                .AppendLine(shippingInfo.Line2 ?? "")
-                .AppendLine(shippingInfo.Line3 ?? "")
-                .AppendLine(shippingInfo.City)
-                .AppendLine(shippingInfo.Country)
-                .AppendLine(shippingInfo.Zip)
-                .AppendLine("---");
+                .AppendLine("Ship to:");
+                //.AppendLine(shippingInfo.Name)
+                //.AppendLine(shippingInfo.Line1)
+                //.AppendLine(shippingInfo.Line2 ?? "")
+                //.AppendLine(shippingInfo.Line3 ?? "")
+                //.AppendLine(shippingInfo.City)
+                //.AppendLine(shippingInfo.State ?? "")
+                //.AppendLine(shippingInfo.Country)
+                //.AppendLine(shippingInfo.Zip)
+                //.AppendLine("---")
                 //.AppendFormat("Gift wrap: {0}",
                 //shippingInfo.GiftWrap ? "Yes" : "No");
                 MailMessage mailMessage = new MailMessage(

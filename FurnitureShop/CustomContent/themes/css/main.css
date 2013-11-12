@@ -958,13 +958,15 @@ textarea {
 .editor-field {
     margin: 0.5em 0 0 0;
 }
+
 .editor-float-left {
-    float:left;
+    float: left;
 }
+
 .editor-float-none {
-    float:none;
-    clear:both;
-    overflow:hidden;
+    float: none;
+    clear: both;
+    overflow: hidden;
 }
 
 /* Styles for cart buttons etc
@@ -986,8 +988,28 @@ DIV.item INPUT {
 }
 
 H2 {
+    font-size: 1.5em;
     margin-top: 0.3em;
+    font: "Arial Narrow", "Franklin Gothic Medium", Arial;
 }
+
+H3 {
+    font-size: 1.3em;
+    margin-top: 0.3em;
+    font: "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+
+H4 {
+    font-size: 1em;
+    margin-top: 0.3em;
+    font: "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+
+/*
+DIV#header DIV.title, DIV.item H3, DIV.item H4, DIV.pager A {
+    font: bold 1em "Arial Narrow", "Franklin Gothic Medium", Arial;
+}
+ */
 
 TFOOT TD {
     border-top: 1px dotted gray;

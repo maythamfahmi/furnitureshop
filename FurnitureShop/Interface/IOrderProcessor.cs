@@ -8,7 +8,7 @@ namespace FurnitureShop.Interface
 {
     public interface IOrderProcessor
     {
-        void ProcessOrder(Cart cart, User shippingDetails);
+        void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
 
     }
 }

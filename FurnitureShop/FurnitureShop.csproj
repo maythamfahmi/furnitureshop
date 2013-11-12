@@ -169,6 +169,7 @@
     <Compile Include="Models\LoginOnViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProductListView.cs" />
+    <Compile Include="Models\ShippingDetails.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
@@ -449,6 +450,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Users\myAccount.cshtml" />
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
+    <Content Include="Views\Orders\CustomerCreateOrder.cshtml" />
     <Content Include="Views\Account\isLoggin.cshtml" />
   </ItemGroup>
   <ItemGroup>

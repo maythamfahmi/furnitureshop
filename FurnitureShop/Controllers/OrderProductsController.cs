@@ -110,6 +110,32 @@ namespace FurnitureShop.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult CreateOrderProducts()
+        {
+            ViewBag.PossibleOrders = orderRepository.All;
+            return View();
+        }
+
+        //
+        // POST: /OrderProducts/Create
+
+        [HttpPost]
+        public ActionResult CreateOrderProducts(OrderProduct orderproduct)
+        {
+            if (ModelState.IsValid)
+            {
+                orderproductRepository.InsertOrUpdate(orderproduct);
+                orderproductRepository.Save();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.PossibleOrders = orderRepository.All;
+                return View();
+            }
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
