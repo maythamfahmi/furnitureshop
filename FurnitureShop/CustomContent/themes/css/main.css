@@ -94,7 +94,12 @@ th {
 }
 .clear-both {
     clear:both;
-} 
+}
+
+.SubCategoriesPartialView {
+    
+  
+}
 
 /*End added by Renier*/
 
@@ -566,14 +571,24 @@ section.navbar {
         left: 0;
     }
 
-    .product-box:hover {
-        background-color: #eb4800;
+    /*.product-box:hover {
+        background-color: #e9e8e8;
         -webkit-transition: all 0.2s linear;
         -moz-transition: all 0.2s linear;
         -o-transition: all 0.2s linear;
         -ms-transition: all 0.2s linear;
         transition: all 0.2s linear;
         box-shadow: 0px 0px 5px #ccc;
+    }*/
+
+    .product-box:hover {
+        background-color: #ffcea4;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition: all 0.1s linear;
+        -o-transition: all 0.1s linear;
+        -ms-transition: all 0.1s linear;
+        transition: all 0.2s linear;
+        box-shadow: 0px 0px 5px #eee;
     }
 
         .product-box:hover a {
