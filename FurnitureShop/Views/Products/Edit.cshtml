@@ -16,6 +16,21 @@
         @Html.HiddenFor(model => model.ProductId)
 		@Html.Partial("_CreateOrEdit", Model)
 
+        @Html.ValidationMessageFor(model => Model.ImageData)
+                <div class="editor-label">Image</div>
+                <div class="editor-field">
+                  
+                  @if (Model.ImageData == null) {
+                            @:No image selected
+                        }
+                        else
+                        {
+                            <img width="150" height="150" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" />
+                        }
+                    @*@Html.ValidationMessageFor(model => Model.ImageData)*@
+                    <div>Upload new image: <input type="file" name="image"/></div>
+                </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
