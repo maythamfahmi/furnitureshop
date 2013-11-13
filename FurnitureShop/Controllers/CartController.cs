@@ -85,8 +85,10 @@ namespace FurnitureShop.Controllers
         }
 
         [HttpPost]
+		[Authorize]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails, Order order, OrderProduct orderproduct)
         {
+
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your cart is empty!");
@@ -128,6 +130,7 @@ namespace FurnitureShop.Controllers
             }
         }
 
+		[Authorize]
         public ViewResult Checkout()
         {
             string userName = HttpContext.User.Identity.Name;
