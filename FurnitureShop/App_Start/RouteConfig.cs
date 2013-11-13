@@ -13,16 +13,28 @@ namespace FurnitureShop
         {
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //routes.MapRoute(null,
+            //"",
+            //new
+            //{
+            //    controller = "Products",
+            //    action = "List",
+            //    category = (string)null,
+            //    page = 1
+            //}
+            //);
+
             routes.MapRoute(null,
             "",
             new
             {
-                controller = "Products",
-                action = "List",
+                controller = "Home",
+                action = "Index",
                 category = (string)null,
                 page = 1
             }
             );
+
             routes.MapRoute(null,
             "Page{page}",
             new { controller = "Products", action = "List", category = (string)null },

@@ -142,6 +142,7 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NaviController.cs" />
     <Compile Include="Controllers\OrderDeliveriesController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
@@ -290,6 +291,9 @@
     <Content Include="CustomContent\themes\images\bg.png" />
     <Content Include="CustomContent\themes\images\carousel\banner-1.jpg" />
     <Content Include="CustomContent\themes\images\carousel\banner-2.jpg" />
+    <Content Include="CustomContent\themes\images\carousel\banner-3.jpg" />
+    <Content Include="CustomContent\themes\images\carousel\banner-4.jpg" />
+    <Content Include="CustomContent\themes\images\carousel\banner-5.jpg" />
     <Content Include="CustomContent\themes\images\clients\1.png" />
     <Content Include="CustomContent\themes\images\clients\10.png" />
     <Content Include="CustomContent\themes\images\clients\11.png" />
@@ -503,6 +507,7 @@
     <Content Include="Views\Users\CustomerOrder.cshtml" />
     <Content Include="Views\RatePlusComments\CreateRating.cshtml" />
     <Content Include="Views\Products\SummaryDetails.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
