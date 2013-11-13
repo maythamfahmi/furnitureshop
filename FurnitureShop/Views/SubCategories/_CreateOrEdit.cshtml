@@ -10,3 +10,15 @@
     @Html.ValidationMessageFor(model => model.Name)
 </div>
 
+<div class="editor-label">
+    Category
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.CategoryId, ((IEnumerable<FurnitureShop.Models.Category>)ViewBag.PossibleCategories).Select(option => new SelectListItem
+{
+Text = (option == null ? "None" : option.Name),
+Value = option.CategoryId.ToString(),
+Selected = (Model != null) && (option.CategoryId == Model.CategoryId)
+}), "Choose...")
+    @Html.ValidationMessageFor(model => model.CategoryId)
+</div>
