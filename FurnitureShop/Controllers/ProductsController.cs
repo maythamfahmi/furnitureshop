@@ -269,10 +269,16 @@ namespace FurnitureShop.Controllers
             return View(model);
         }
 
-        public FileContentResult GetImage(int ProductId)
+        public ViewResult SummaryDetails(int id)
+        {
+            return View(productRepository.Find(id));
+        }
+
+
+        public FileContentResult GetImage(int productid)
         {
             //Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
-            Product prod = productRepository.All.ToList().FirstOrDefault(p => p.ProductId == ProductId);
+            Product prod = productRepository.All.ToList().FirstOrDefault(p => p.ProductId == productid);
             if (prod != null)
             {
                 return File(prod.ImageData, prod.ImageMimeType);

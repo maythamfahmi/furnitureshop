@@ -117,6 +117,7 @@ namespace FurnitureShop.Controllers
         }
 
         // Rating a product
+        [Authorize]
         public ActionResult CreateRating(int productid)
         {
             string userName = HttpContext.User.Identity.Name;
@@ -130,7 +131,7 @@ namespace FurnitureShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRating(RatePlusComment ratepluscomment)
+        public ActionResult CreateRating(RatePlusComment ratepluscomment, int productid)
         {
             if (ModelState.IsValid)
             {
@@ -140,9 +141,13 @@ namespace FurnitureShop.Controllers
             }
             else
             {
-                ViewBag.PossibleProducts = productRepository.All;
-                ViewBag.PossibleUsers = userRepository.All;
-                return View();
+                string userName = HttpContext.User.Identity.Name;
+                User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+                ViewBag.SelecedUser = user.UserId;
+                ViewBag.SelecedProduct = productid;
+                return Redirect("createrating?productid=" + productid);
+                 //RedirectToAction
             }
         }
         // 
