@@ -16,24 +16,32 @@
 *@
 <li class="span3">
     <div class="product-box">
-        @*<a href="product_detail.html">
-            <img alt="" src="themes/images/ladies/5.jpg"></a><br />
-        <a href="product_detail.html" class="title">@Model.Name</a><br />*@
-        <!--<a href="#" class="category">Suspendisse aliquet</a>-->
-        <a href="">
-            <a href="product_detail.html" class="title">@Model.Name</a><br /><br />
-            <img width="180" height="180" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+        <span class="sale_tag"></span>	
+        <a href="~/Products/SummaryDetails?id=@Model.ProductId">
+            <img alt="" width="270" height="270" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+        @*Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })*@
+        <p class="title">@Model.Name</p>
+        <p class="price">@Model.Price.ToString("c")</p>
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-inverse" value="+ Add to cart" />
+        }
 
-        
-        <p class="price-summary">@Model.Price.ToString("c")</p>
+        @*
+        <a href="/Products/SummaryDetails?id=@Model.ProductId">
+            <img alt="" src="~/customcontent/images/@Model.ImageSrc" height="150" width="150"></a><br />
+        <a href="/Products/SummaryDetails?id=@Model.ProductId" class="title">@Model.Name</a><br />
 
-        @Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             @Html.HiddenFor(x => x.ProductId)
             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
             <input type="submit" class="actionButtons" value="+ Add to cart" />
         }
+        <p class="price">@Model.Price.ToString("c")</p>
+        *@
 
     </div>
 </li>

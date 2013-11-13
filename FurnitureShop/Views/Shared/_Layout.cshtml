@@ -90,20 +90,18 @@
                 <div class="span3">
                     <h4>Navigation</h4>
                     <ul class="nav">
-                        <li><a href="./index.html">Homepage</a></li>
-                        <li><a href="./about.html">About Us</a></li>
-                        <li><a href="./contact.html">Contac Us</a></li>
-                        <li><a href="./cart.html">Your Cart</a></li>
-                        <li><a href="./register.html">Login</a></li>
+                        <li><a href="/">Homepage</a></li>
+                        <li><a href="/About/Index">About Us</a></li>
+                        <li><a href="/Contact/Index">Contac Us</a></li>
+                        <li><a href="/Cart/Index">Your Cart</a></li>
+                        <li><a href="/Account/Login">Login</a></li>
                     </ul>
                 </div>
                 <div class="span4">
                     <h4>My Account</h4>
                     <ul class="nav">
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Order History</a></li>
-                        <li><a href="#">Wish List</a></li>
-                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="/Users/MyAccount">My Account</a></li>
+                        <li><a href="/orders/customerorder">Order History</a></li>
                     </ul>
                 </div>
                 <div class="span5">
@@ -130,9 +128,9 @@
     <!-- scripts -->
     <!-- Menu system in this template is not compatible with latest Jquery 2.x, No opgrade or install please. -->
     <!-- Date picker is a little bit craized here. -->
-    @Scripts.Render("~/bundles/jquery")
+    @*Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/modernizr")
-    @*Scripts.Render("~/CustomContent/themes/js/jquery-1.7.2.min.js")*@
+    @Scripts.Render("~/CustomContent/themes/js/jquery-1.7.2.min.js")
     @Scripts.Render("~/CustomContent/bootstrap/js/bootstrap.min.js")
     @Scripts.Render("~/CustomContent/themes/js/superfish.js")
     @Scripts.Render("~/CustomContent/themes/js/jquery.scrolltotop.js")
@@ -141,8 +139,8 @@
 			@Scripts.Render("~/CustomContent/js/respond.min.js")
 	<![endif]-->
 
-    <script src="CustomContent/themes/js/common.js"></script>
-    <script>
+    <script src="~/CustomContent/themes/js/common.js"></script>
+    <script src="~/CustomContent/themes/js/jquery.flexslider-min.js"></script>    <script>
         $(document).ready(function () {
             $('#checkout').click(function (e) {
                 document.location.href = "checkout.html";

@@ -1,7 +1,7 @@
 ﻿@model FurnitureShop.Models.CartIndexView
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your cart";
 }
 
 <h2>Index</h2>
@@ -24,7 +24,7 @@
                 @using (Html.BeginForm("RemoveFromCart", "Cart")) {        
                     @Html.Hidden("ProductId", line.Product.ProductId)
                     @Html.HiddenFor(x => x.ReturnUrl)
-                    <input class="actionButtons" type="submit" 
+                    <input class="btn btn-inverse" type="submit" 
                         value="Remove" />
                 }
             </td>
@@ -38,7 +38,7 @@
         </td>
     </tr></tfoot>
 </table>
-<p align="center" class="actionButtons">
+<p align="center" class="btn btn-inverse">
     <a href="@Model.ReturnUrl">Continue shopping</a>
     @Html.ActionLink("Checkout now", "Checkout")
 </p>

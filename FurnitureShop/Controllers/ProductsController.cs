@@ -15,6 +15,7 @@ namespace FurnitureShop.Controllers
         private readonly IProductRepository productRepository;
 		private readonly ISubCategoryRepository subCategoryRepository;
 		private readonly IProductSubCategoryRepository productSubCategoryRepository;
+        private readonly IRatePlusCommentRepository ratePlusCommentRepository;
 
         public int PageSize = 10;
         // If you are using Dependency Injection, you can delete the following constructor
@@ -22,12 +23,19 @@ namespace FurnitureShop.Controllers
         //{
         //}
 
-		public ProductsController(ICategoryRepository categoryRepository, IProductRepository productRepository, ISubCategoryRepository subCategoryRepository, IProductSubCategoryRepository productSubCategoryRepository)
+		public ProductsController(
+            ICategoryRepository categoryRepository,
+            IProductRepository productRepository,
+            ISubCategoryRepository subCategoryRepository,
+            IProductSubCategoryRepository productSubCategoryRepository,
+            IRatePlusCommentRepository ratePlusCommentRepository
+            )
         {
             this.categoryRepository = categoryRepository;
             this.productRepository = productRepository;
 			this.subCategoryRepository = subCategoryRepository;
 			this.productSubCategoryRepository = productSubCategoryRepository;
+            this.ratePlusCommentRepository = ratePlusCommentRepository;
         }
 
         //
@@ -269,8 +277,18 @@ namespace FurnitureShop.Controllers
             return View(model);
         }
 
+        // view product summary and rating statistic
         public ViewResult SummaryDetails(int id)
         {
+            if (ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Count() < 1)
+            {
+                ViewBag.ratingstatistics = "This product is not rated yet";
+            }
+            else
+            {
+                ViewBag.ratingstatistics = ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Average(p => p.Rate);
+                ViewBag.ratecomments = ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id);
+            }
             return View(productRepository.Find(id));
         }
 
