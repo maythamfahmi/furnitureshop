@@ -12,16 +12,18 @@ namespace FurnitureShop.Controllers
     {
 		private readonly IUserRoleRepository userroleRepository;
 		private readonly IUserRepository userRepository;
+		private readonly IAddressRepository addressRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         /*public UsersController() : this(new UserRoleRepository(), new UserRepository())
         {
         }*/
 
-        public UsersController(IUserRoleRepository userroleRepository, IUserRepository userRepository)
+		public UsersController(IUserRoleRepository userroleRepository, IUserRepository userRepository, IAddressRepository addressRepository)
         {
 			this.userroleRepository = userroleRepository;
 			this.userRepository = userRepository;
+			this.addressRepository = addressRepository;
         }
 
         //
@@ -128,7 +130,15 @@ namespace FurnitureShop.Controllers
 		// Show account for the current user
 		//
 		[Authorize]
-		public ActionResult myAccount()
+		public ViewResult myAccount()
+		{
+			//Get the current user 
+			string userName = HttpContext.User.Identity.Name;
+			User user = userRepository.AllIncluding(u => u.Address).FirstOrDefault(u => u.Name == userName);
+			return View(user);
+		}
+		[Authorize]
+		public ActionResult EditUserInfo()
 		{
 			//Get the current user 
 			string userName = HttpContext.User.Identity.Name;
@@ -139,7 +149,7 @@ namespace FurnitureShop.Controllers
 			TempData.Remove("UserId");
 			TempData.Remove("UserName");
 			TempData.Remove("UserUserRoleId");
-            TempData.Add("UserId", user.UserId);
+			TempData.Add("UserId", user.UserId);
 			TempData.Add("UserName", user.Name);
 			TempData.Add("UserUserRoleId", user.UserRoleId);
 
@@ -147,7 +157,7 @@ namespace FurnitureShop.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult myAccount(User user)
+		public ActionResult EditUserInfo(User user)
 		{
 			//Get the authorized user
 			string userName = HttpContext.User.Identity.Name;
@@ -160,8 +170,7 @@ namespace FurnitureShop.Controllers
 			{
 				userRepository.InsertOrUpdate(user);
 				userRepository.Save();
-				return RedirectToAction("list", "Products");
-
+				return RedirectToAction("MyAccount");
 			}
 			else
 			{
@@ -170,6 +179,87 @@ namespace FurnitureShop.Controllers
 			}
 		}
 
+		public ActionResult EditAddress(int AddressId)
+		{
+			Address address = addressRepository.Find(AddressId);
+
+			//Check with the user Id
+			string userName = HttpContext.User.Identity.Name;
+			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+			if (address.UserId != user.UserId) {
+				return RedirectToAction("MyAccount");
+			}
+
+			return View(addressRepository.Find(AddressId));
+		}
+		[HttpPost]
+		public ActionResult EditAddress(Address address)
+		{
+			if (ModelState.IsValid)
+			{
+				addressRepository.InsertOrUpdate(address);
+				addressRepository.Save();
+				return RedirectToAction("MyAccount");
+			}
+			else
+			{
+				return View(address);
+			}
+		}
+
+		public ActionResult AddAddress()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult AddAddress(Address address)
+		{
+			//Check with the user Id
+			string userName = HttpContext.User.Identity.Name;
+			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+			address.UserId = user.UserId;
+			ModelState["UserId"].Errors.Clear();
+
+			if (ModelState.IsValid)
+			{
+				addressRepository.InsertOrUpdate(address);
+				addressRepository.Save();
+				return RedirectToAction("MyAccount");
+			}
+			else
+			{
+				return View(address);
+			}
+		}
+
+		public ActionResult RemoveAddress(int AddressId)
+		{
+			return View(addressRepository.Find(AddressId));
+		}
+
+		[HttpPost]
+		public ActionResult RemoveAddressConfirmed(int AddressId)
+		{
+			Address address = addressRepository.Find(AddressId);
+
+			//Check with the user Id
+			string userName = HttpContext.User.Identity.Name;
+			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+			if (address.UserId == user.UserId)
+			{
+				addressRepository.Delete(AddressId);
+				addressRepository.Save();
+				return RedirectToAction("MyAccount");
+			}
+			else
+			{
+				return RedirectToAction("MyAccount");
+			}
+		}
     }
 }
 

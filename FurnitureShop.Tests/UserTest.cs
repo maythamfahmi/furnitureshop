@@ -26,7 +26,7 @@ namespace FurnitureShop.Tests
 				new User() { UserId=1, Name="u1"},
 				new User() { UserId=2, Name="u2"}
 			}.AsQueryable());
-			UsersController target = new UsersController(null, mock.Object);
+			UsersController target = new UsersController(null, mock.Object, null);
 			
 			//Action
 			User[] result = ((IQueryable<User>)target.Index().Model).ToArray();
@@ -42,7 +42,7 @@ namespace FurnitureShop.Tests
 			Mock<IUserRepository> mock = new Mock<IUserRepository>();
 			Mock<IUserRoleRepository> mockRoles = new Mock<IUserRoleRepository>();
 
-			UsersController target = new UsersController(mockRoles.Object, mock.Object);
+			UsersController target = new UsersController(mockRoles.Object, mock.Object, null);
 
 			User unValidUser = new User() { FirstName="firstName"};
 			// Arrange - add an error to the model state
