@@ -21,13 +21,13 @@
         <a href="product_detail.html" class="title">@Model.Name</a><br />
         <a href="#" class="category">Suspendisse aliquet</a>*@
         <a href="">
-            @Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })
-            <img width="200" height="200" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+            <a href="product_detail.html" class="title">@Model.Name</a><br /><br />
+            <img width="180" height="180" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
 
-        <a href="product_detail.html" class="title">@Model.Name</a><br />
+        
         <p class="price-summary">@Model.Price.ToString("c")</p>
 
-
+        @Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             @Html.HiddenFor(x => x.ProductId)

@@ -139,6 +139,8 @@ namespace FurnitureShop.Controllers
 					Selected = (ProductSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
 				});
 			}
+            TempData.Add("ImageData", product.ImageData);
+            TempData.Add("ImageMimeType", product.ImageMimeType);
 			ViewBag.SubCategories = SubCategoriesAvailable;
             ViewBag.PossibleCategories = categoryRepository.All;
             return View(productRepository.Find(id));
@@ -182,16 +184,27 @@ namespace FurnitureShop.Controllers
                     product.ImageMimeType = image.ContentType;
                     product.ImageData = new byte[image.ContentLength];
                     image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+
+
+                }
+                else
+                {
+                     product.ImageMimeType = (string)TempData["ImageMimeType"];
+                     product.ImageData = (byte[])TempData["ImageData"];
+                     //image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                 
+
                 }
                 // manually added end
-
+                //ViewBag.product.ImageData = TempData["currentImage"];
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();
                 return RedirectToAction("Index");
             }
             else
             {
-				ViewBag.SubCategories = ProductSubCategory;
+				
+                ViewBag.SubCategories = ProductSubCategory;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 return View();
             }

@@ -6,7 +6,7 @@
 body {
     font-size: 12px;
     font-family: 'Open Sans', arial, tahoma, sans-serif;
-    background: url(../images/bg.png) repeat 0 0 fixed;
+    background: url(../images/BodyBg.png) repeat 0 0 fixed;
 }
 
 label, input, button, select, textarea {
