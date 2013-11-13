@@ -4,7 +4,8 @@
 @{
     if (Model == "True")
     {
-    @Html.ActionLink("Sign out", "Logout", "Account")
+        string logout = "Sign " + ViewBag.userName + " out";
+        @Html.ActionLink(logout, "Logout", "Account")
     }
     else
     {

@@ -449,13 +449,17 @@
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Completed.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Users\myAccount.cshtml" />
+    <Content Include="Views\Users\EditUserInfo.cshtml" />
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
     <Content Include="Views\Orders\CustomerCreateOrder.cshtml" />
     <Content Include="Views\Account\isLoggin.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Users\CustomerOrder.cshtml" />
     <Content Include="Views\RatePlusComments\CreateRating.cshtml" />
+    <Content Include="Views\Users\myAccount.cshtml" />
+    <Content Include="Views\Users\EditAddress.cshtml" />
+    <Content Include="Views\Users\AddAddress.cshtml" />
+    <Content Include="Views\Users\RemoveAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

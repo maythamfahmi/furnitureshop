@@ -4,85 +4,72 @@
     ViewBag.Title = "myAccount";
 }
 
-<h2>myAccount</h2>
-@using (Html.BeginForm()) {
-       @* @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.Name)
-        @Html.HiddenFor(model => model.UserRoleId)  
-*@<div class="user-editor-general-info">
-    <div class="editor-float-none">
-        <div class="editor-float-left">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Password)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-        </div>
-    </div>
-    <div class="editor-float-none">
-        <div class="editor-float-left">
-            <div class="editor-float-left">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.FirstName)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.FirstName)
-                    @Html.ValidationMessageFor(model => model.FirstName)
-                </div>
-            </div>
-            <div class="editor-float-left">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.LastName)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.LastName)
-                    @Html.ValidationMessageFor(model => model.LastName)
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="editor-float-none">
-        <div class="editor-float-left">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Email)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-        <div class="editor-float-left">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Phone)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Phone)
-                @Html.ValidationMessageFor(model => model.Phone)
-            </div>
-        </div>
-    </div>
+<h2>Account for @Model.Name</h2>
+<p>Name: @Model.FirstName @Model.LastName</p>
+<p>Email: @Model.Email</p>
+<p>Phone: @Model.Phone</p>
+<p>@Html.ActionLink("Edit personal data", "EditUserInfo", "Users")</p>
 
-    <div class="editor-float-none">
-        <div class="editor-float-left">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ImageSrc)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ImageSrc)
-                @Html.ValidationMessageFor(model => model.ImageSrc)
-            </div>
-        </div>
-    </div>
-</div>
-@Html.EditorFor(model => model.Address)
-<div class="editor-float-none">
-    <p>
-        <input type="submit" value="Update" class="actionButtons" />
-    </p>
-</div>
+<p>Registered addresses</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Address1
+        </th>
+        <th>
+             Address2
+        </th>
+        <th>
+            Address3
+        </th>
+        <th>
+            Postal
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+    </tr>
+
+@{
+foreach (FurnitureShop.Models.Address address in Model.Address)
+{
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "EditAddress", new { AddressId=address.AddressId })
+            @if (Model.Address.Count > 1)
+            {  
+                @:| 
+                @Html.ActionLink("Delete", "RemoveAddress", new { AddressId=address.AddressId }) }
+        </td>
+        <td>
+			@address.AddressLine1
+        </td>
+        <td>
+			@address.AddressLine2
+        </td>
+        <td>
+			@address.AddressLine3
+        </td>
+        <td>
+			@address.Postal
+        </td>
+        <td>
+			@address.City
+        </td>
+        <td>
+			@address.Country
+        </td>
+    </tr>
 }
+
+}
+</table>
+ @Html.ActionLink("Add new address", "AddAddress")
+
 <hr />
 <h2>My order history</h2>
 
