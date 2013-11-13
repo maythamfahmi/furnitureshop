@@ -3,11 +3,42 @@
 @{
     ViewBag.Title = "Login";
 }
-
-<h2>Login In</h2>
-<p>Please log in to access your account</p>
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-    @Html.EditorForModel()
-    <p><input type="submit" value="Log in" /></p>
-}
+<section class="header_text sub">
+    <!--<img class="pageBanner" src="themes/images/pageBanner.png" alt="New products">-->
+    <h4><span>Login or Regsiter</span></h4>
+</section>
+<section class="main-content">
+    <div class="row">
+        <div class="span5">
+            <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
+            @using (Html.BeginForm())
+            {
+                <fieldset>
+                    @Html.ValidationSummary()
+                    <div class="control-group">
+                        <label class="control-label">Username</label>
+                        <div class="controls">
+                            @Html.EditorFor(m => m.userName, new { @class = "input-xlarge", @placeholder = "Enter your username" })
+                            @Html.ValidationMessageFor(m => m.userName)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Username</label>
+                        <div class="controls">
+                            @Html.EditorFor(m => m.Password, new { @class = "input-xlarge", @placeholder = "Enter your password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account">
+                        <hr>
+                        <p class="reset">Recover your <a tabindex="4" href="#" title="Recover your username or password">username or password</a></p>
+                    </div>
+                </fieldset>
+            }
+        </div>
+        <div class="span7">					
+			@{Html.RenderPartial("Register");} 	
+		</div>
+    </div>
+</section>

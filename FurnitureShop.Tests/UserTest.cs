@@ -69,7 +69,7 @@ namespace FurnitureShop.Tests
 			LoginOnViewModel model = new LoginOnViewModel { userName = "user", Password = "secret" };
 
 			//Arrange - create the controller
-			AccountController target = new AccountController(mock.Object);
+			AccountController target = new AccountController(mock.Object, null, null);
 
 			//Act - authenticate using valid credentials
 			ActionResult result = target.Login(model, "/MyUrl");
@@ -90,7 +90,7 @@ namespace FurnitureShop.Tests
 			LoginOnViewModel model = new LoginOnViewModel { userName = "BadUser", Password = "BadPass" };
 
 			//Arrange - create the controller
-			AccountController target = new AccountController(mock.Object);
+			AccountController target = new AccountController(mock.Object, null,null);
 
 			//Act - authenticate using valid credentials
 			ActionResult result = target.Login(model, "/MyUrl");
