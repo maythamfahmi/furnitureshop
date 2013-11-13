@@ -241,6 +241,12 @@ namespace FurnitureShop.Controllers
             return View(model);
         }
 
+        public ViewResult SummaryDetails(int id)
+        {
+            return View(productRepository.Find(id));
+        }
+
+
         public FileContentResult GetImage(int id)
         {
             Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);

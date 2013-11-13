@@ -1,5 +1,10 @@
 ﻿@model FurnitureShop.Models.RatePlusComment
 
+<section class="header_text sub">
+    <img class="pageBanner" src="../CustomContent/themes/images/Banner1.png" alt="New products">
+    <h4><span>Product rating and comments</span></h4>
+</section>
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -23,18 +28,18 @@
         </div>
 
         <div class="editor-label">
-            Product
+            @*User*@
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(x => x.UserId, new { @Value = ViewBag.SelecedUser, @type = "hidden" })
-            @ViewBag.SelecedUser
+            @*ViewBag.SelecedUser*@
         </div>
         <div class="editor-label">
-            User
+            @*Product*@
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(x => x.ProductId, new { @Value = ViewBag.SelecedUser, @type = "hidden" })
-            @ViewBag.SelecedUser
+            @Html.TextBoxFor(x => x.ProductId, new { @Value = ViewBag.SelecedProduct, @type = "hidden" })
+            @*ViewBag.SelecedProduct*@
         </div>
 
         <p>
