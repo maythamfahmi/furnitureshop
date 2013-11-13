@@ -46,7 +46,7 @@ namespace FurnitureShop.Controllers
 			{
 				if (authProvider.Authenticate(model.userName, model.Password))
 				{
-					return Redirect(returnUrl ?? Url.Action("index", "products"));
+					return Redirect(returnUrl ?? Url.Action("MyAccount", "Users"));
 				}
 				else
 				{
