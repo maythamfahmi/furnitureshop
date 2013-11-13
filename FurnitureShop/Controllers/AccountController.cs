@@ -66,7 +66,7 @@ namespace FurnitureShop.Controllers
 			{
 				authProvider.logout();
 			}
-			return RedirectToAction("index", "products");
+			return RedirectToAction("index","home");
 		}
 
 		public PartialViewResult isLoggin()
