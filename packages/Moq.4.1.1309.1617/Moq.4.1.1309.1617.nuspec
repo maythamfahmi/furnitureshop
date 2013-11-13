@@ -159,5 +159,9 @@ Version 1.0
 
 * Initial release, initial documentation process in place, etc.</releaseNotes>
     <tags>tdd mocking mocks unittesting agile</tags>
+    <references>
+      <reference file="Moq.dll" />
+      <reference file="Moq.Silverlight.dll" />
+    </references>
   </metadata>
 </package>

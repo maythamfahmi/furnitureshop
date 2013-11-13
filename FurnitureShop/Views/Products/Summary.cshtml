@@ -16,18 +16,25 @@
 *@
 <li class="span3">
     <div class="product-box">
-        <a href="product_detail.html">
+        @*<a href="product_detail.html">
             <img alt="" src="themes/images/ladies/5.jpg"></a><br />
         <a href="product_detail.html" class="title">@Model.Name</a><br />
-        <!--<a href="#" class="category">Suspendisse aliquet</a>-->
+        <a href="#" class="category">Suspendisse aliquet</a>*@
+        <a href="">
+            @Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })
+            <img width="200" height="200" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+
+        <a href="product_detail.html" class="title">@Model.Name</a><br />
+        <p class="price-summary">@Model.Price.ToString("c")</p>
+
+
         @using (Html.BeginForm("AddToCart", "Cart"))
         {
             @Html.HiddenFor(x => x.ProductId)
             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
             <input type="submit" class="actionButtons" value="+ Add to cart" />
         }
-        <p class="price">@Model.Price.ToString("c")</p>
+
     </div>
 </li>
-
 
