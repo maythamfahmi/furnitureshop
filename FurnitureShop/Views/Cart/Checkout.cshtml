@@ -1,26 +1,25 @@
 ﻿@model FurnitureShop.Models.ShippingDetails
+
 @{
     ViewBag.Title = "Checkout";
 }
 <h2>Check out now</h2>
 Please enter your details, and we'll ship your goods right away!
 
-@{ FurnitureShop.Models.User userInfo = ViewBag.SelectedUser;
-}
-@{ FurnitureShop.Models.Address userAddress = ViewBag.SelectedAddress;
-}
-
 @using (Html.BeginForm())
 {
+@*Html.TextBoxFor(x => x.Line1, new { @Value = "maytham" })*@
+@*Html.TextBox("Name", (string)userInfo.FirstName+" "+userInfo.LastName )*@
+    
     <h3>Ship to</h3>
-    <div>Name: @Html.TextBox("Name", (string)userInfo.FirstName+" "+userInfo.LastName )</div>
+    <div>Name:      @Html.TextBoxFor(x => x.FullName, new { @Value = ViewBag.FullName })</div>
     <h3>Address</h3>
-    <div>Line 1: @*Html.TextBoxFor(x => x.Line1, new { @Value = (string)userAddress.AddressLine1 })*@ @*Html.TextBoxFor(x => x.Line1, new { @Value = "maytham" })</div>
-    <div>Line 2: @*Html.TextBoxFor(x => x.Line2, new { @Value = (string)userAddress.AddressLine2 }) @*Html.EditorFor(x => x.Line2)*@</div>
-    <div>Line 3: @*Html.TextBoxFor(x => x.Line3, new { @Value = (string)userAddress.AddressLine3 }) @*Html.EditorFor(x => x.Line3)*@</div>
-    <div>City: @*Html.TextBoxFor(x => x.City, new { @Value = (string)userAddress.City })</div>
-    <div>Zip: @*Html.EditorFor(x => x.Zip)*@</div>
-    <div>Country: @*Html.EditorFor(x => x.Country)*@</div>
+    <div>Line 1:    @Html.TextBoxFor(x => x.AddressLine1, new { @Value = ViewBag.AddressLine1 })</div>
+    <div>Line 2:    @Html.EditorFor(x => x.AddressLine2)</div>
+    <div>Line 3:    @Html.EditorFor(x => x.AddressLine3)</div>
+    <div>City:      @Html.TextBoxFor(x => x.City, new { @Value = ViewBag.City })</div>
+    <div>Zip:       @Html.TextBoxFor(x => x.Postal, new { @Value = ViewBag.Postal })</div>
+    <div>Country:   @Html.TextBoxFor(x => x.Country, new { @Value = ViewBag.Country })</div>
     <p align="center">
         <input class="actionButtons" type="submit" value="Complete order" />
     </p>

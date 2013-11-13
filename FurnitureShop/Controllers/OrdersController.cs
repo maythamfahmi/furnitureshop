@@ -136,14 +136,16 @@ namespace FurnitureShop.Controllers
 
         public ViewResult CustomerOrder()
         {
-            //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
-            ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
-            //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All.ToList().Find(o => o.OrderDeliveryId == 1);
+            //ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 3);
+            //ViewBag.SelectedOrder = orderRepository.All.ToList().FirstOrDefault(o => o.UserId == 2);
             return View(orderRepository.All);
-            //List<OrderRepository> viewModelList = new List<OrderRepository>();
-            //OrderRepository orderRepository = new OrderRepository();
-            //viewModelList.Add(orderRepository);
-            //return View(viewModelList.AsEnumerable());
+            
+            // string userName = HttpContext.User.Identity.Name;
+            // User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+            // Order order = orderRepository.All.FirstOrDefault(o => o.UserId == user.UserId);
+            //ViewBag.SelecedUser = userRepository.All.FirstOrDefault(u => u.Name == userName);
+            // //ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.Name == userName);
+            //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All.ToList().Find(o => o.OrderDeliveryId == 1);
         }
 
         public ViewResult CustomerOrderProducts(int id, int userid)
@@ -157,64 +159,6 @@ namespace FurnitureShop.Controllers
             ViewBag.totalPrice = orderproductRepository.All.ToList().FindAll(o => o.OrderId == id).Sum(p => p.OProdcutPrice * p.OProdcutQty);
             return View(orderRepository.Find(id));
         }
-
-        public ActionResult CustomerCreateOrder()
-        {
-            //ViewBag.PossibleUsers = userRepository.All;
-            ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
-            ViewBag.UserId = 1;
-            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-            return View();
-        }
-
-        //
-        // POST: /Orders/Create
-
-        [HttpPost]
-        public ActionResult CustomerCreateOrder(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                orderRepository.InsertOrUpdate(order);
-                orderRepository.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.PossibleUsers = userRepository.All;
-                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-                return View();
-            }
-        }
-
-        public ActionResult CustomerCreateOrderProducts()
-        {
-            ViewBag.SelectedOrder = orderRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
-            ViewBag.UserId = 1;
-            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-            return View();
-        }
-
-        //
-        // POST: /Orders/Create
-
-        [HttpPost]
-        public ActionResult CustomerCreateOrderProducts(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                orderRepository.InsertOrUpdate(order);
-                orderRepository.Save();
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ViewBag.PossibleUsers = userRepository.All;
-                ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
-                return View();
-            }
-        }
-
 
         protected override void Dispose(bool disposing)
         {

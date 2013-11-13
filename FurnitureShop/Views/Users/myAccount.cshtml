@@ -79,7 +79,13 @@
 @Html.EditorFor(model => model.Address)
 <div class="editor-float-none">
     <p>
-        <input type="submit" value="Update" />
+        <input type="submit" value="Update" class="actionButtons" />
     </p>
 </div>
 }
+<hr />
+<h2>My order history</h2>
+
+<a href="/orders/customerorder">
+   <input type="button" value="List of previous orders" class="actionButtons" />
+</a>

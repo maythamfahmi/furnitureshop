@@ -13,16 +13,23 @@ namespace FurnitureShop.Controllers
     {
         private IProductRepository productRepository;
         private IOrderProcessor orderProcessor;
+        private IOrderRepository orderRepository;
+        private IOrderProductRepository orderproductRepository;
         private IUserRepository userRepository;
         private IAddressRepository addressRepository;
         public CartController(
             IProductRepository productRepository,
             IOrderProcessor orderProcessor,
+            IOrderRepository orderRepository,
+            IOrderProductRepository orderproductRepository,
             IUserRepository userRepository,
-            IAddressRepository addressRepository)
+            IAddressRepository addressRepository
+            )
         {
             this.productRepository = productRepository;
             this.orderProcessor = orderProcessor;
+            this.orderRepository = orderRepository;
+            this.orderproductRepository = orderproductRepository;
             this.userRepository = userRepository;
             this.addressRepository = addressRepository;
         }
@@ -78,7 +85,7 @@ namespace FurnitureShop.Controllers
         }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails, Order order, OrderProduct orderproduct)
         {
             if (cart.Lines.Count() == 0)
             {
@@ -87,6 +94,31 @@ namespace FurnitureShop.Controllers
             if (ModelState.IsValid)
             {
                 orderProcessor.ProcessOrder(cart, shippingDetails);
+
+                // create new order
+                string userName = HttpContext.User.Identity.Name;
+                User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+                order.UserId = (int)user.UserId;
+                order.OrderDate = System.DateTime.Today;
+                order.OrderDeliveryId = (int)1;
+
+                orderRepository.InsertOrUpdate(order);
+                orderRepository.Save();
+                //
+
+                // save cart contents to order products
+                foreach (var line in cart.Lines)
+                {
+                    orderproduct.OrderId = order.OrderId;
+                    orderproduct.OProdcutId = line.Product.ProductId;
+                    orderproduct.OProdcutName = line.Product.Name;
+                    orderproduct.OProdcutQty = line.Quantity;
+                    orderproduct.OProdcutPrice = (int)line.Product.Price;
+                    orderproductRepository.InsertOrUpdate(orderproduct);
+                    orderproductRepository.Save();
+                }
+                //
+
                 cart.Clear();
                 return View("Completed");
             }
@@ -98,8 +130,22 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Checkout()
         {
-            ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
-            ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            string userName = HttpContext.User.Identity.Name;
+            User user = userRepository.All.FirstOrDefault(u => u.Name == userName); //"maytham"); //userName
+            Address address = addressRepository.All.FirstOrDefault(u => u.UserId == user.UserId); //"maytham"); //userName
+            //TempData.Remove("UserFirstName");
+            //TempData.Add("UserFirstName", user.FirstName);
+            //ViewBag.userName = (string)TempData["UserName"];
+            ViewBag.FullName = (string)user.FirstName + " " + (string)user.LastName;
+            ViewBag.AddressLine1 = (string)address.AddressLine1;
+            //ViewBag.Line1         = (string)address.AddressLine1;
+            //ViewBag.Line1         = (string)address.AddressLine1;
+            ViewBag.City = (string)address.City;
+            ViewBag.Postal = (string)address.Postal;
+            ViewBag.Country = (string)address.Country;
+
+            //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
+            //ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
             return View(new ShippingDetails());
         }
 

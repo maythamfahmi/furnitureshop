@@ -62,13 +62,13 @@ namespace FurnitureShop.Services
                 body.AppendFormat("Total order value: {0:c}", cart.ComputeTotalValue())
                 .AppendLine("---")
                 .AppendLine("Ship to:")
-                .AppendLine(shippingInfo.Name)
-                .AppendLine(shippingInfo.Line1)
-                .AppendLine(shippingInfo.Line2 ?? "")
-                .AppendLine(shippingInfo.Line3 ?? "")
+                .AppendLine(shippingInfo.FullName)
+                .AppendLine(shippingInfo.AddressLine1)
+                .AppendLine(shippingInfo.AddressLine2 ?? "")
+                .AppendLine(shippingInfo.AddressLine3 ?? "")
                 .AppendLine(shippingInfo.City)
                 .AppendLine(shippingInfo.Country)
-                .AppendLine(shippingInfo.Zip)
+                .AppendLine(shippingInfo.Postal)
                 .AppendLine("---");
                 //.AppendFormat("Gift wrap: {0}",
                 //shippingInfo.GiftWrap ? "Yes" : "No");
@@ -84,5 +84,6 @@ namespace FurnitureShop.Services
                 smtpClient.Send(mailMessage);
             }
         }
+
     }
 }

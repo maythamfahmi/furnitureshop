@@ -8,7 +8,7 @@ using FurnitureShop.Repository;
 
 namespace FurnitureShop.Controllers
 {   
-	[Authorize]
+	[Authorize] // default user is required
     public class UserRolesController : Controller
     {
 		private readonly IUserRoleRepository userroleRepository;
