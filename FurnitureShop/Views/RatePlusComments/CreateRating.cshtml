@@ -1,0 +1,46 @@
+﻿@model FurnitureShop.Models.RatePlusComment
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>RatePlusComment</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rate)
+            @Html.ValidationMessageFor(model => model.Rate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor-label">
+            Product
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(x => x.UserId, new { @Value = ViewBag.SelecedUser, @type = "hidden" })
+            @ViewBag.SelecedUser
+        </div>
+        <div class="editor-label">
+            User
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(x => x.ProductId, new { @Value = ViewBag.SelecedUser, @type = "hidden" })
+            @ViewBag.SelecedUser
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
