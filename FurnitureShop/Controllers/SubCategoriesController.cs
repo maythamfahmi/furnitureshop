@@ -10,16 +10,18 @@ namespace FurnitureShop.Controllers
 {   
     public class SubCategoriesController : Controller
     {
+		private readonly ICategoryRepository categoryRepository;
 		private readonly ISubCategoryRepository subcategoryRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public SubCategoriesController() : this(new SubCategoryRepository())
+        /*public SubCategoriesController() : this(new SubCategoryRepository())
         {
-        }
+        }*/
 
-        public SubCategoriesController(ISubCategoryRepository subcategoryRepository)
+		public SubCategoriesController(ISubCategoryRepository subcategoryRepository, ICategoryRepository categoryRepository)
         {
 			this.subcategoryRepository = subcategoryRepository;
+			this.categoryRepository = categoryRepository;
         }
 
         //
@@ -43,6 +45,7 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
+			ViewBag.PossibleCategories = categoryRepository.All;
             return View();
         } 
 
@@ -57,6 +60,7 @@ namespace FurnitureShop.Controllers
                 subcategoryRepository.Save();
                 return RedirectToAction("Index");
             } else {
+				ViewBag.PossibleCategories = categoryRepository.All;
 				return View();
 			}
         }
@@ -66,6 +70,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
+			ViewBag.PossibleCategories = categoryRepository.All;
              return View(subcategoryRepository.Find(id));
         }
 
@@ -80,6 +85,7 @@ namespace FurnitureShop.Controllers
                 subcategoryRepository.Save();
                 return RedirectToAction("Index");
             } else {
+				ViewBag.PossibleCategories = categoryRepository.All;
 				return View();
 			}
         }

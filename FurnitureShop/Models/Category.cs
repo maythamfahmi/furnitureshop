@@ -16,5 +16,7 @@ namespace FurnitureShop.Models
 
 		[Required(ErrorMessage="Please enter a category name")]
 		public string Name { get; set; }
+
+		public virtual List<SubCategory> SubCategories { get; set; }
 	}
 }

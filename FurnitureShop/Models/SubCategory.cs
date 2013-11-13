@@ -16,5 +16,7 @@ namespace FurnitureShop.Models
 
 		[Required(ErrorMessage="Please enter a subcategory name")]
 		public string Name { get; set; }
+
+		public int? CategoryId { get; set; } //this is nullable 
 	}
 }
