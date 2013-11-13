@@ -21,6 +21,7 @@ namespace FurnitureShop.Models
 		public string Email { get; set; }
 
 		[Required(ErrorMessage = "Please create password")]
+		[MinLength(2,ErrorMessage="Please specify a longer password")]
 		public string Password { get; set; }
 
 		[Required(ErrorMessage = "Please create your firstname")]

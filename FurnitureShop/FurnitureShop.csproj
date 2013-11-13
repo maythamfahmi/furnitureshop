@@ -452,6 +452,7 @@
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
     <Content Include="Views\Orders\CustomerCreateOrder.cshtml" />
     <Content Include="Views\Account\isLoggin.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Users\CustomerOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
