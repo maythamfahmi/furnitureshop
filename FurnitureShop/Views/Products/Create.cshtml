@@ -13,8 +13,15 @@
     <fieldset>
         <legend>Product</legend>
 
-		@Html.Partial("_CreateOrEdit", Model)
+        @Html.Partial("_CreateOrEdit", Model)
 
+        <div class="editor-label">Image</div>
+        <div class="editor-field">
+
+            <div>Upload new image:
+                <input type="file" name="image" />
+            </div>
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
