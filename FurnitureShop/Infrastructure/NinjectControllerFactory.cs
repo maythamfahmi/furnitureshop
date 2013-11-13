@@ -65,6 +65,7 @@ namespace FurnitureShop.Infrastructure
 			ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
 			ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
             ninjectKernel.Bind<IAddressRepository>().To<AddressRepository>();
+            ninjectKernel.Bind<IRatePlusCommentRepository>().To<RatePlusCommentRepository>();
             
             // new lines
             EmailSettings emailSettings = new EmailSettings

@@ -450,11 +450,13 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Users\myAccount.cshtml" />
     <Content Include="Views\Orders\CustomerOrderProducts.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Orders\CustomerCreateOrder.cshtml" />
-=======
     <Content Include="Views\Account\isLoggin.cshtml" />
->>>>>>> b59db767e4be513b939803dfc4c666cb2fef2de1
+<<<<<<< HEAD
+    <Content Include="Views\Users\CustomerOrder.cshtml" />
+=======
+    <Content Include="Views\Account\Register.cshtml" />
+>>>>>>> ee4395ef3d2e56c3e66129138bd51aa577ca3b0b
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

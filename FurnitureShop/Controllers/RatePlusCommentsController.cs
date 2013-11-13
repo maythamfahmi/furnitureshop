@@ -116,6 +116,37 @@ namespace FurnitureShop.Controllers
             return RedirectToAction("Index");
         }
 
+        // Rating a product
+        public ActionResult CreateRating(int productid)
+        {
+            string userName = HttpContext.User.Identity.Name;
+            User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+
+            ViewBag.SelecedUser = user.UserId;
+            ViewBag.SelecedProduct = productid;
+            //ViewBag.PossibleProducts = 
+            //ViewBag.PossibleUsers = userRepository.All;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateRating(RatePlusComment ratepluscomment)
+        {
+            if (ModelState.IsValid)
+            {
+                ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
+                ratepluscommentRepository.Save();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.PossibleProducts = productRepository.All;
+                ViewBag.PossibleUsers = userRepository.All;
+                return View();
+            }
+        }
+        // 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
