@@ -139,6 +139,8 @@ namespace FurnitureShop.Controllers
 					Selected = (ProductSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
 				});
 			}
+            TempData.Remove("ImageData");
+            TempData.Remove("ImageMimeType");
             TempData.Add("ImageData", product.ImageData);
             TempData.Add("ImageMimeType", product.ImageMimeType);
 			ViewBag.SubCategories = SubCategoriesAvailable;
@@ -196,6 +198,7 @@ namespace FurnitureShop.Controllers
 
                 }
                 // manually added end
+                //
                 //ViewBag.product.ImageData = TempData["currentImage"];
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();

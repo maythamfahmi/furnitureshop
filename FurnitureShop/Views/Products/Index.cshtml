@@ -58,13 +58,13 @@
 			@(item.Category == null ? "None" : item.Category.Name)
         </td>
         <td>
-                @*@for (int i = 0; i < ViewBag.SubCategories.Count; i++)
+                @for (int i = 0; i < item.SubCategories.Count; i++)
                 {
-                    <p>ViewBag.SubCategories[i].Name</p>
-                }*@
+                    <p>@item.SubCategories[i].SubCategory.Name</p>
+                }
 
             
-			@(item.SubCategories == null ? "None" : item.SubCategories.Count.ToString())
+			@*@(item.SubCategories == null ? "None" : item.SubCategories.Count.ToString())*@
         </td>
 
 
