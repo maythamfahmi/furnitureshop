@@ -1,4 +1,5 @@
-﻿using FurnitureShop.Repository;
+﻿using FurnitureShop.Models;
+using FurnitureShop.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,9 @@ namespace FurnitureShop.Controllers
             ViewBag.SelectedCategory = category;
 
 
-            IEnumerable<string> categories = categoryRepository.All.ToList().Select(c => c.Name).ToArray(); //productRepository.AllIncluding(product => product.Categories, product => product.SubCategories) //categoryRepository.All.ToList().Select(c => c.Name).ToArray(); /*productRepository.All
+            //IEnumerable<string> categories = categoryRepository.All.ToList().Select(c => c.Name).ToArray(); //productRepository.AllIncluding(product => product.Categories, product => product.SubCategories) //categoryRepository.All.ToList().Select(c => c.Name).ToArray(); /*productRepository.All
+
+			List<Category> categories = categoryRepository.All.ToList();
 
             //IEnumerable<string> categories = productRepository.All
             //    .Select(x => x.Category)

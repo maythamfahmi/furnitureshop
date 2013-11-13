@@ -55,11 +55,7 @@
                 <nav id="menu" class="pull-right">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/List">Products</a>
-                            <ul>
-                                <li>@{Html.RenderAction("Menu", "Navi"); }</li>
-                            </ul>
-                        </li>
+                        @{Html.RenderAction("Menu", "Navi"); }
                         <li><a href="/">Admin</a>
                             <ul>
                                 <li><a href="/Categories/Index">Category</a></li>
