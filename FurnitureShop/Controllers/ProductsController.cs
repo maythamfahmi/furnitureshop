@@ -48,6 +48,13 @@ namespace FurnitureShop.Controllers
         }
 
         //
+        // GET: /Products/ProductDetails/5
+
+        public ViewResult ProductDetails(int id)
+        {
+            return View(productRepository.Find(id));
+        }
+        //
         // GET: /Products/Create
 
         public ActionResult Create()
@@ -241,10 +248,10 @@ namespace FurnitureShop.Controllers
             return View(model);
         }
 
-        public FileContentResult GetImage(int id)
+        public FileContentResult GetImage(int ProductId)
         {
-            Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
-
+            //Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
+            Product prod = productRepository.All.ToList().FirstOrDefault(p => p.ProductId == ProductId);
             if (prod != null)
             {
                 return File(prod.ImageData, prod.ImageMimeType);

@@ -64,7 +64,15 @@
 			@item.ImageSrc
         </td>
         <td>
-			@Html.DisplayTextFor(_ => item.ImageData).ToString()
+
+             @if (item.ImageData != null) {
+                    <div style="float:left;margin-right:20px">
+                      @*<p>@Html.DisplayTextFor(_ => item.ProductId).ToString()</p>*@
+                      <img width="75" height="auto" src="@Url.Action("GetImage", "Products", new {item.ProductId })" />
+                    </div>
+                    }
+
+			@*@Html.DisplayTextFor(_ => item.ImageData).ToString()*@
         </td>
         <td>
 			@item.ImageMimeType

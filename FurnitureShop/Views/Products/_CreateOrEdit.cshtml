@@ -34,11 +34,11 @@
     @Html.ValidationMessageFor(model => model.ImageSrc)
 </div>
 
-<div class="editor-label">
+@*<div class="editor-label">
     @Html.LabelFor(model => model.ImageData)
 </div>
-<div class="editor-field">
-    @*if (Model.ImageMimeType == null)
+<div class="editor-field">*@
+@*if (Model.ImageMimeType == null)
     {
         @:No image.
     }
@@ -46,32 +46,38 @@
     {
         <img src="@Url.Action("GetImage", "Products", new { Id = Model.ProductId })" />
     }*@
-    <div>
+@*<div>
         <input type="file" name="Image" />        
     </div>
-</div>
+</div>*@
 
 <div class="editor-label">
     Category
 </div>
 <div class="editor-field">
-    @Html.DropDownListFor(model => model.CategoryId, ((IEnumerable<FurnitureShop.Models.Category>)ViewBag.PossibleCategories).Select(option => new SelectListItem {
-        Text = (option == null ? "None" : option.Name), 
-        Value = option.CategoryId.ToString(),
-        Selected = (Model != null) && (option.CategoryId == Model.CategoryId)
-    }), "Choose...")
+    @Html.DropDownListFor(model => model.CategoryId, ((IEnumerable<FurnitureShop.Models.Category>)ViewBag.PossibleCategories).Select(option => new SelectListItem
+{
+    Text = (option == null ? "None" : option.Name),
+    Value = option.CategoryId.ToString(),
+    Selected = (Model != null) && (option.CategoryId == Model.CategoryId)
+}), "Choose...")
     @Html.ValidationMessageFor(model => model.CategoryId)
 </div>
-@for (int i =0; i <  ViewBag.SubCategories.Count; i++){
-    <div class="editor-label">
-        <label for="SubCategories_@(i)__Selected">@ViewBag.SubCategories[i].Name</label>
+@for (int i = 0; i < ViewBag.SubCategories.Count; i++)
+{
+    
+    <div class="SubCategoryCheckBox">
+        <div class="editor-label-checkbox">
+            <label for="SubCategories_@(i)__Selected">@ViewBag.SubCategories[i].Name</label>
+        </div>
+        <div class="editor-field-checkbox">
+            @{
+    var checkedBox = (ViewBag.SubCategories[i].Selected == true) ? "checked" : "";
+            }
+            <input type="checkbox" id="SubCategories_@(i)__Selected" name="ProductSubCategory[@(i)].Selected" value="true" @checkedBox />
+            <input type="hidden" id="SubCategories_@(i)__ItemId" name="ProductSubCategory[@(i)].ItemId" value="@ViewBag.SubCategories[i].ItemId" />
+            <input type="hidden" id="SubCategories_@(i)__Name" name="ProductSubCategory[@(i)].Name" value="@ViewBag.SubCategories[i].Name" />
+        </div>
     </div>
-    <div class="editor-field">
-        @{
-            var checkedBox = (ViewBag.SubCategories[i].Selected == true)? "checked" : "";
-        }
-    <input type="checkbox" id="SubCategories_@(i)__Selected" name="ProductSubCategory[@(i)].Selected" value="true" @checkedBox />
-    <input type="hidden" id="SubCategories_@(i)__ItemId" name="ProductSubCategory[@(i)].ItemId" value="@ViewBag.SubCategories[i].ItemId" />
-    <input type="hidden" id="SubCategories_@(i)__Name" name="ProductSubCategory[@(i)].Name" value="@ViewBag.SubCategories[i].Name" />
-    </div>
+    <div class="clear-both"></div>
 }
