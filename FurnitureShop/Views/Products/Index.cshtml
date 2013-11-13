@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,82 +12,74 @@
 <table>
     <tr>
         <th></th>
-        <th>
-            Name
+        <th>Name
         </th>
-        <th>
-            Description
+        <th>ImageData
         </th>
-        <th>
-            Price
+        <th>Description
         </th>
-        <th>
-            Category
+        <th>Price
         </th>
-        <th>
-            SubCategories
+        <th>Category
         </th>
-        <th>
-            ImageSrc
+        <th>SubCategories
         </th>
-        <th>
-            ImageData
+        <th>ImageSrc
         </th>
-        <th>
-            ImageMimeType
+
+        <th>ImageMimeType
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-        <td>
-			@item.Name
-        </td>
-        <td>
-			@item.Description
-        </td>
-        <td>
-			@String.Format("{0:F}", item.Price)
-        </td>
-        <td>
-			@(item.Category == null ? "None" : item.Category.Name)
-        </td>
-        <td>
-                @for (int i = 0; i < item.SubCategories.Count; i++)
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @if (item.ImageData != null)
                 {
-                    <p>@item.SubCategories[i].SubCategory.Name</p>
+                    <div style="float: left; margin-right: 20px">
+                        @*<p>@Html.DisplayTextFor(_ => item.ProductId).ToString()</p>*@
+                        <img width="100" height="auto" src="@Url.Action("GetImage", "Products", new { item.ProductId })" />
+                    </div>
                 }
 
-            
-			@*@(item.SubCategories == null ? "None" : item.SubCategories.Count.ToString())*@
-        </td>
+@*@Html.DisplayTextFor(_ => item.ImageData).ToString()*@
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @String.Format("{0:F}", item.Price)
+            </td>
+            <td>
+                @(item.Category == null ? "None" : item.Category.Name)
+            </td>
+            <td>
+                @for (int i = 0; i < item.SubCategories.Count; i++)
+                {
+                    int j = i + 1;
+                    <span>@j</span><span>. </span><span>@item.SubCategories[i].SubCategory.Name</span><br />
+                }
+                @*@(item.SubCategories == null ? "None" : item.SubCategories.Count.ToString())*@
+            </td>
 
+            <td>
+                @item.ImageSrc
+            </td>
 
-
-        <td>
-			@item.ImageSrc
-        </td>
-        <td>
-
-             @if (item.ImageData != null) {
-                    <div style="float:left;margin-right:20px">
-                      @*<p>@Html.DisplayTextFor(_ => item.ProductId).ToString()</p>*@
-                      <img width="75" height="auto" src="@Url.Action("GetImage", "Products", new {item.ProductId })" />
-                    </div>
-                    }
-
-			@*@Html.DisplayTextFor(_ => item.ImageData).ToString()*@
-        </td>
-        <td>
-			@item.ImageMimeType
-        </td>
-    </tr>
-}
+            <td>
+                @item.ImageMimeType
+            </td>
+        </tr>
+    }
 
 </table>
 
