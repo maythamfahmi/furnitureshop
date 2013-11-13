@@ -18,6 +18,6 @@ namespace FurnitureShop.Models
 		public string Name { get; set; }
 
 		public int? CategoryId { get; set; } //this is nullable
-		public virtual Category? Category { get; set; }
+		public virtual Category Category { get; set; }
 	}
 }
