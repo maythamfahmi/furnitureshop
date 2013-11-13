@@ -16,7 +16,7 @@ namespace FurnitureShop.Controllers
 		private readonly ISubCategoryRepository subCategoryRepository;
 		private readonly IProductSubCategoryRepository productSubCategoryRepository;
 
-        public int PageSize = 4;
+        public int PageSize = 10;
         // If you are using Dependency Injection, you can delete the following constructor
         //public ProductsController() : this(new CategoryRepository(), new ProductRepository())
         //{
@@ -47,6 +47,13 @@ namespace FurnitureShop.Controllers
             return View(productRepository.Find(id));
         }
 
+        //
+        // GET: /Products/ProductDetails/5
+
+        public ViewResult ProductDetails(int id)
+        {
+            return View(productRepository.Find(id));
+        }
         //
         // GET: /Products/Create
 
@@ -132,6 +139,10 @@ namespace FurnitureShop.Controllers
 					Selected = (ProductSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
 				});
 			}
+            TempData.Remove("ImageData");
+            TempData.Remove("ImageMimeType");
+            TempData.Add("ImageData", product.ImageData);
+            TempData.Add("ImageMimeType", product.ImageMimeType);
 			ViewBag.SubCategories = SubCategoriesAvailable;
             ViewBag.PossibleCategories = categoryRepository.All;
             return View(productRepository.Find(id));
@@ -175,16 +186,28 @@ namespace FurnitureShop.Controllers
                     product.ImageMimeType = image.ContentType;
                     product.ImageData = new byte[image.ContentLength];
                     image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+
+
+                }
+                else
+                {
+                     product.ImageMimeType = (string)TempData["ImageMimeType"];
+                     product.ImageData = (byte[])TempData["ImageData"];
+                     //image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                 
+
                 }
                 // manually added end
-
+                //
+                //ViewBag.product.ImageData = TempData["currentImage"];
                 productRepository.InsertOrUpdate(product);
                 productRepository.Save();
                 return RedirectToAction("Index");
             }
             else
             {
-				ViewBag.SubCategories = ProductSubCategory;
+				
+                ViewBag.SubCategories = ProductSubCategory;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 return View();
             }
@@ -209,24 +232,29 @@ namespace FurnitureShop.Controllers
 
             return RedirectToAction("Index");
         }
-
-        //public ActionResult List()
-        //{
-        //    return View(productRepository.All //Including(product => product.Categories, product => product.SubCategories));
-        //        .OrderBy(p => p.ProductId)
-        //        .Skip((PageSize - 1) * PageSize)
-        //        .Take(PageSize));
-        //}
-
-        public ViewResult List(string category, int page = 1)
+        public ViewResult List(string category, string subCategory = null, int page = 1)
         {
+			IEnumerable<Product> Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
+				.Where(c => c.Category.Name == category) // || p.Categories == category)
+                .OrderBy(p => p.ProductId);
+                //.Skip((page - 1) * PageSize)
+                //.Take(PageSize);
+
+			if (subCategory != null)
+			{
+				//Products = (IEnumerable<Product>)Products.Select(c => c.SubCategories.FindAll(sc => sc.SubCategory.Name == subCategory));
+				//Products = Products.Where(c => c.SubCategories.FindAll(sc => sc.SubCategory.Name == subCategory)
+
+				Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
+				.Where(c => c.SubCategories.Select(sc => sc.SubCategory.Name == subCategory).Count() > 0)
+				.OrderBy(p => p.ProductId);
+				//.Skip((page - 1) * PageSize)
+				//.Take(PageSize);
+			}
+
             ProductListView model = new ProductListView
             {
-                Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
-                .Where(p => category == null) // || p.Categories == category)
-                .OrderBy(p => p.ProductId)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
+				Products = Products,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -247,10 +275,10 @@ namespace FurnitureShop.Controllers
         }
 
 
-        public FileContentResult GetImage(int id)
+        public FileContentResult GetImage(int productid)
         {
-            Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
-
+            //Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
+            Product prod = productRepository.All.ToList().FirstOrDefault(p => p.ProductId == productid);
             if (prod != null)
             {
                 return File(prod.ImageData, prod.ImageMimeType);

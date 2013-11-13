@@ -28,14 +28,20 @@
         <div class="display-label">ImageSrc</div>
         <div class="display-field">@Model.ImageSrc</div>
 
-        <div class="display-label">ImageData</div>
-        <div class="display-field">@*Html.DisplayTextFor(_ => Model.ImageData).ToString()*@
+        @*<div class="display-label">ImageData</div>
+        <div class="display-field">
             <img src="@Url.Action("GetImage", "Products", new { Id = Model.ProductId })" />
-        </div>
+        </div>*@
 
         <div class="display-label">ImageMimeType</div>
         <div class="display-field">@Model.ImageMimeType</div>
 
+    </div>
+
+    <div class="ImageProductDetails">
+        @*<div class="display-label">Product image</div>*@
+        <div class="display-field"><img width="200" height="200" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></div>
+        
     </div>
 </fieldset>
 <p>
