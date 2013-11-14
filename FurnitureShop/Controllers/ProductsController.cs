@@ -243,21 +243,15 @@ namespace FurnitureShop.Controllers
         public ViewResult List(string category, string subCategory = null, int page = 1)
         {
 			IEnumerable<Product> Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
-				.Where(c => c.Category.Name == category) // || p.Categories == category)
+				.Where(c => c.Category.Name == category)
                 .OrderBy(p => p.ProductId);
-                //.Skip((page - 1) * PageSize)
-                //.Take(PageSize);
 
 			if (subCategory != null)
 			{
-				//Products = (IEnumerable<Product>)Products.Select(c => c.SubCategories.FindAll(sc => sc.SubCategory.Name == subCategory));
-				//Products = Products.Where(c => c.SubCategories.FindAll(sc => sc.SubCategory.Name == subCategory)
-
 				Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
-				.Where(c => c.SubCategories.Select(sc => sc.SubCategory.Name == subCategory).Count() > 0)
+				.Where(c => c.Category.Name == category)
+				.Where(c => c.SubCategories.FirstOrDefault(sc => sc.SubCategory.Name == subCategory).SubCategory.Name == subCategory)
 				.OrderBy(p => p.ProductId);
-				//.Skip((page - 1) * PageSize)
-				//.Take(PageSize);
 			}
 
             ProductListView model = new ProductListView
