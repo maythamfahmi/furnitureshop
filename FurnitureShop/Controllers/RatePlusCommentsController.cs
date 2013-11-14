@@ -137,7 +137,7 @@ namespace FurnitureShop.Controllers
             {
                 ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
                 ratepluscommentRepository.Save();
-                return RedirectToAction("Index");
+                return Redirect("createrating?productid=" + productid);
             }
             else
             {

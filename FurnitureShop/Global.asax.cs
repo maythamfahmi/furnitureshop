@@ -33,7 +33,9 @@ namespace FurnitureShop
 		private IKernel ninjectKernel = new StandardKernel(new myNinjectModule());
         protected void Application_Start()
         {
-			//System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
+            // dont use this System.Data.Entity.Database.SetInitializer(new System.Data.Entity.MigrateDatabaseToLatestVersion<FurnitureShop.Models.FurnitureShopContext, Configuration>());
+            //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

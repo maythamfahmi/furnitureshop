@@ -12,14 +12,28 @@ Please enter your details, and we'll ship your goods right away!
 @*Html.TextBox("Name", (string)userInfo.FirstName+" "+userInfo.LastName )*@
     
     <h3>Ship to</h3>
-    <div>Name:      @Html.TextBoxFor(x => x.FullName, new { @Value = ViewBag.FullName })</div>
+    <div><strong>Name</strong><span style="margin-left: 60px;">@Html.TextBoxFor(x => x.FullName, new { @Value = ViewBag.FullName })</span></div>
     <h3>Address</h3>
-    <div>Line 1:    @Html.TextBoxFor(x => x.AddressLine1, new { @Value = ViewBag.AddressLine1 })</div>
-    <div>Line 2:    @Html.EditorFor(x => x.AddressLine2)</div>
-    <div>Line 3:    @Html.EditorFor(x => x.AddressLine3)</div>
-    <div>City:      @Html.TextBoxFor(x => x.City, new { @Value = ViewBag.City })</div>
-    <div>Zip:       @Html.TextBoxFor(x => x.Postal, new { @Value = ViewBag.Postal })</div>
-    <div>Country:   @Html.TextBoxFor(x => x.Country, new { @Value = ViewBag.Country })</div>
+    <div><strong>Line 1</strong><span style="margin-left: 60px;">@Html.TextBoxFor(x => x.AddressLine1, new { @Value = ViewBag.AddressLine1 })</span></div>
+    <div><strong>Line 2</strong><span style="margin-left: 60px;">@Html.EditorFor(x => x.AddressLine2)</span></div>
+    <div><strong>Line 3</strong><span style="margin-left: 60px;">@Html.EditorFor(x => x.AddressLine3)</span></div>
+    <div><strong>City</strong><span style="margin-left: 70px;">@Html.TextBoxFor(x => x.City, new { @Value = ViewBag.City })</span></div>
+    <div><strong>Postal</strong><span style="margin-left: 60px;">@Html.TextBoxFor(x => x.Postal, new { @Value = ViewBag.Postal })</span></div>
+    <div><strong>Country</strong><span style="margin-left: 50px;">@Html.TextBoxFor(x => x.Country, new { @Value = ViewBag.Country })</span></div>
+    <h3>Shipping provider</h3>
+    @*foreach (FurnitureShop.Models.OrderDelivery item in ViewBag.PossibleOrderdelivery)
+    {
+    @item.Methode;
+    }*@
+    @*{ FurnitureShop.Models.OrderDelivery methode = ViewBag.PossibleOrderDeliveries; }*@
+    @Html.DropDownList("OrderDeliveryId", ((IEnumerable<FurnitureShop.Models.OrderDelivery>)ViewBag.PossibleOrderDeliveries).Select(option => new SelectListItem
+    {
+        Text = option.Methode.ToString(),
+        Value = option.OrderDeliveryId.ToString(),
+        Selected = (Model != null)
+    }), "Choose...")
+    @*Html.ValidationMessage(ViewBag.PossibleOrderDeliveries)*@
+
     <p align="center">
         <input class="btn btn-inverse" type="submit" value="Complete order" />
     </p>
