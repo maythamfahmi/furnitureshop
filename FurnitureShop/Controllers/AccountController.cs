@@ -79,6 +79,7 @@ namespace FurnitureShop.Controllers
 
 				ViewBag.userName = user.FirstName;
 			}
+			
 			return PartialView("isLoggin", (string)isLoggedin);
 		}
 

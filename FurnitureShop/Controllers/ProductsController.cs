@@ -64,7 +64,7 @@ namespace FurnitureShop.Controllers
         }
         //
         // GET: /Products/Create
-
+		[Authorize(Roles="Admin, Editor")]
         public ActionResult Create()
         {
 			//Create a list containing both selected and non-selected subcategories for the product
@@ -89,6 +89,7 @@ namespace FurnitureShop.Controllers
         // POST: /Products/Create
 
         [HttpPost]
+		[Authorize(Roles = "Admin, Editor")]
 		public ActionResult Create(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
@@ -129,7 +130,7 @@ namespace FurnitureShop.Controllers
 
         //
         // GET: /Products/Edit/5
-
+		[Authorize(Roles = "Admin, Editor")]
         public ActionResult Edit(int id)
         {
 			Product product = productRepository.Find(id);
@@ -158,7 +159,7 @@ namespace FurnitureShop.Controllers
 
         //
         // POST: /Products/Edit/5
-
+		[Authorize(Roles = "Admin, Editor")]
         [HttpPost]
 		public ActionResult Edit(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
         {
@@ -221,18 +222,14 @@ namespace FurnitureShop.Controllers
             }
         }
 
-        //
-        // GET: /Products/Delete/5
-
+		[Authorize(Roles = "Admin, Editor")]
         public ActionResult Delete(int id)
         {
             return View(productRepository.Find(id));
         }
 
-        //
-        // POST: /Products/Delete/5
-
         [HttpPost, ActionName("Delete")]
+		[Authorize(Roles = "Admin, Editor")]
         public ActionResult DeleteConfirmed(int id)
         {
             productRepository.Delete(id);
@@ -240,6 +237,7 @@ namespace FurnitureShop.Controllers
 
             return RedirectToAction("Index");
         }
+
         public ViewResult List(string category, string subCategory = null, int page = 1)
         {
 			IEnumerable<Product> Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)

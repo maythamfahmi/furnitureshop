@@ -56,17 +56,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         @{Html.RenderAction("Menu", "Navi"); }
-                        <li><a href="/">Admin</a>
-                            <ul>
-                                <li><a href="/Categories/Index">Category</a></li>
-                                <li>@Html.ActionLink("SubCategories", "Index","SubCategories")</li>
-                                <li><a href="/OrderDeliveries/Index">Order delivery</a></li>
-                                <li><a href="/UserRoles/Index">User role</a></li>
-                                <li><a href="/Products/Index">Products</a></li>
-                                <li><a href="/SpecialOffers/Index">Special Offer</a></li>
-                                <li><a href="/Users/Index">Users</a></li>
-                            </ul>
-                        </li>
+                        @{Html.RenderAction("AdminMenu", "Navi");}
 
                         <!--<li><a href="./products.html">Menu1</a></li>-->
                         <!--<li><a href="./products.html">Menu2</a>
