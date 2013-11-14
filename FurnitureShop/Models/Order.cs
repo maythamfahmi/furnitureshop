@@ -31,6 +31,7 @@ namespace FurnitureShop.Models
 
         [Required]
         public int OrderDeliveryId { get; set; }
+        public virtual OrderDelivery Orderdelivery { get; set; }
 
         public string TrackingNumber { get; set; }
 

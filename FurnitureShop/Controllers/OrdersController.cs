@@ -138,11 +138,14 @@ namespace FurnitureShop.Controllers
         {
             //ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 3);
             //ViewBag.SelectedOrder = orderRepository.All.ToList().FirstOrDefault(o => o.UserId == 2);
-            return View(orderRepository.All);
-            
-            // string userName = HttpContext.User.Identity.Name;
-            // User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
-            // Order order = orderRepository.All.FirstOrDefault(o => o.UserId == user.UserId);
+
+
+            string userName = HttpContext.User.Identity.Name;
+            User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+            List<Order> order = orderRepository.All.ToList().FindAll(o => o.UserId == user.UserId);
+
+            //return View(orderRepository.All);
+            return View(order);
             //ViewBag.SelecedUser = userRepository.All.FirstOrDefault(u => u.Name == userName);
             // //ViewBag.Selected = userRepository.All.ToList().FirstOrDefault(o => o.Name == userName);
             //ViewBag.SelectedOrderDeliveries = orderdeliveryRepository.All.ToList().Find(o => o.OrderDeliveryId == 1);

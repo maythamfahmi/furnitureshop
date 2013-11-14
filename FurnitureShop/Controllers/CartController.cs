@@ -15,6 +15,7 @@ namespace FurnitureShop.Controllers
         private IOrderProcessor orderProcessor;
         private IOrderRepository orderRepository;
         private IOrderProductRepository orderproductRepository;
+        private readonly IOrderDeliveryRepository orderdeliveryRepository;
         private IUserRepository userRepository;
         private IAddressRepository addressRepository;
         public CartController(
@@ -22,6 +23,7 @@ namespace FurnitureShop.Controllers
             IOrderProcessor orderProcessor,
             IOrderRepository orderRepository,
             IOrderProductRepository orderproductRepository,
+            IOrderDeliveryRepository orderdeliveryRepository,
             IUserRepository userRepository,
             IAddressRepository addressRepository
             )
@@ -30,6 +32,7 @@ namespace FurnitureShop.Controllers
             this.orderProcessor = orderProcessor;
             this.orderRepository = orderRepository;
             this.orderproductRepository = orderproductRepository;
+            this.orderdeliveryRepository = orderdeliveryRepository;
             this.userRepository = userRepository;
             this.addressRepository = addressRepository;
         }
@@ -102,7 +105,7 @@ namespace FurnitureShop.Controllers
                 User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
                 order.UserId = (int)user.UserId;
                 order.OrderDate = System.DateTime.Today;
-                order.OrderDeliveryId = (int)1;
+                order.OrderDeliveryId = order.OrderDeliveryId; // henter shipping info fra dropdown
 
                 orderRepository.InsertOrUpdate(order);
                 orderRepository.Save();
@@ -117,8 +120,8 @@ namespace FurnitureShop.Controllers
                     orderproduct.OProdcutQty = line.Quantity;
                     orderproduct.OProdcutPrice = (int)line.Product.Price;
                     orderproductRepository.InsertOrUpdate(orderproduct);
-                    orderproductRepository.Save();
                 }
+                orderproductRepository.Save();
                 //
 
                 cart.Clear();
@@ -146,6 +149,7 @@ namespace FurnitureShop.Controllers
             ViewBag.City = (string)address.City;
             ViewBag.Postal = (string)address.Postal;
             ViewBag.Country = (string)address.Country;
+            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
 
             //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
             //ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
