@@ -268,6 +268,8 @@ namespace FurnitureShop.Controllers
                 },
                 CurrentCategory = category
             };
+			ViewBag.PageCategory = (string)category;
+			ViewBag.PageSubcategory = (string)subCategory;
             return View(model);
         }
 
