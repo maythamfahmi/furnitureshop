@@ -18,6 +18,8 @@ namespace FurnitureShop.Models
 
         public int UserId { get; set; }
 
+        public virtual User user { get; set; }
+
         [Required(ErrorMessage = "Please specify a rate")]
         public int Rate { get; set; }
 

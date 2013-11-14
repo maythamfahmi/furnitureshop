@@ -34,7 +34,7 @@ namespace FurnitureShop
         protected void Application_Start()
         {
             // dont use this System.Data.Entity.Database.SetInitializer(new System.Data.Entity.MigrateDatabaseToLatestVersion<FurnitureShop.Models.FurnitureShopContext, Configuration>());
-            //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
+            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<FurnitureShop.Models.FurnitureShopContext>());
             
             AreaRegistration.RegisterAllAreas();
 

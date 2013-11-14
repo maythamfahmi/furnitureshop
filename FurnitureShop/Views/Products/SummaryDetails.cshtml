@@ -124,9 +124,9 @@
                             <span class="pull-left"><span class="text"><strong>Customer</strong> comments</span></span>
                         </h4>
                         <div>
-                            @foreach (var item in ViewBag.ratecomments)
+                            @foreach (FurnitureShop.Models.RatePlusComment item in ViewBag.ratecomments)
                             {
-                                <div><strong>User: @ViewBag.ratingUser</strong> has rated the product with: <strong>@item.Rate</strong></div>
+                                <div><strong>User: @item.user.FirstName</strong> has rated the product with: <strong>@item.Rate</strong></div>
                                 <br />
                                 <div>@item.Comment</div>
                                 <hr />
