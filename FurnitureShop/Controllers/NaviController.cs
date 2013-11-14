@@ -43,5 +43,12 @@ namespace FurnitureShop.Controllers
             return PartialView(categories);
 
         }
+
+		public PartialViewResult AdminMenu()
+		{
+			string isInRole = (HttpContext.User.IsInRole("Admin") || HttpContext.User.IsInRole("Editor"))? "True" : "False";
+
+			return PartialView("AdminMenu", (string)isInRole);
+		}
     }
 }

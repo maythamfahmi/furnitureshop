@@ -28,6 +28,7 @@ namespace FurnitureShop.Controllers
 
         //
         // GET: /Users/
+		[Authorize(Roles = "Admin, Editor")]
         public ViewResult Index()
         {
             return View(userRepository.AllIncluding(user => user.Address));
@@ -43,7 +44,7 @@ namespace FurnitureShop.Controllers
 
         //
         // GET: /Users/Create
-
+		[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
 			ViewBag.PossibleUserRoles = userroleRepository.All;
@@ -60,6 +61,7 @@ namespace FurnitureShop.Controllers
         // POST: /Users/Create
 
         [HttpPost]
+		[Authorize(Roles = "Admin")]
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid) {
@@ -75,6 +77,7 @@ namespace FurnitureShop.Controllers
         //
         // GET: /Users/Edit/5
 		[HttpGet]
+		[Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
 			ViewBag.PossibleUserRoles = userroleRepository.All;
@@ -85,6 +88,7 @@ namespace FurnitureShop.Controllers
         // POST: /Users/Edit/5
 
         [HttpPost]
+		[Authorize(Roles = "Admin")]
         public ActionResult Edit(User user)
         {
             if (ModelState.IsValid) {
@@ -97,18 +101,14 @@ namespace FurnitureShop.Controllers
 			}
         }
 
-        //
-        // GET: /Users/Delete/5
- 
+		[Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(userRepository.Find(id));
         }
-
-        //
-        // POST: /Users/Delete/5
-
+		
         [HttpPost, ActionName("Delete")]
+		[Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             userRepository.Delete(id);
@@ -157,6 +157,7 @@ namespace FurnitureShop.Controllers
 		}
 
 		[HttpPost]
+		[Authorize]
 		public ActionResult EditUserInfo(User user)
 		{
 			//Get the authorized user
@@ -178,7 +179,7 @@ namespace FurnitureShop.Controllers
 				return View(user);
 			}
 		}
-
+		[Authorize]
 		public ActionResult EditAddress(int AddressId)
 		{
 			Address address = addressRepository.Find(AddressId);
@@ -194,6 +195,7 @@ namespace FurnitureShop.Controllers
 			return View(addressRepository.Find(AddressId));
 		}
 		[HttpPost]
+		[Authorize]
 		public ActionResult EditAddress(Address address)
 		{
 			if (ModelState.IsValid)
@@ -207,13 +209,14 @@ namespace FurnitureShop.Controllers
 				return View(address);
 			}
 		}
-
+		[Authorize]
 		public ActionResult AddAddress()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Authorize]
 		public ActionResult AddAddress(Address address)
 		{
 			//Check with the user Id
@@ -234,13 +237,14 @@ namespace FurnitureShop.Controllers
 				return View(address);
 			}
 		}
-
+		[Authorize]
 		public ActionResult RemoveAddress(int AddressId)
 		{
 			return View(addressRepository.Find(AddressId));
 		}
 
 		[HttpPost]
+		[Authorize]
 		public ActionResult RemoveAddressConfirmed(int AddressId)
 		{
 			Address address = addressRepository.Find(AddressId);

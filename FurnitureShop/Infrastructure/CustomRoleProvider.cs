@@ -68,7 +68,11 @@ namespace FurnitureShop.Infrastructure
 
 		public override bool IsUserInRole(string username, string roleName)
 		{
-			throw new NotImplementedException();
+			AccountRoles = UserRepository.All.ToList();
+
+			bool UserIsInrole = AccountRoles.FindAll(u => u.Name == username).FirstOrDefault(u => u.UserRole.Name == roleName).UserRole.Name == roleName;
+
+			return UserIsInrole;
 		}
 
 		public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)

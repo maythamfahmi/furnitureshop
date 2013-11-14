@@ -46,7 +46,7 @@ namespace FurnitureShop.Controllers
 			{
 				if (authProvider.Authenticate(model.userName, model.Password))
 				{
-					return Redirect(returnUrl ?? Url.Action("index", "products"));
+					return Redirect(returnUrl ?? Url.Action("MyAccount", "Users"));
 				}
 				else
 				{
@@ -66,7 +66,7 @@ namespace FurnitureShop.Controllers
 			{
 				authProvider.logout();
 			}
-			return RedirectToAction("index", "products");
+			return RedirectToAction("index","home");
 		}
 
 		public PartialViewResult isLoggin()
@@ -79,6 +79,7 @@ namespace FurnitureShop.Controllers
 
 				ViewBag.userName = user.FirstName;
 			}
+			
 			return PartialView("isLoggin", (string)isLoggedin);
 		}
 
