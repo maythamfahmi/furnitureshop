@@ -12,8 +12,11 @@ namespace FurnitureShop.Infrastructure
 	public class CustomRoleProvider : RoleProvider
 	{
 		private static List<User> AccountRoles = new List<User>();
+		private static List<UserRole> Roles = new List<UserRole>();
+
 		[Inject]
 		public IUserRepository UserRepository { get; set; }
+		public IUserRoleRepository RoleRepository { get; set; }
 
 		public override void AddUsersToRoles(string[] usernames, string[] roleNames)
 		{
@@ -34,7 +37,8 @@ namespace FurnitureShop.Infrastructure
 
 		public override void CreateRole(string roleName)
 		{
-			throw new NotImplementedException();
+			RoleRepository.InsertOrUpdate(new UserRole(){Name = roleName});
+			RoleRepository.Save();
 		}
 
 		public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
@@ -49,7 +53,7 @@ namespace FurnitureShop.Infrastructure
 
 		public override string[] GetAllRoles()
 		{
-			throw new NotImplementedException();
+			return RoleRepository.All.ToList().Select(r => r.Name).ToArray();
 		}
 
 		public override string[] GetRolesForUser(string username)
@@ -63,7 +67,11 @@ namespace FurnitureShop.Infrastructure
 
 		public override string[] GetUsersInRole(string roleName)
 		{
-			throw new NotImplementedException();
+			AccountRoles = UserRepository.All.ToList();
+
+			string[] users = AccountRoles.FindAll(u => u.UserRole.Name == roleName).Select(u => u.Name).ToArray();
+
+			return users;
 		}
 
 		public override bool IsUserInRole(string username, string roleName)
@@ -82,7 +90,11 @@ namespace FurnitureShop.Infrastructure
 
 		public override bool RoleExists(string roleName)
 		{
-			throw new NotImplementedException();
+			Roles = RoleRepository.All.ToList();
+
+			bool roleExist = Roles.Find(r => r.Name == roleName) != null;
+
+			return roleExist;
 		}
 	}
 }
