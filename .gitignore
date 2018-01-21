@@ -297,5 +297,8 @@ __pycache__/
 # By default, sensitive information, such as encrypted password
 # should be stored in the .pubxml.user file.
 
+*SQL backup
+*TestResuts
+*UpgradeLog.htm
 
 # End of https://www.gitignore.io/api/visualstudio

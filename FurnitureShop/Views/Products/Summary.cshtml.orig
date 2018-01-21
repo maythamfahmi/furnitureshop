@@ -1,0 +1,47 @@
+﻿@model FurnitureShop.Models.Product
+
+@* original view
+<div class="item">
+    <h3>@Model.Name</h3>
+    @Model.Description
+
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" value="+ Add to cart" />
+    }
+    <h4>@Model.Price.ToString("c")</h4>
+</div>
+*@
+<li class="span3">
+    <div class="product-box">
+<<<<<<< HEAD
+        <a href="/Products/SummaryDetails?id=@Model.ProductId">
+            <img alt="" src="~/customcontent/images/@Model.ImageSrc" height="150" width="150"></a><br />
+        <a href="/Products/SummaryDetails?id=@Model.ProductId" class="title">@Model.Name</a><br />
+        <!--<a href="#" class="category">Suspendisse aliquet</a>-->
+=======
+        @*<a href="product_detail.html">
+            <img alt="" src="themes/images/ladies/5.jpg"></a><br />
+        <a href="product_detail.html" class="title">@Model.Name</a><br />
+        <a href="#" class="category">Suspendisse aliquet</a>*@
+        <a href="">
+            <a href="product_detail.html" class="title">@Model.Name</a><br /><br />
+            <img width="180" height="180" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+
+        
+        <p class="price-summary">@Model.Price.ToString("c")</p>
+
+        @Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })
+>>>>>>> bd54ae7e4e5f44dbbf0e62b2f7fcfd85c843a51a
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="actionButtons" value="+ Add to cart" />
+        }
+
+    </div>
+</li>
+
