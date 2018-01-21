@@ -1,0 +1,48 @@
+﻿@model FurnitureShop.Models.Product
+
+@* original view
+<div class="item">
+    <h3>@Model.Name</h3>
+    @Model.Description
+
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" value="+ Add to cart" />
+    }
+    <h4>@Model.Price.ToString("c")</h4>
+</div>
+*@
+<li class="span3">
+    <div class="product-box">
+        <span class="sale_tag"></span>	
+        <a href="~/Products/SummaryDetails?id=@Model.ProductId">
+            <img alt="" width="270" height="270" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></a><br />
+        @*Html.ActionLink("Product Details", "ProductDetails", new { id = Model.ProductId })*@
+        <p class="title">@Model.Name</p>
+        <p class="price">@Model.Price.ToString("c")</p>
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-inverse" value="+ Add to cart" />
+        }
+
+        @*
+        <a href="/Products/SummaryDetails?id=@Model.ProductId">
+            <img alt="" src="~/customcontent/images/@Model.ImageSrc" height="150" width="150"></a><br />
+        <a href="/Products/SummaryDetails?id=@Model.ProductId" class="title">@Model.Name</a><br />
+
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            @Html.HiddenFor(x => x.ProductId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="actionButtons" value="+ Add to cart" />
+        }
+        <p class="price">@Model.Price.ToString("c")</p>
+        *@
+
+    </div>
+</li>
+

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="FurnitureShop.Models.FurnitureShopContext-Web.config Connection String" description="FurnitureShop.Models.FurnitureShopContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=BIZ01\SQLEXPRESS;Initial Catalog=FurnitureShop.Models.FurnitureShopContext;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Maytham\\Dropbox\\KEA\\WPN\\Project\\FurnitureShop\ Git\\FurnitureShop\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FurnitureShop.Models.FurnitureShopContext']/@connectionString" />
+  </parameter>
+</parameters>

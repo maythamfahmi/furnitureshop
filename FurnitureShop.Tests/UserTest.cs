@@ -3,7 +3,6 @@ using FurnitureShop.Repository;
 using FurnitureShop.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -66,7 +65,7 @@ namespace FurnitureShop.Tests
 			mock.Setup(m => m.Authenticate("user", "secret")).Returns(true);
 
 			//Arrange - create the view model
-			LoginOnViewModel model = new LoginOnViewModel { userName = "user", Password = "secret" };
+			LoginOnViewModel model = new LoginOnViewModel { UserName = "user", Password = "secret" };
 
 			//Arrange - create the controller
 			AccountController target = new AccountController(mock.Object, null, null);
@@ -87,7 +86,7 @@ namespace FurnitureShop.Tests
 			mock.Setup(m => m.Authenticate("BadUser", "BadPass")).Returns(false);
 
 			//Arrange - create the view model
-			LoginOnViewModel model = new LoginOnViewModel { userName = "BadUser", Password = "BadPass" };
+			LoginOnViewModel model = new LoginOnViewModel { UserName = "BadUser", Password = "BadPass" };
 
 			//Arrange - create the controller
 			AccountController target = new AccountController(mock.Object, null,null);

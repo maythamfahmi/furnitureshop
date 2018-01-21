@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,12 +10,12 @@ namespace FurnitureShop.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ICategoryRepository categoryRepository;
-        private readonly IProductRepository productRepository;
-        private readonly ISubCategoryRepository subCategoryRepository;
-        private readonly IProductSubCategoryRepository productSubCategoryRepository;
-        private readonly IRatePlusCommentRepository ratePlusCommentRepository;
-        private readonly IUserRepository userRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly ISubCategoryRepository _subCategoryRepository;
+        private readonly IProductSubCategoryRepository _productSubCategoryRepository;
+        private readonly IRatePlusCommentRepository _ratePlusCommentRepository;
+        private readonly IUserRepository _userRepository;
 
         public int PageSize = 10;
         // If you are using Dependency Injection, you can delete the following constructor
@@ -33,12 +32,12 @@ namespace FurnitureShop.Controllers
             IUserRepository userRepository
             )
         {
-            this.categoryRepository = categoryRepository;
-            this.productRepository = productRepository;
-            this.subCategoryRepository = subCategoryRepository;
-            this.productSubCategoryRepository = productSubCategoryRepository;
-            this.ratePlusCommentRepository = ratePlusCommentRepository;
-            this.userRepository = userRepository;
+            this._categoryRepository = categoryRepository;
+            this._productRepository = productRepository;
+            this._subCategoryRepository = subCategoryRepository;
+            this._productSubCategoryRepository = productSubCategoryRepository;
+            this._ratePlusCommentRepository = ratePlusCommentRepository;
+            this._userRepository = userRepository;
         }
 
         //
@@ -47,7 +46,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(productRepository.AllIncluding(product => product.Category, product => product.SubCategories));
+            return View(_productRepository.AllIncluding(product => product.Category, product => product.SubCategories));
         }
 
         //
@@ -55,7 +54,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(productRepository.Find(id));
+            return View(_productRepository.Find(id));
         }
 
         //
@@ -63,7 +62,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult ProductDetails(int id)
         {
-            return View(productRepository.Find(id));
+            return View(_productRepository.Find(id));
         }
         //
         // GET: /Products/Create
@@ -71,20 +70,20 @@ namespace FurnitureShop.Controllers
         public ActionResult Create()
         {
             //Create a list containing both selected and non-selected subcategories for the product
-            List<SubCategory> SubCategoriesInSystem = subCategoryRepository.All.ToList();
-            List<ItemCheckSelected> SubCategoriesAvailable = new List<ItemCheckSelected>();
+            List<SubCategory> subCategoriesInSystem = _subCategoryRepository.All.ToList();
+            List<ItemCheckSelected> subCategoriesAvailable = new List<ItemCheckSelected>();
 
-            foreach (SubCategory subCategory in SubCategoriesInSystem)
+            foreach (SubCategory subCategory in subCategoriesInSystem)
             {
-                SubCategoriesAvailable.Add(new ItemCheckSelected()
+                subCategoriesAvailable.Add(new ItemCheckSelected()
                 {
                     ItemId = subCategory.SubCategoryId,
                     Name = subCategory.Name,
                     Selected = false
                 });
             }
-            ViewBag.SubCategories = SubCategoriesAvailable;
-            ViewBag.PossibleCategories = categoryRepository.All;
+            ViewBag.SubCategories = subCategoriesAvailable;
+            ViewBag.PossibleCategories = _categoryRepository.All;
             return View();
         }
 
@@ -93,7 +92,7 @@ namespace FurnitureShop.Controllers
 
         [HttpPost]
 		[Authorize(Roles = "Admin, Editor")]
-		public ActionResult Create(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
+		public ActionResult Create(Product product, HttpPostedFileBase image, List<ItemCheckSelected> productSubCategory) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
@@ -106,27 +105,27 @@ namespace FurnitureShop.Controllers
                 }
                 // manually added end
 
-                productRepository.InsertOrUpdate(product);
-                productRepository.Save();
+                _productRepository.InsertOrUpdate(product);
+                _productRepository.Save();
 
                 //Add new connections
-                foreach (ItemCheckSelected SubCatSelected in ProductSubCategory.FindAll(c => c.Selected == true))
+                foreach (ItemCheckSelected subCatSelected in productSubCategory.FindAll(c => c.Selected == true))
                 {
-                    ProductSubCategory SubCatConnection = new ProductSubCategory()
+                    ProductSubCategory subCatConnection = new ProductSubCategory()
                     {
                         ProductId = product.ProductId,
-                        SubCategoryId = SubCatSelected.ItemId
+                        SubCategoryId = subCatSelected.ItemId
                     };
-                    productSubCategoryRepository.InsertOrUpdate(SubCatConnection);
+                    _productSubCategoryRepository.InsertOrUpdate(subCatConnection);
                 }
-                productSubCategoryRepository.Save();
+                _productSubCategoryRepository.Save();
 
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.SubCategories = ProductSubCategory;
-                ViewBag.PossibleCategories = categoryRepository.All;
+                ViewBag.SubCategories = productSubCategory;
+                ViewBag.PossibleCategories = _categoryRepository.All;
                 return View();
             }
         }
@@ -136,62 +135,62 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin, Editor")]
         public ActionResult Edit(int id)
         {
-            Product product = productRepository.Find(id);
+            Product product = _productRepository.Find(id);
             //Create a list containing both selected and non-selected subcategories for the product
-            List<SubCategory> SubCategoriesInSystem = subCategoryRepository.All.ToList();
-            List<SubCategory> ProductSubCategoriesSelected = product.SubCategories.Select(c => c.SubCategory).ToList();
-            List<ItemCheckSelected> SubCategoriesAvailable = new List<ItemCheckSelected>();
+            List<SubCategory> subCategoriesInSystem = _subCategoryRepository.All.ToList();
+            List<SubCategory> productSubCategoriesSelected = product.SubCategories.Select(c => c.SubCategory).ToList();
+            List<ItemCheckSelected> subCategoriesAvailable = new List<ItemCheckSelected>();
 
-            foreach (SubCategory subCategory in SubCategoriesInSystem)
+            foreach (SubCategory subCategory in subCategoriesInSystem)
             {
-                SubCategoriesAvailable.Add(new ItemCheckSelected()
+                subCategoriesAvailable.Add(new ItemCheckSelected()
                 {
                     ItemId = subCategory.SubCategoryId,
                     Name = subCategory.Name,
-                    Selected = (ProductSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
+                    Selected = (productSubCategoriesSelected.FirstOrDefault(c => c.SubCategoryId == subCategory.SubCategoryId) != null) ? true : false
                 });
             }
             TempData.Remove("ImageData");
             TempData.Remove("ImageMimeType");
             TempData.Add("ImageData", product.ImageData);
             TempData.Add("ImageMimeType", product.ImageMimeType);
-            ViewBag.SubCategories = SubCategoriesAvailable;
-            ViewBag.PossibleCategories = categoryRepository.All;
-            return View(productRepository.Find(id));
+            ViewBag.SubCategories = subCategoriesAvailable;
+            ViewBag.PossibleCategories = _categoryRepository.All;
+            return View(_productRepository.Find(id));
         }
 
         //
         // POST: /Products/Edit/5
 		[Authorize(Roles = "Admin, Editor")]
         [HttpPost]
-        public ActionResult Edit(Product product, HttpPostedFileBase image, List<ItemCheckSelected> ProductSubCategory) // manually added HttpPostedFileBase image
+        public ActionResult Edit(Product product, HttpPostedFileBase image, List<ItemCheckSelected> productSubCategory) // manually added HttpPostedFileBase image
         {
             if (ModelState.IsValid)
             {
                 //Remove all existing ProductSubcategory entries for this product
-                List<ProductSubCategory> SubCatConnections = productSubCategoryRepository.All.ToList().FindAll(s => s.ProductId == product.ProductId).ToList();
+                List<ProductSubCategory> subCatConnections = _productSubCategoryRepository.All.ToList().FindAll(s => s.ProductId == product.ProductId).ToList();
 
                 //productSubCategoryRepository.All.ToList().RemoveAll(s => s.ProductId == product.ProductId);
 
-                foreach (ProductSubCategory SubCatConnection in SubCatConnections)
+                foreach (ProductSubCategory subCatConnection in subCatConnections)
                 {
                     //context.ProductSubCategories.Remove(SubCatConnection);
-                    productSubCategoryRepository.Delete(SubCatConnection.ProductSubCategoryId);
+                    _productSubCategoryRepository.Delete(subCatConnection.ProductSubCategoryId);
                 }
                 //productSubCategoryRepository.Save();
 
                 //Add new connections
-                foreach (ItemCheckSelected SubCatSelected in ProductSubCategory.FindAll(c => c.Selected == true))
+                foreach (ItemCheckSelected subCatSelected in productSubCategory.FindAll(c => c.Selected == true))
                 {
-                    ProductSubCategory SubCatConnection = new ProductSubCategory()
+                    ProductSubCategory subCatConnection = new ProductSubCategory()
                     {
                         ProductId = product.ProductId,
-                        SubCategoryId = SubCatSelected.ItemId
+                        SubCategoryId = subCatSelected.ItemId
                     };
-                    productSubCategoryRepository.InsertOrUpdate(SubCatConnection);
+                    _productSubCategoryRepository.InsertOrUpdate(subCatConnection);
                     //context.ProductSubCategories.Add(SubCatConnection);
                 }
-                productSubCategoryRepository.Save();
+                _productSubCategoryRepository.Save();
                 // manually added 
                 if (image != null)
                 {
@@ -212,15 +211,15 @@ namespace FurnitureShop.Controllers
                 // manually added end
                 //
                 //ViewBag.product.ImageData = TempData["currentImage"];
-                productRepository.InsertOrUpdate(product);
-                productRepository.Save();
+                _productRepository.InsertOrUpdate(product);
+                _productRepository.Save();
                 return RedirectToAction("Index");
             }
             else
             {
 
-                ViewBag.SubCategories = ProductSubCategory;
-                ViewBag.PossibleCategories = categoryRepository.All;
+                ViewBag.SubCategories = productSubCategory;
+                ViewBag.PossibleCategories = _categoryRepository.All;
                 return View();
             }
         }
@@ -228,28 +227,28 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin, Editor")]
         public ActionResult Delete(int id)
         {
-            return View(productRepository.Find(id));
+            return View(_productRepository.Find(id));
         }
 
         [HttpPost, ActionName("Delete")]
 		[Authorize(Roles = "Admin, Editor")]
         public ActionResult DeleteConfirmed(int id)
         {
-            productRepository.Delete(id);
-            productRepository.Save();
+            _productRepository.Delete(id);
+            _productRepository.Save();
 
             return RedirectToAction("Index");
         }
 
         public ViewResult List(string category, string subCategory = null, int page = 1)
         {
-			IEnumerable<Product> Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
+			IEnumerable<Product> products = _productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
 				.Where(c => c.Category.Name == category)
                 .OrderBy(p => p.ProductId);
 
 			if (subCategory != null)
 			{
-				Products = productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
+				products = _productRepository.AllIncluding(product => product.Category, product => product.SubCategories)
 				.Where(c => c.Category.Name == category)
 				.Where(c => c.SubCategories.FirstOrDefault(sc => sc.SubCategory.Name == subCategory).SubCategory.Name == subCategory)
 				.OrderBy(p => p.ProductId);
@@ -257,12 +256,12 @@ namespace FurnitureShop.Controllers
 
             ProductListView model = new ProductListView
             {
-                Products = Products,
+                Products = products,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = productRepository.All.Count()
+                    TotalItems = _productRepository.All.Count()
                     //TotalItems = category == null ?
                     //    productRepository.All.Count() :
                     //    productRepository.All.Where(e => e.Categories == category).Count()
@@ -277,26 +276,26 @@ namespace FurnitureShop.Controllers
         // view product summary and rating statistic
         public ViewResult SummaryDetails(int id)
         {
-            if (ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Count() < 1)
+            if (_ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Count() < 1)
             {
                 ViewBag.ratingstatistics = "This product is not rated yet";
                 ViewBag.ratecomments = "";
             }
             else
             {
-                ViewBag.ratingstatistics = string.Format("{0:0.#}", ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Average(p => p.Rate));
-                ViewBag.ratecomments = ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id);
+                ViewBag.ratingstatistics = string.Format("{0:0.#}", _ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id).Average(p => p.Rate));
+                ViewBag.ratecomments = _ratePlusCommentRepository.All.ToList().FindAll(o => o.ProductId == id);
                 ViewBag.ratingUser = "test USER"; //userRepository.All.ToList().FindAll(o => o.UserId == ViewBag.ratecomments.UserId);
                 //ViewBag.ratinguser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == );
             }
-            return View(productRepository.Find(id));
+            return View(_productRepository.Find(id));
         }
 
 
         public FileContentResult GetImage(int productid)
         {
             //Product prod = productRepository.All.FirstOrDefault(p => p.ProductId == id);
-            Product prod = productRepository.All.ToList().FirstOrDefault(p => p.ProductId == productid);
+            Product prod = _productRepository.All.ToList().FirstOrDefault(p => p.ProductId == productid);
             if (prod != null)
             {
                 return File(prod.ImageData, prod.ImageMimeType);
@@ -312,8 +311,8 @@ namespace FurnitureShop.Controllers
         {
             if (disposing)
             {
-                categoryRepository.Dispose();
-                productRepository.Dispose();
+                _categoryRepository.Dispose();
+                _productRepository.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -4,7 +4,6 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
 namespace FurnitureShop.Infrastructure.Concrete
@@ -12,12 +11,12 @@ namespace FurnitureShop.Infrastructure.Concrete
 	public class CustomMembershipProvider : MembershipProvider
 	{
 		[Inject]
-		public IUserRepository userRepo { get; set; }
+		public IUserRepository UserRepo { get; set; }
 		/*public CustomMembershipProvider(IUserRepository AccountRepository) {
 			userRepo = AccountRepository;
 		}*/
 
-		private static List<User> Users = new List<User>();
+		private static List<User> _users = new List<User>();
 
 		public override string ApplicationName
 		{
@@ -159,9 +158,9 @@ namespace FurnitureShop.Infrastructure.Concrete
 		public override bool ValidateUser(string username, string password)
 		{
 			//Users = context.Users.;
-			Users = userRepo.All.ToList();
+			_users = UserRepo.All.ToList();
 
-			return Users.Exists(u => u.Name == username && u.Password == password);
+			return _users.Exists(u => u.Name == username && u.Password == password);
 		}
 	}
 }

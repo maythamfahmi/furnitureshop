@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FurnitureShop.Models
@@ -19,6 +15,8 @@ namespace FurnitureShop.Models
         public int ProductId1 { get; set; }
 
         public int ProductId2 { get; set; }
+
+        //public virtual Product Product { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

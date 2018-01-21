@@ -18,14 +18,14 @@
                     <div class="control-group">
                         <label class="control-label">Username</label>
                         <div class="controls">
-                            @Html.EditorFor(m => m.userName, new { @class = "input-xlarge", @placeholder = "Enter your username" })
-                            @Html.ValidationMessageFor(m => m.userName)
+                            @Html.EditorFor(m => m.UserName, new { @class = "input-xlarge", @placeholder = "Enter your username" })
+                            @Html.ValidationMessageFor(m => m.UserName)
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Username</label>
+                        <label class="control-label">Password</label>
                         <div class="controls">
-                            @Html.EditorFor(m => m.Password, new { @class = "input-xlarge", @placeholder = "Enter your password" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "input-xlarge", @placeholder = "Enter your password" })
                             @Html.ValidationMessageFor(m => m.Password)
                         </div>
                     </div>

@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class OrderDeliveryRepository : IOrderDeliveryRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<OrderDelivery> All
         {
-            get { return context.OrderDeliveries; }
+            get { return _context.OrderDeliveries; }
         }
 
         public IQueryable<OrderDelivery> AllIncluding(params Expression<Func<OrderDelivery, object>>[] includeProperties)
         {
-            IQueryable<OrderDelivery> query = context.OrderDeliveries;
+            IQueryable<OrderDelivery> query = _context.OrderDeliveries;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public OrderDelivery Find(int id)
         {
-            return context.OrderDeliveries.Find(id);
+            return _context.OrderDeliveries.Find(id);
         }
 
         public void InsertOrUpdate(OrderDelivery orderdelivery)
         {
             if (orderdelivery.OrderDeliveryId == default(int)) {
                 // New entity
-                context.OrderDeliveries.Add(orderdelivery);
+                _context.OrderDeliveries.Add(orderdelivery);
             } else {
                 // Existing entity
-                context.Entry(orderdelivery).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(orderdelivery).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var orderdelivery = context.OrderDeliveries.Find(id);
-            context.OrderDeliveries.Remove(orderdelivery);
+            var orderdelivery = _context.OrderDeliveries.Find(id);
+            _context.OrderDeliveries.Remove(orderdelivery);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

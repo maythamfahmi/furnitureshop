@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class SubCategoryRepository : ISubCategoryRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<SubCategory> All
         {
-            get { return context.SubCategories; }
+            get { return _context.SubCategories; }
         }
 
         public IQueryable<SubCategory> AllIncluding(params Expression<Func<SubCategory, object>>[] includeProperties)
         {
-            IQueryable<SubCategory> query = context.SubCategories;
+            IQueryable<SubCategory> query = _context.SubCategories;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public SubCategory Find(int id)
         {
-            return context.SubCategories.Find(id);
+            return _context.SubCategories.Find(id);
         }
 
         public void InsertOrUpdate(SubCategory subcategory)
         {
             if (subcategory.SubCategoryId == default(int)) {
                 // New entity
-                context.SubCategories.Add(subcategory);
+                _context.SubCategories.Add(subcategory);
             } else {
                 // Existing entity
-                context.Entry(subcategory).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(subcategory).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var subcategory = context.SubCategories.Find(id);
-            context.SubCategories.Remove(subcategory);
+            var subcategory = _context.SubCategories.Find(id);
+            _context.SubCategories.Remove(subcategory);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

@@ -1,0 +1,15 @@
+﻿@model System.String
+
+
+@{
+    if (Model == "True")
+    {
+        string logout = "Sign " + ViewBag.userName + " out";
+        @Html.ActionLink(logout, "Logout", "Account")
+    }
+    else
+    {
+    @Html.ActionLink("Login", "Login", "Account")
+        
+    }
+}

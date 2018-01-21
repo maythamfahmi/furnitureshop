@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using FurnitureShop.Infrastructure.Abstract;
+﻿using FurnitureShop.Infrastructure.Abstract;
 using System.Web.Security;
 
 namespace FurnitureShop.Infrastructure.Concrete
@@ -28,7 +24,7 @@ namespace FurnitureShop.Infrastructure.Concrete
 			return result;
 		}
 
-		public void logout() {
+		public void Logout() {
 			FormsAuthentication.SignOut();
 		}
 	}

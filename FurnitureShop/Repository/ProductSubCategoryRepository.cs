@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class ProductSubCategoryRepository : IProductSubCategoryRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<ProductSubCategory> All
         {
-            get { return context.ProductSubCategories; }
+            get { return _context.ProductSubCategories; }
         }
 
         public IQueryable<ProductSubCategory> AllIncluding(params Expression<Func<ProductSubCategory, object>>[] includeProperties)
         {
-            IQueryable<ProductSubCategory> query = context.ProductSubCategories;
+            IQueryable<ProductSubCategory> query = _context.ProductSubCategories;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public ProductSubCategory Find(int id)
         {
-            return context.ProductSubCategories.Find(id);
+            return _context.ProductSubCategories.Find(id);
         }
 
         public void InsertOrUpdate(ProductSubCategory productsubcategory)
         {
             if (productsubcategory.ProductSubCategoryId == default(int)) {
                 // New entity
-                context.ProductSubCategories.Add(productsubcategory);
+                _context.ProductSubCategories.Add(productsubcategory);
             } else {
                 // Existing entity
-                context.Entry(productsubcategory).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(productsubcategory).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var productsubcategory = context.ProductSubCategories.Find(id);
-            context.ProductSubCategories.Remove(productsubcategory);
+            var productsubcategory = _context.ProductSubCategories.Find(id);
+            _context.ProductSubCategories.Remove(productsubcategory);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

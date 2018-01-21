@@ -1,0 +1,57 @@
+﻿@model FurnitureShop.Models.Address
+
+@{
+    ViewBag.Title = "RemoveAddress";
+}
+
+<h2>Are you sure you want to remove this address?</h2>
+<table>
+    <tr>
+        <th>
+            Address1
+        </th>
+        <th>
+             Address2
+        </th>
+        <th>
+            Address3
+        </th>
+        <th>
+            Postal
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+    </tr>
+    <tr>
+        <td>
+			@Model.AddressLine1
+        </td>
+        <td>
+			@Model.AddressLine2
+        </td>
+        <td>
+			@Model.AddressLine3
+        </td>
+        <td>
+			@Model.Postal
+        </td>
+        <td>
+			@Model.City
+        </td>
+        <td>
+			@Model.Country
+        </td>
+    </tr>
+</table>
+<p>
+@using (Html.BeginForm("RemoveAddressConfirmed", "Users"))
+{
+    @Html.ActionLink("Cancel", "MyAccount")
+    @Html.Hidden("AddressId", Model.AddressId);
+    <input type="submit" value="Remove" class="actionButtons" />
+    }
+</p>

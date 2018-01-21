@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
 
 namespace FurnitureShop.Controllers
-{   
+{
     public class AddressesController : Controller
     {
-		private readonly IUserRepository userRepository;
-		private readonly IAddressRepository addressRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAddressRepository _addressRepository;
 
-		// If you are using Dependency Injection, you can delete the following constructor
+        // If you are using Dependency Injection, you can delete the following constructor
         public AddressesController() : this(new UserRepository(), new AddressRepository())
         {
         }
 
         public AddressesController(IUserRepository userRepository, IAddressRepository addressRepository)
         {
-			this.userRepository = userRepository;
-			this.addressRepository = addressRepository;
+            this._userRepository = userRepository;
+            this._addressRepository = addressRepository;
         }
 
         //
@@ -29,7 +25,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(addressRepository.All);
+            return View(_addressRepository.All);
         }
 
         //
@@ -37,7 +33,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(addressRepository.Find(id));
+            return View(_addressRepository.Find(id));
         }
 
         //
@@ -45,9 +41,9 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleUsers = userRepository.All;
+            ViewBag.PossibleUsers = _userRepository.All;
             return View();
-        } 
+        }
 
         //
         // POST: /Addresses/Create
@@ -55,23 +51,26 @@ namespace FurnitureShop.Controllers
         [HttpPost]
         public ActionResult Create(Address address)
         {
-            if (ModelState.IsValid) {
-                addressRepository.InsertOrUpdate(address);
-                addressRepository.Save();
+            if (ModelState.IsValid)
+            {
+                _addressRepository.InsertOrUpdate(address);
+                _addressRepository.Save();
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleUsers = userRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                ViewBag.PossibleUsers = _userRepository.All;
+                return View();
+            }
         }
-        
+
         //
         // GET: /Addresses/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleUsers = userRepository.All;
-             return View(addressRepository.Find(id));
+            ViewBag.PossibleUsers = _userRepository.All;
+            return View(_addressRepository.Find(id));
         }
 
         //
@@ -80,22 +79,25 @@ namespace FurnitureShop.Controllers
         [HttpPost]
         public ActionResult Edit(Address address)
         {
-            if (ModelState.IsValid) {
-                addressRepository.InsertOrUpdate(address);
-                addressRepository.Save();
+            if (ModelState.IsValid)
+            {
+                _addressRepository.InsertOrUpdate(address);
+                _addressRepository.Save();
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleUsers = userRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                ViewBag.PossibleUsers = _userRepository.All;
+                return View();
+            }
         }
 
         //
         // GET: /Addresses/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
-            return View(addressRepository.Find(id));
+            return View(_addressRepository.Find(id));
         }
 
         //
@@ -104,17 +106,18 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            addressRepository.Delete(id);
-            addressRepository.Save();
+            _addressRepository.Delete(id);
+            _addressRepository.Save();
 
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) {
-                userRepository.Dispose();
-                addressRepository.Dispose();
+            if (disposing)
+            {
+                _userRepository.Dispose();
+                _addressRepository.Dispose();
             }
             base.Dispose(disposing);
         }

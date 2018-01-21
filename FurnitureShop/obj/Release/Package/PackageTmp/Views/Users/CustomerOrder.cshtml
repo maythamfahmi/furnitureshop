@@ -1,0 +1,51 @@
+﻿@model FurnitureShop.Models.User
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Customer order list</h4>
+
+<fieldset>
+    <table>
+        <tr>
+            <th width="5%"></th>
+            <th width="5%">OrderId
+            </th>
+            <th width="15%">OrderDate
+            </th>
+            <th width="15%">ShippingDate
+            </th>
+            <th width="15%">DeliveryDate
+            </th>
+            <th width="15%">Shipped by
+            </th>
+        </tr>
+
+        @*foreach (var item in Model)* // defalut line *@
+        @foreach (FurnitureShop.Models.Order item in ViewBag.SelectedOrder)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("View", "CustomerOrderProducts", new { id = item.OrderId, userid = item.UserId }) |
+                </td>
+                <td>
+                    @item.OrderId
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.OrderDate)
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.ShippingDate)
+                </td>
+                <td>
+                    @String.Format("{0:dd-MM-yyyy}", item.DeliveryDate)
+                </td>
+                <td>
+                    @item.OrderDeliveryId
+                </td>
+            </tr>
+        }
+
+    </table>
+</fieldset>

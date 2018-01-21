@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -10,8 +6,8 @@ namespace FurnitureShop.Controllers
 {   
     public class OrderProductsController : Controller
     {
-		private readonly IOrderRepository orderRepository;
-		private readonly IOrderProductRepository orderproductRepository;
+		private readonly IOrderRepository _orderRepository;
+		private readonly IOrderProductRepository _orderproductRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         public OrderProductsController() : this(new OrderRepository(), new OrderProductRepository())
@@ -20,8 +16,8 @@ namespace FurnitureShop.Controllers
 
         public OrderProductsController(IOrderRepository orderRepository, IOrderProductRepository orderproductRepository)
         {
-			this.orderRepository = orderRepository;
-			this.orderproductRepository = orderproductRepository;
+			this._orderRepository = orderRepository;
+			this._orderproductRepository = orderproductRepository;
         }
 
         //
@@ -29,7 +25,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(orderproductRepository.All);
+            return View(_orderproductRepository.All);
         }
 
         //
@@ -37,7 +33,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(orderproductRepository.Find(id));
+            return View(_orderproductRepository.Find(id));
         }
 
         //
@@ -45,7 +41,7 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleOrders = orderRepository.All;
+			ViewBag.PossibleOrders = _orderRepository.All;
             return View();
         } 
 
@@ -56,11 +52,11 @@ namespace FurnitureShop.Controllers
         public ActionResult Create(OrderProduct orderproduct)
         {
             if (ModelState.IsValid) {
-                orderproductRepository.InsertOrUpdate(orderproduct);
-                orderproductRepository.Save();
+                _orderproductRepository.InsertOrUpdate(orderproduct);
+                _orderproductRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleOrders = orderRepository.All;
+				ViewBag.PossibleOrders = _orderRepository.All;
 				return View();
 			}
         }
@@ -70,8 +66,8 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleOrders = orderRepository.All;
-             return View(orderproductRepository.Find(id));
+			ViewBag.PossibleOrders = _orderRepository.All;
+             return View(_orderproductRepository.Find(id));
         }
 
         //
@@ -81,11 +77,11 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(OrderProduct orderproduct)
         {
             if (ModelState.IsValid) {
-                orderproductRepository.InsertOrUpdate(orderproduct);
-                orderproductRepository.Save();
+                _orderproductRepository.InsertOrUpdate(orderproduct);
+                _orderproductRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleOrders = orderRepository.All;
+				ViewBag.PossibleOrders = _orderRepository.All;
 				return View();
 			}
         }
@@ -95,7 +91,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View(orderproductRepository.Find(id));
+            return View(_orderproductRepository.Find(id));
         }
 
         //
@@ -104,15 +100,15 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            orderproductRepository.Delete(id);
-            orderproductRepository.Save();
+            _orderproductRepository.Delete(id);
+            _orderproductRepository.Save();
 
             return RedirectToAction("Index");
         }
 
         public ActionResult CreateOrderProducts()
         {
-            ViewBag.PossibleOrders = orderRepository.All;
+            ViewBag.PossibleOrders = _orderRepository.All;
             return View();
         }
 
@@ -124,13 +120,13 @@ namespace FurnitureShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                orderproductRepository.InsertOrUpdate(orderproduct);
-                orderproductRepository.Save();
+                _orderproductRepository.InsertOrUpdate(orderproduct);
+                _orderproductRepository.Save();
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.PossibleOrders = orderRepository.All;
+                ViewBag.PossibleOrders = _orderRepository.All;
                 return View();
             }
         }
@@ -139,8 +135,8 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                orderRepository.Dispose();
-                orderproductRepository.Dispose();
+                _orderRepository.Dispose();
+                _orderproductRepository.Dispose();
             }
             base.Dispose(disposing);
         }

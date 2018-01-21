@@ -1,0 +1,23 @@
+@model FurnitureShop.Models.RatePlusComment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RatePlusComment</legend>
+
+    <div class="display-label">Rate</div>
+    <div class="display-field">@Model.Rate</div>
+
+    <div class="display-label">Comment</div>
+    <div class="display-field">@Model.Comment</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

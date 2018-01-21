@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using Moq;
-using FurnitureShop.Models;
 using FurnitureShop.Repository;
 using FurnitureShop.Services;
 using FurnitureShop.Interface;
@@ -18,11 +13,11 @@ namespace FurnitureShop.Infrastructure
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {
-        private IKernel ninjectKernel;
+        private readonly IKernel _ninjectKernel;
 
         public NinjectControllerFactory()
         {
-            ninjectKernel = new StandardKernel();
+            _ninjectKernel = new StandardKernel();
             AddBindings();
         }
 
@@ -30,12 +25,12 @@ namespace FurnitureShop.Infrastructure
         {
             return controllerType == null
             ? null
-            : (IController)ninjectKernel.Get(controllerType);
+            : (IController)_ninjectKernel.Get(controllerType);
         }
 
         private void AddBindings()
         {
-            // Database binding
+            // Database binding // test categories are working by injection.
 
             //Mock<ICategoryRepository> mockCat = new Mock<ICategoryRepository>();
             //mockCat.Setup(m => m.All).Returns(new List<Category> {
@@ -43,37 +38,43 @@ namespace FurnitureShop.Infrastructure
             //    new Category { CategoryId = 2, Name = "Chair" },
             //    new Category { CategoryId = 3, Name = "Lamp" }
             //}.AsQueryable());
-            
-            //Mock<IProductRepository> mockPro = new Mock<IProductRepository>();
-            //mockPro.Setup(m => m.All).Returns(new List<Product> {
-            //    new Product { Name = "1", Price = 125, Description = "test", ImageSrc="", Category = new Category{ Name = "sofa" } },
-            //    new Product { Name = "2", Price = 225, Description = "test", ImageSrc="", Category = new Category{ Name = "sofa" } },
-            //    new Product { Name = "3", Price = 325, Description = "test", ImageSrc="", Category = new Category{ Name = "sofa" } }
+
+            // if you enable test injection line then disable category production line
+            //ninjectKernel.Bind<ICategoryRepository>().ToConstant(mockCat.Object);
+
+            //Mock<IOrderRepository> mockOrder = new Mock<IOrderRepository>();
+            //mockOrder.Setup(m => m.All).Returns(new List<Order> {
+            //    new Order { OrderId = 1, OrderDate = System.DateTime.Now, OrderDeliveryId = 1},
+            //    new Order { OrderId = 2, OrderDate = System.DateTime.Now, OrderDeliveryId = 3},
+            //    new Order { OrderId = 3, OrderDate = System.DateTime.Now, OrderDeliveryId = 5}
             //}.AsQueryable());
 
-            //ninjectKernel.Bind<ICategoryRepository>().ToConstant(mockCat.Object);
-            //ninjectKernel.Bind<IProductRepository>().ToConstant(mockPro.Object);
+            //if you enable test injection line then disable order production line
+            // test link localhost:1317/orders/index
+            //ninjectKernel.Bind<IOrderRepository>().ToConstant(mockOrder.Object);
 
-            ninjectKernel.Bind<IProductRepository>().To<ProductRepository>();
-            ninjectKernel.Bind<ICategoryRepository>().To<CategoryRepository>();
-			ninjectKernel.Bind<IProductSubCategoryRepository>().To<ProductSubCategoryRepository>();
-			ninjectKernel.Bind<ISubCategoryRepository>().To<SubCategoryRepository>();
-            ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
-            ninjectKernel.Bind<IOrderRepository>().To<OrderRepository>();
-            ninjectKernel.Bind<IOrderProductRepository>().To<OrderProductRepository>();
-            ninjectKernel.Bind<IOrderDeliveryRepository>().To<OrderDeliveryRepository>();
-			ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
-			ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
-            ninjectKernel.Bind<IAddressRepository>().To<AddressRepository>();
-            ninjectKernel.Bind<IRatePlusCommentRepository>().To<RatePlusCommentRepository>();
-            
-            // new lines
+
+            _ninjectKernel.Bind<IProductRepository>().To<ProductRepository>();
+            _ninjectKernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            _ninjectKernel.Bind<IProductSubCategoryRepository>().To<ProductSubCategoryRepository>();
+            _ninjectKernel.Bind<ISubCategoryRepository>().To<SubCategoryRepository>();
+            _ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
+            _ninjectKernel.Bind<IOrderRepository>().To<OrderRepository>();
+            _ninjectKernel.Bind<IOrderProductRepository>().To<OrderProductRepository>();
+            _ninjectKernel.Bind<IOrderDeliveryRepository>().To<OrderDeliveryRepository>();
+            _ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+            _ninjectKernel.Bind<IUserRoleRepository>().To<UserRoleRepository>();
+            _ninjectKernel.Bind<IAddressRepository>().To<AddressRepository>();
+            _ninjectKernel.Bind<IRatePlusCommentRepository>().To<RatePlusCommentRepository>();
+            _ninjectKernel.Bind<ISpecialOfferRepository>().To<SpecialOfferRepository>();
+
+            // new lines order processing
             EmailSettings emailSettings = new EmailSettings
             {
                 WriteAsFile = bool.Parse(ConfigurationManager
                 .AppSettings["Email.WriteAsFile"] ?? "false")
             };
-            ninjectKernel.Bind<IOrderProcessor>()
+            _ninjectKernel.Bind<IOrderProcessor>()
             .To<EmailOrderProcessor>()
             .WithConstructorArgument("settings", emailSettings);
         }

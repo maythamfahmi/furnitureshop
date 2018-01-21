@@ -6,15 +6,15 @@
 <section class="header_text sub">
     <img class="pageBanner" src="../CustomContent/themes/images/Banner1.png" alt="New products">
     @{
-        string PageTitle = "";
+        string pageTitle = "";
         if (ViewBag.PageSubcategory != null){
 
-          PageTitle = "-> "+ ViewBag.PageSubcategory;
+          pageTitle = "-> "+ ViewBag.PageSubcategory;
     }else{
-        PageTitle = "";
+        pageTitle = "";
       }
     }
-    <h4>Products in <span> @ViewBag.PageCategory  @PageTitle</span></h4>
+    <h4>Products in <span> @ViewBag.PageCategory  @pageTitle</span></h4>
 </section>
 <section class="main-content">
 

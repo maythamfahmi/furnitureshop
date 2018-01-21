@@ -1,0 +1,47 @@
+@model FurnitureShop.Models.OrderProduct
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OProdcutId)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OProdcutId)
+    @Html.ValidationMessageFor(model => model.OProdcutId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OProdcutName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OProdcutName)
+    @Html.ValidationMessageFor(model => model.OProdcutName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OProdcutQty)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OProdcutQty)
+    @Html.ValidationMessageFor(model => model.OProdcutQty)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OProdcutPrice)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OProdcutPrice)
+    @Html.ValidationMessageFor(model => model.OProdcutPrice)
+</div>
+
+<div class="editor-label">
+    Order
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.OrderId, ((IEnumerable<FurnitureShop.Models.Order>)ViewBag.PossibleOrders).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.OrderId.ToString(),
+        Selected = (Model != null) && (option.OrderId == Model.OrderId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.OrderId)
+</div>

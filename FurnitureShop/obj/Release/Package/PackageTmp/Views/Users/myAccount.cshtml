@@ -1,0 +1,78 @@
+﻿@model FurnitureShop.Models.User
+
+@{
+    ViewBag.Title = "myAccount";
+}
+
+<h2>Account for @Model.Name</h2>
+<p>Name: @Model.FirstName @Model.LastName</p>
+<p>Email: @Model.Email</p>
+<p>Phone: @Model.Phone</p>
+<p>@Html.ActionLink("Edit personal data", "EditUserInfo", "Users")</p>
+
+<p>Registered addresses</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Address1
+        </th>
+        <th>
+             Address2
+        </th>
+        <th>
+            Address3
+        </th>
+        <th>
+            Postal
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+    </tr>
+
+@{
+foreach (FurnitureShop.Models.Address address in Model.Address)
+{
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "EditAddress", new { AddressId=address.AddressId })
+            @if (Model.Address.Count > 1)
+            {  
+                @:| 
+                @Html.ActionLink("Delete", "RemoveAddress", new { AddressId=address.AddressId }) }
+        </td>
+        <td>
+			@address.AddressLine1
+        </td>
+        <td>
+			@address.AddressLine2
+        </td>
+        <td>
+			@address.AddressLine3
+        </td>
+        <td>
+			@address.Postal
+        </td>
+        <td>
+			@address.City
+        </td>
+        <td>
+			@address.Country
+        </td>
+    </tr>
+}
+
+}
+</table>
+ @Html.ActionLink("Add new address", "AddAddress")
+
+<hr />
+<h2>My order history</h2>
+
+<a href="/orders/customerorder">
+   <input type="button" value="List of previous orders" class="btn btn-inverse" />
+</a>

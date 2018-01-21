@@ -1,0 +1,41 @@
+@model IEnumerable<FurnitureShop.Models.ProductSubCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Product
+        </th>
+        <th>
+            SubCategory
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductSubCategoryId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductSubCategoryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductSubCategoryId })
+        </td>
+        <td>
+			@(item.Product == null ? "None" : item.Product.Name)
+        </td>
+        <td>
+			@(item.SubCategory == null ? "None" : item.SubCategory.Name)
+        </td>
+    </tr>
+}
+
+</table>
+
+

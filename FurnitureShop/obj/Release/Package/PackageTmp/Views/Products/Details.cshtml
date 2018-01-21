@@ -1,0 +1,52 @@
+@model FurnitureShop.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Product</legend>
+
+    <div class="InfoProductDetails">
+        <div class="display-label">Name</div>
+        <div class="display-field">@Model.Name</div>
+
+        <div class="display-label">Description</div>
+        <div class="display-field">@Model.Description</div>
+
+        <div class="display-label">Price</div>
+        <div class="display-field">@String.Format("{0:F}", Model.Price)</div>
+
+        <div class="display-label">Category</div>
+        <div class="display-field">@(Model.Category == null ? "None" : Model.Category.Name)</div>
+
+        <div class="display-label">SubCategories</div>
+        <div class="display-field">@(Model.SubCategories == null ? "None" : Model.SubCategories.Count.ToString())</div>
+
+        <div class="display-label">ImageSrc</div>
+        <div class="display-field">@Model.ImageSrc</div>
+
+        @*<div class="display-label">ImageData</div>
+        <div class="display-field">
+            <img src="@Url.Action("GetImage", "Products", new { Id = Model.ProductId })" />
+        </div>*@
+
+        <div class="display-label">ImageMimeType</div>
+        <div class="display-field">@Model.ImageMimeType</div>
+
+    </div>
+
+    <div class="ImageProductDetails">
+        @*<div class="display-label">Product image</div>*@
+        <div class="display-field"><img width="400" height="400" src ="@Url.Action("GetImage", "Products", new { Model.ProductId })" /></div>
+        
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

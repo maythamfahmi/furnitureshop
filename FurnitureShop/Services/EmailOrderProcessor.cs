@@ -1,8 +1,4 @@
 ﻿using System.Net.Mail;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Text;
 using System.Net;
 using FurnitureShop.Interface;
@@ -19,33 +15,33 @@ namespace FurnitureShop.Services
         public string Password = "MySmtpPassword";
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
-        public bool WriteAsFile = false;
+        public bool WriteAsFile = true;
         public string FileLocation = @"c:\eshop_emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
     {
-        private EmailSettings emailSettings;
+        private readonly EmailSettings _emailSettings;
         public EmailOrderProcessor(EmailSettings settings)
         {
-            emailSettings = settings;
+            _emailSettings = settings;
         }
         public void ProcessOrder(Cart cart, ShippingDetails shippingInfo)
         {
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.EnableSsl = emailSettings.UseSsl;
-                smtpClient.Host = emailSettings.ServerName;
-                smtpClient.Port = emailSettings.ServerPort;
+                smtpClient.EnableSsl = _emailSettings.UseSsl;
+                smtpClient.Host = _emailSettings.ServerName;
+                smtpClient.Port = _emailSettings.ServerPort;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials
-                = new NetworkCredential(emailSettings.Username,
-                emailSettings.Password);
-                if (emailSettings.WriteAsFile)
+                = new NetworkCredential(_emailSettings.Username,
+                _emailSettings.Password);
+                if (_emailSettings.WriteAsFile)
                 {
                     smtpClient.DeliveryMethod
                     = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
+                    smtpClient.PickupDirectoryLocation = _emailSettings.FileLocation;
                     smtpClient.EnableSsl = false;
                 }
                 StringBuilder body = new StringBuilder()
@@ -73,11 +69,11 @@ namespace FurnitureShop.Services
                 //.AppendFormat("Gift wrap: {0}",
                 //shippingInfo.GiftWrap ? "Yes" : "No");
                 MailMessage mailMessage = new MailMessage(
-                emailSettings.MailFromAddress, // From
-                emailSettings.MailToAddress, // To
+                _emailSettings.MailFromAddress, // From
+                _emailSettings.MailToAddress, // To
                 "New order submitted!", // Subject
                 body.ToString()); // Body
-                if (emailSettings.WriteAsFile)
+                if (_emailSettings.WriteAsFile)
                 {
                     mailMessage.BodyEncoding = Encoding.ASCII;
                 }

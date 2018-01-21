@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class SpecialOfferRepository : ISpecialOfferRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<SpecialOffer> All
         {
-            get { return context.SpecialOffers; }
+            get { return _context.SpecialOffers; }
         }
 
         public IQueryable<SpecialOffer> AllIncluding(params Expression<Func<SpecialOffer, object>>[] includeProperties)
         {
-            IQueryable<SpecialOffer> query = context.SpecialOffers;
+            IQueryable<SpecialOffer> query = _context.SpecialOffers;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public SpecialOffer Find(int id)
         {
-            return context.SpecialOffers.Find(id);
+            return _context.SpecialOffers.Find(id);
         }
 
         public void InsertOrUpdate(SpecialOffer specialoffer)
         {
             if (specialoffer.SpecialOfferId == default(int)) {
                 // New entity
-                context.SpecialOffers.Add(specialoffer);
+                _context.SpecialOffers.Add(specialoffer);
             } else {
                 // Existing entity
-                context.Entry(specialoffer).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(specialoffer).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var specialoffer = context.SpecialOffers.Find(id);
-            context.SpecialOffers.Remove(specialoffer);
+            var specialoffer = _context.SpecialOffers.Find(id);
+            _context.SpecialOffers.Remove(specialoffer);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

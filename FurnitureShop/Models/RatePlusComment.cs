@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace FurnitureShop.Models
@@ -18,7 +13,7 @@ namespace FurnitureShop.Models
 
         public int UserId { get; set; }
 
-        public virtual User user { get; set; }
+        public virtual User User { get; set; }
 
         [Required(ErrorMessage = "Please specify a rate")]
         public int Rate { get; set; }

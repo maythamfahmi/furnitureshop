@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class OrderRepository : IOrderRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<Order> All
         {
-            get { return context.Orders; }
+            get { return _context.Orders; }
         }
 
         public IQueryable<Order> AllIncluding(params Expression<Func<Order, object>>[] includeProperties)
         {
-            IQueryable<Order> query = context.Orders;
+            IQueryable<Order> query = _context.Orders;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public Order Find(int id)
         {
-            return context.Orders.Find(id);
+            return _context.Orders.Find(id);
         }
 
         public void InsertOrUpdate(Order order)
         {
             if (order.OrderId == default(int)) {
                 // New entity
-                context.Orders.Add(order);
+                _context.Orders.Add(order);
             } else {
                 // Existing entity
-                context.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(order).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var order = context.Orders.Find(id);
-            context.Orders.Remove(order);
+            var order = _context.Orders.Find(id);
+            _context.Orders.Remove(order);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

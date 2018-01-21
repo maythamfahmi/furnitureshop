@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -10,20 +7,20 @@ namespace FurnitureShop.Controllers
 {   
     public class RatePlusCommentsController : Controller
     {
-		private readonly IProductRepository productRepository;
-		private readonly IUserRepository userRepository;
-		private readonly IRatePlusCommentRepository ratepluscommentRepository;
+		private readonly IProductRepository _productRepository;
+		private readonly IUserRepository _userRepository;
+		private readonly IRatePlusCommentRepository _ratepluscommentRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public RatePlusCommentsController() : this(new ProductRepository(), new UserRepository(), new RatePlusCommentRepository())
-        {
-        }
+        //public RatePlusCommentsController() : this(new ProductRepository(), new UserRepository(), new RatePlusCommentRepository())
+        //{
+        //}
 
         public RatePlusCommentsController(IProductRepository productRepository, IUserRepository userRepository, IRatePlusCommentRepository ratepluscommentRepository)
         {
-			this.productRepository = productRepository;
-			this.userRepository = userRepository;
-			this.ratepluscommentRepository = ratepluscommentRepository;
+			this._productRepository = productRepository;
+			this._userRepository = userRepository;
+			this._ratepluscommentRepository = ratepluscommentRepository;
         }
 
         //
@@ -31,7 +28,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(ratepluscommentRepository.All);
+            return View(_ratepluscommentRepository.All);
         }
 
         //
@@ -39,7 +36,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(ratepluscommentRepository.Find(id));
+            return View(_ratepluscommentRepository.Find(id));
         }
 
         //
@@ -47,8 +44,8 @@ namespace FurnitureShop.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleProducts = productRepository.All;
-			ViewBag.PossibleUsers = userRepository.All;
+			ViewBag.PossibleProducts = _productRepository.All;
+			ViewBag.PossibleUsers = _userRepository.All;
             return View();
         } 
 
@@ -59,12 +56,12 @@ namespace FurnitureShop.Controllers
         public ActionResult Create(RatePlusComment ratepluscomment)
         {
             if (ModelState.IsValid) {
-                ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
-                ratepluscommentRepository.Save();
+                _ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
+                _ratepluscommentRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleProducts = productRepository.All;
-				ViewBag.PossibleUsers = userRepository.All;
+				ViewBag.PossibleProducts = _productRepository.All;
+				ViewBag.PossibleUsers = _userRepository.All;
 				return View();
 			}
         }
@@ -74,9 +71,9 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleProducts = productRepository.All;
-			ViewBag.PossibleUsers = userRepository.All;
-             return View(ratepluscommentRepository.Find(id));
+			ViewBag.PossibleProducts = _productRepository.All;
+			ViewBag.PossibleUsers = _userRepository.All;
+             return View(_ratepluscommentRepository.Find(id));
         }
 
         //
@@ -86,12 +83,12 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(RatePlusComment ratepluscomment)
         {
             if (ModelState.IsValid) {
-                ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
-                ratepluscommentRepository.Save();
+                _ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
+                _ratepluscommentRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleProducts = productRepository.All;
-				ViewBag.PossibleUsers = userRepository.All;
+				ViewBag.PossibleProducts = _productRepository.All;
+				ViewBag.PossibleUsers = _userRepository.All;
 				return View();
 			}
         }
@@ -101,7 +98,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View(ratepluscommentRepository.Find(id));
+            return View(_ratepluscommentRepository.Find(id));
         }
 
         //
@@ -110,8 +107,8 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            ratepluscommentRepository.Delete(id);
-            ratepluscommentRepository.Save();
+            _ratepluscommentRepository.Delete(id);
+            _ratepluscommentRepository.Save();
 
             return RedirectToAction("Index");
         }
@@ -121,7 +118,7 @@ namespace FurnitureShop.Controllers
         public ActionResult CreateRating(int productid)
         {
             string userName = HttpContext.User.Identity.Name;
-            User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+            User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
             ViewBag.SelecedUser = user.UserId;
             ViewBag.SelecedProduct = productid;
@@ -135,14 +132,14 @@ namespace FurnitureShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
-                ratepluscommentRepository.Save();
-                return Redirect("createrating?productid=" + productid);
+                _ratepluscommentRepository.InsertOrUpdate(ratepluscomment);
+                _ratepluscommentRepository.Save();
+                return Redirect("~/Products/SummaryDetails?id=" + productid);
             }
             else
             {
                 string userName = HttpContext.User.Identity.Name;
-                User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+                User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
                 ViewBag.SelecedUser = user.UserId;
                 ViewBag.SelecedProduct = productid;
@@ -155,9 +152,9 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                productRepository.Dispose();
-                userRepository.Dispose();
-                ratepluscommentRepository.Dispose();
+                _productRepository.Dispose();
+                _userRepository.Dispose();
+                _ratepluscommentRepository.Dispose();
             }
             base.Dispose(disposing);
         }

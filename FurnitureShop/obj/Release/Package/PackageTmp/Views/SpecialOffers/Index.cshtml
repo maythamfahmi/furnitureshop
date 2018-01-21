@@ -1,0 +1,65 @@
+@model IEnumerable<FurnitureShop.Models.SpecialOffer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Name
+        </th>
+        <th>
+            ProductId1
+        </th>
+        <th>
+            ProductId2
+        </th>
+        <th>
+            StartDate
+        </th>
+        <th>
+            EndDate
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SpecialOfferId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SpecialOfferId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SpecialOfferId })
+        </td>
+        <td>
+			@item.Name
+        </td>
+        <td>
+			@item.ProductId1
+        </td>
+        <td>
+			@item.ProductId2
+        </td>
+        <td>
+			@String.Format("{0:g}", item.StartDate)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.EndDate)
+        </td>
+        <td>
+			@String.Format("{0:F}", item.Price)
+        </td>
+    </tr>
+}
+
+</table>
+
+

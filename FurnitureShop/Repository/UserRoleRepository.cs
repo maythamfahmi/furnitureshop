@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class UserRoleRepository : IUserRoleRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<UserRole> All
         {
-            get { return context.UserRoles; }
+            get { return _context.UserRoles; }
         }
 
         public IQueryable<UserRole> AllIncluding(params Expression<Func<UserRole, object>>[] includeProperties)
         {
-            IQueryable<UserRole> query = context.UserRoles;
+            IQueryable<UserRole> query = _context.UserRoles;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public UserRole Find(int id)
         {
-            return context.UserRoles.Find(id);
+            return _context.UserRoles.Find(id);
         }
 
         public void InsertOrUpdate(UserRole userrole)
         {
             if (userrole.UserRoleId == default(int)) {
                 // New entity
-                context.UserRoles.Add(userrole);
+                _context.UserRoles.Add(userrole);
             } else {
                 // Existing entity
-                context.Entry(userrole).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(userrole).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var userrole = context.UserRoles.Find(id);
-            context.UserRoles.Remove(userrole);
+            var userrole = _context.UserRoles.Find(id);
+            _context.UserRoles.Remove(userrole);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

@@ -1,0 +1,984 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>11/08/2013 19:15:05</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/08/2013 22:17:05</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>11/08/2013 22:17:05</publishTime>
+    </File>
+    <File Include="bin/FurnitureShop.dll">
+      <publishTime>11/20/2013 22:09:45</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/19/2012 10:59:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>11/08/2013 19:15:03</publishTime>
+    </File>
+    <File Include="bin/Moq.dll">
+      <publishTime>11/13/2013 12:27:37</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/08/2013 19:15:02</publishTime>
+    </File>
+    <File Include="bin/Ninject.dll">
+      <publishTime>11/08/2013 23:34:19</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>07/10/2012 21:51:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Abstractions.dll">
+      <publishTime>07/09/2012 00:40:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>07/10/2012 21:51:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>07/10/2012 21:51:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>07/10/2012 21:51:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>11/08/2013 19:15:05</publishTime>
+    </File>
+    <File Include="bin/System.Web.Providers.dll">
+      <publishTime>11/08/2013 19:15:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>08/17/2012 11:22:26</publishTime>
+    </File>
+    <File Include="bin/System.Web.Routing.dll">
+      <publishTime>07/09/2012 00:40:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>07/10/2012 12:03:34</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>07/10/2012 12:03:34</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>07/10/2012 12:03:34</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>11/08/2013 19:15:05</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>11/11/2013 23:05:59</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery-ui.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.accordion.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.all.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.autocomplete.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.base.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.button.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.core.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.datepicker.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.dialog.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.progressbar.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.resizable.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.selectable.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.slider.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.tabs.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.theme.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery-ui.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.accordion.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.autocomplete.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.button.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.core.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.datepicker.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.dialog.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.progressbar.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.resizable.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.selectable.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.slider.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.tabs.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
+      <publishTime>11/08/2013 19:15:00</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/css/bootstrap-responsive.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/css/bootstrap-responsive.min.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/css/bootstrap.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/css/bootstrap.min.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/img/glyphicons-halflings-white.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/img/glyphicons-halflings.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/js/bootstrap.js">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/bootstrap/js/bootstrap.min.js">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair1.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair2.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair3.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair4.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair5.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair6.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair7.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/armchair8.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe1.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe10.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe2.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe3.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe4.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe5.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe6.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe7.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe8.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/bordlampe9.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable1.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable10.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable2.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable3.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable4.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable5.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable6.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable7.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable8.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/coffeetable9.png">
+      <publishTime>11/13/2013 15:16:43</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp1.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp10.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp2.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp3.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp4.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp5.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp6.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp7.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp8.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/floorlamp9.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa1.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa2.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa3.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa4.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa5.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa6.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa7.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/images/sofa8.png">
+      <publishTime>11/13/2013 15:16:44</publishTime>
+    </File>
+    <File Include="CustomContent/themes/css/bootstrappage.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/css/flexslider.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/css/jquery.fancybox.css">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/css/main.css">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/arrow-p.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/arrow-pleft.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/bg.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/carousel/banner-1.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/carousel/banner-2.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/carousel/banner-3.jpg">
+      <publishTime>11/13/2013 21:21:26</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/carousel/banner-4.jpg">
+      <publishTime>11/13/2013 21:27:38</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/carousel/banner-5.jpg">
+      <publishTime>11/13/2013 21:30:07</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/1.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/10.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/11.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/12.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/13.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/14.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/15.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/16.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/17.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/18.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/19.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/2.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/20.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/21.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/22.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/222.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/2222.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/23.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/24.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/26.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/27.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/28.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/29.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/3.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/30.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/31.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/32.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/33.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/333.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/34.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/35.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/36.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/37.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/4.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/444.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/5.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/6.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/7.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/8.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/888.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/9.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/clients/999.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware1.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware2.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware3.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware4.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware5.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/cloth/bootstrap-women-ware6.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/feature_img_1.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/feature_img_2.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/feature_img_3.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/gotop.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/1.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/2.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/3.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/4.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/5.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/6.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/7.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/8.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/ladies/9.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/line_bar.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/logo.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m1.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m2.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m3.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m4.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m5.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/m6.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/pageBanner.png">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/project_img2.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/project_img3.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/project_img4.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/images/project_img6.jpg">
+      <publishTime>11/09/2013 11:00:05</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/common.js">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/css/style.css">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/jquery-1.7.2.min.js">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/jquery.fancybox.js">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/jquery.flexslider-min.js">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/jquery.scrolltotop.js">
+      <publishTime>11/09/2013 16:08:13</publishTime>
+    </File>
+    <File Include="CustomContent/themes/js/superfish.js">
+      <publishTime>11/09/2013 11:00:06</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/08/2013 19:14:55</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>11/18/2013 09:53:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.js">
+      <publishTime>11/10/2013 19:41:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.min.js">
+      <publishTime>11/10/2013 19:41:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>11/10/2013 19:41:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>11/10/2013 19:41:16</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.debug.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>11/10/2013 19:41:17</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>11/10/2013 20:44:25</publishTime>
+    </File>
+    <File Include="Views/Account/isLoggin.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>11/17/2013 04:01:32</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Addresses/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Addresses/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Addresses/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Addresses/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Addresses/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Addresses/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Cart/Checkout.cshtml">
+      <publishTime>11/14/2013 11:56:34</publishTime>
+    </File>
+    <File Include="Views/Cart/Completed.cshtml">
+      <publishTime>11/11/2013 00:11:49</publishTime>
+    </File>
+    <File Include="Views/Cart/Index.cshtml">
+      <publishTime>11/19/2013 18:39:04</publishTime>
+    </File>
+    <File Include="Views/Cart/Summary.cshtml">
+      <publishTime>11/10/2013 23:18:20</publishTime>
+    </File>
+    <File Include="Views/Categories/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Categories/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Categories/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Categories/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Categories/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Categories/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>11/13/2013 21:31:21</publishTime>
+    </File>
+    <File Include="Views/Navi/AdminMenu.cshtml">
+      <publishTime>11/17/2013 18:36:25</publishTime>
+    </File>
+    <File Include="Views/Navi/Menu.cshtml">
+      <publishTime>11/13/2013 17:01:29</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderDeliveries/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/OrderProducts/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Orders/Create.cshtml">
+      <publishTime>11/19/2013 11:50:00</publishTime>
+    </File>
+    <File Include="Views/Orders/CustomerOrder.cshtml">
+      <publishTime>11/17/2013 18:33:47</publishTime>
+    </File>
+    <File Include="Views/Orders/CustomerOrderProducts.cshtml">
+      <publishTime>11/19/2013 11:50:24</publishTime>
+    </File>
+    <File Include="Views/Orders/Delete.cshtml">
+      <publishTime>11/19/2013 11:50:18</publishTime>
+    </File>
+    <File Include="Views/Orders/Details.cshtml">
+      <publishTime>11/19/2013 11:50:36</publishTime>
+    </File>
+    <File Include="Views/Orders/Edit.cshtml">
+      <publishTime>11/19/2013 11:50:42</publishTime>
+    </File>
+    <File Include="Views/Orders/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Orders/_CreateOrEdit.cshtml">
+      <publishTime>11/10/2013 12:41:09</publishTime>
+    </File>
+    <File Include="Views/Products/Create.cshtml">
+      <publishTime>11/13/2013 12:17:52</publishTime>
+    </File>
+    <File Include="Views/Products/Delete.cshtml">
+      <publishTime>11/13/2013 12:17:52</publishTime>
+    </File>
+    <File Include="Views/Products/Details.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Products/Edit.cshtml">
+      <publishTime>11/13/2013 17:01:29</publishTime>
+    </File>
+    <File Include="Views/Products/Index.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Products/List.cshtml">
+      <publishTime>11/14/2013 12:04:13</publishTime>
+    </File>
+    <File Include="Views/Products/Summary.cshtml">
+      <publishTime>11/13/2013 21:43:21</publishTime>
+    </File>
+    <File Include="Views/Products/SummaryDetails.cshtml">
+      <publishTime>11/14/2013 12:22:53</publishTime>
+    </File>
+    <File Include="Views/Products/_CreateOrEdit.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/ProductSubCategories/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/CreateRating.cshtml">
+      <publishTime>11/17/2013 03:01:05</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/RatePlusComments/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Address.cshtml">
+      <publishTime>11/09/2013 00:50:15</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Color.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Date.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/DateTime-Local.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/DateTime.cshtml">
+      <publishTime>11/12/2013 09:23:11</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/EmailAddress.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Month.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Number.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/PhoneNumber.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Search.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Time.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Url.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Week.cshtml">
+      <publishTime>11/10/2013 02:38:22</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>11/08/2013 19:14:55</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>11/16/2013 03:33:29</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/Index.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SpecialOffers/_CreateOrEdit.cshtml">
+      <publishTime>11/18/2013 18:00:10</publishTime>
+    </File>
+    <File Include="Views/SubCategories/Create.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SubCategories/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SubCategories/Details.cshtml">
+      <publishTime>11/08/2013 22:17:03</publishTime>
+    </File>
+    <File Include="Views/SubCategories/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/SubCategories/Index.cshtml">
+      <publishTime>11/14/2013 12:04:13</publishTime>
+    </File>
+    <File Include="Views/SubCategories/_CreateOrEdit.cshtml">
+      <publishTime>11/13/2013 17:01:29</publishTime>
+    </File>
+    <File Include="Views/UserRoles/Create.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/UserRoles/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/UserRoles/Details.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/UserRoles/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/UserRoles/Index.cshtml">
+      <publishTime>11/12/2013 09:29:13</publishTime>
+    </File>
+    <File Include="Views/UserRoles/_CreateOrEdit.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/AddAddress.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Users/Create.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/CustomerOrder.cshtml">
+      <publishTime>11/12/2013 17:23:12</publishTime>
+    </File>
+    <File Include="Views/Users/Delete.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/Details.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/Edit.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/EditAddress.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Users/EditUserInfo.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Users/Index.cshtml">
+      <publishTime>11/08/2013 22:17:04</publishTime>
+    </File>
+    <File Include="Views/Users/myAccount.cshtml">
+      <publishTime>11/13/2013 21:52:10</publishTime>
+    </File>
+    <File Include="Views/Users/RemoveAddress.cshtml">
+      <publishTime>11/13/2013 21:46:34</publishTime>
+    </File>
+    <File Include="Views/Users/_CreateOrEdit.cshtml">
+      <publishTime>11/11/2013 12:16:29</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>11/19/2013 17:29:14</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>11/08/2013 19:14:55</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/20/2013 22:09:47</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

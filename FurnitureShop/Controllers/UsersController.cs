@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -10,9 +8,9 @@ namespace FurnitureShop.Controllers
 {   
     public class UsersController : Controller
     {
-		private readonly IUserRoleRepository userroleRepository;
-		private readonly IUserRepository userRepository;
-		private readonly IAddressRepository addressRepository;
+		private readonly IUserRoleRepository _userroleRepository;
+		private readonly IUserRepository _userRepository;
+		private readonly IAddressRepository _addressRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         /*public UsersController() : this(new UserRoleRepository(), new UserRepository())
@@ -21,9 +19,9 @@ namespace FurnitureShop.Controllers
 
 		public UsersController(IUserRoleRepository userroleRepository, IUserRepository userRepository, IAddressRepository addressRepository)
         {
-			this.userroleRepository = userroleRepository;
-			this.userRepository = userRepository;
-			this.addressRepository = addressRepository;
+			this._userroleRepository = userroleRepository;
+			this._userRepository = userRepository;
+			this._addressRepository = addressRepository;
         }
 
         //
@@ -31,7 +29,7 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin, Editor")]
         public ViewResult Index()
         {
-            return View(userRepository.AllIncluding(user => user.Address));
+            return View(_userRepository.AllIncluding(user => user.Address));
         }
 
         //
@@ -39,7 +37,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(userRepository.Find(id));
+            return View(_userRepository.Find(id));
         }
 
         //
@@ -47,7 +45,7 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-			ViewBag.PossibleUserRoles = userroleRepository.All;
+			ViewBag.PossibleUserRoles = _userroleRepository.All;
 
 			User myNewUser = new User()
 			{
@@ -65,11 +63,11 @@ namespace FurnitureShop.Controllers
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid) {
-                userRepository.InsertOrUpdate(user);
-                userRepository.Save();
+                _userRepository.InsertOrUpdate(user);
+                _userRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleUserRoles = userroleRepository.All;
+				ViewBag.PossibleUserRoles = _userroleRepository.All;
 				return View(user);
 			}
         }
@@ -80,8 +78,8 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleUserRoles = userroleRepository.All;
-             return View(userRepository.Find(id));
+			ViewBag.PossibleUserRoles = _userroleRepository.All;
+             return View(_userRepository.Find(id));
         }
 
         //
@@ -92,11 +90,11 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(User user)
         {
             if (ModelState.IsValid) {
-                userRepository.InsertOrUpdate(user);
-                userRepository.Save();
+                _userRepository.InsertOrUpdate(user);
+                _userRepository.Save();
                 return RedirectToAction("Index");
             } else {
-				ViewBag.PossibleUserRoles = userroleRepository.All;
+				ViewBag.PossibleUserRoles = _userroleRepository.All;
 				return View(user);
 			}
         }
@@ -104,15 +102,15 @@ namespace FurnitureShop.Controllers
 		[Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            return View(userRepository.Find(id));
+            return View(_userRepository.Find(id));
         }
 		
         [HttpPost, ActionName("Delete")]
 		[Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            userRepository.Delete(id);
-            userRepository.Save();
+            _userRepository.Delete(id);
+            _userRepository.Save();
 
             return RedirectToAction("Index");
         }
@@ -120,8 +118,8 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                userroleRepository.Dispose();
-                userRepository.Dispose();
+                _userroleRepository.Dispose();
+                _userRepository.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -130,11 +128,11 @@ namespace FurnitureShop.Controllers
 		// Show account for the current user
 		//
 		[Authorize]
-		public ViewResult myAccount()
+		public ViewResult MyAccount()
 		{
 			//Get the current user 
 			string userName = HttpContext.User.Identity.Name;
-			User user = userRepository.AllIncluding(u => u.Address).FirstOrDefault(u => u.Name == userName);
+			User user = _userRepository.AllIncluding(u => u.Address).FirstOrDefault(u => u.Name == userName);
 			return View(user);
 		}
 		[Authorize]
@@ -142,7 +140,7 @@ namespace FurnitureShop.Controllers
 		{
 			//Get the current user 
 			string userName = HttpContext.User.Identity.Name;
-			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+			User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
 			//Is user authenticated? returns true or false
 			bool userAuth = HttpContext.User.Identity.IsAuthenticated;
@@ -153,7 +151,7 @@ namespace FurnitureShop.Controllers
 			TempData.Add("UserName", user.Name);
 			TempData.Add("UserUserRoleId", user.UserRoleId);
 
-			return View(userRepository.Find(user.UserId));
+			return View(_userRepository.Find(user.UserId));
 		}
 
 		[HttpPost]
@@ -169,30 +167,30 @@ namespace FurnitureShop.Controllers
 			ModelState["Name"].Errors.Clear();
 			if (ModelState.IsValid)
 			{
-				userRepository.InsertOrUpdate(user);
-				userRepository.Save();
+				_userRepository.InsertOrUpdate(user);
+				_userRepository.Save();
 				return RedirectToAction("MyAccount");
 			}
 			else
 			{
-				ViewBag.PossibleUserRoles = userroleRepository.All;
+				ViewBag.PossibleUserRoles = _userroleRepository.All;
 				return View(user);
 			}
 		}
 		[Authorize]
-		public ActionResult EditAddress(int AddressId)
+		public ActionResult EditAddress(int addressId)
 		{
-			Address address = addressRepository.Find(AddressId);
+			Address address = _addressRepository.Find(addressId);
 
 			//Check with the user Id
 			string userName = HttpContext.User.Identity.Name;
-			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+			User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
 			if (address.UserId != user.UserId) {
 				return RedirectToAction("MyAccount");
 			}
 
-			return View(addressRepository.Find(AddressId));
+			return View(_addressRepository.Find(addressId));
 		}
 		[HttpPost]
 		[Authorize]
@@ -200,8 +198,8 @@ namespace FurnitureShop.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				addressRepository.InsertOrUpdate(address);
-				addressRepository.Save();
+				_addressRepository.InsertOrUpdate(address);
+				_addressRepository.Save();
 				return RedirectToAction("MyAccount");
 			}
 			else
@@ -221,15 +219,15 @@ namespace FurnitureShop.Controllers
 		{
 			//Check with the user Id
 			string userName = HttpContext.User.Identity.Name;
-			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+			User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
 			address.UserId = user.UserId;
 			ModelState["UserId"].Errors.Clear();
 
 			if (ModelState.IsValid)
 			{
-				addressRepository.InsertOrUpdate(address);
-				addressRepository.Save();
+				_addressRepository.InsertOrUpdate(address);
+				_addressRepository.Save();
 				return RedirectToAction("MyAccount");
 			}
 			else
@@ -238,25 +236,25 @@ namespace FurnitureShop.Controllers
 			}
 		}
 		[Authorize]
-		public ActionResult RemoveAddress(int AddressId)
+		public ActionResult RemoveAddress(int addressId)
 		{
-			return View(addressRepository.Find(AddressId));
+			return View(_addressRepository.Find(addressId));
 		}
 
 		[HttpPost]
 		[Authorize]
-		public ActionResult RemoveAddressConfirmed(int AddressId)
+		public ActionResult RemoveAddressConfirmed(int addressId)
 		{
-			Address address = addressRepository.Find(AddressId);
+			Address address = _addressRepository.Find(addressId);
 
 			//Check with the user Id
 			string userName = HttpContext.User.Identity.Name;
-			User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+			User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
 
 			if (address.UserId == user.UserId)
 			{
-				addressRepository.Delete(AddressId);
-				addressRepository.Save();
+				_addressRepository.Delete(addressId);
+				_addressRepository.Save();
 				return RedirectToAction("MyAccount");
 			}
 			else

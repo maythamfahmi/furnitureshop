@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -10,7 +6,7 @@ namespace FurnitureShop.Controllers
 {   
     public class CategoriesController : Controller
     {
-		private readonly ICategoryRepository categoryRepository;
+		private readonly ICategoryRepository _categoryRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         public CategoriesController() : this(new CategoryRepository())
@@ -19,7 +15,7 @@ namespace FurnitureShop.Controllers
 
         public CategoriesController(ICategoryRepository categoryRepository)
         {
-			this.categoryRepository = categoryRepository;
+			this._categoryRepository = categoryRepository;
         }
 
         //
@@ -27,7 +23,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(categoryRepository.All);
+            return View(_categoryRepository.All);
         }
 
         //
@@ -35,7 +31,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(categoryRepository.Find(id));
+            return View(_categoryRepository.Find(id));
         }
 
         //
@@ -53,8 +49,8 @@ namespace FurnitureShop.Controllers
         public ActionResult Create(Category category)
         {
             if (ModelState.IsValid) {
-                categoryRepository.InsertOrUpdate(category);
-                categoryRepository.Save();
+                _categoryRepository.InsertOrUpdate(category);
+                _categoryRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -66,7 +62,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
-             return View(categoryRepository.Find(id));
+             return View(_categoryRepository.Find(id));
         }
 
         //
@@ -76,8 +72,8 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid) {
-                categoryRepository.InsertOrUpdate(category);
-                categoryRepository.Save();
+                _categoryRepository.InsertOrUpdate(category);
+                _categoryRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -89,7 +85,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View(categoryRepository.Find(id));
+            return View(_categoryRepository.Find(id));
         }
 
         //
@@ -98,8 +94,8 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            categoryRepository.Delete(id);
-            categoryRepository.Save();
+            _categoryRepository.Delete(id);
+            _categoryRepository.Save();
 
             return RedirectToAction("Index");
         }
@@ -107,7 +103,7 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                categoryRepository.Dispose();
+                _categoryRepository.Dispose();
             }
             base.Dispose(disposing);
         }

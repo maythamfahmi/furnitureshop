@@ -1,0 +1,34 @@
+﻿@*model IEnumerable<string>*@
+@model List<FurnitureShop.Models.Category>
+
+@*Html.ActionLink("Home", "List", "Products")*@
+@foreach (FurnitureShop.Models.Category category in Model)
+{
+    <li>@Html.RouteLink(category.Name, new
+{
+    controller = "Products",
+    action = "List",
+    category = category.Name,
+    page = 1
+})
+        @{
+    if (category.SubCategories != null)
+    {
+        <ul>
+        @foreach (FurnitureShop.Models.SubCategory subcategory in category.SubCategories)
+        {
+            <li>@Html.RouteLink(subcategory.Name, new
+                {
+                    controller = "Products",
+                    action = "List",
+                    category = category.Name,
+                    subCategory = subcategory.Name,
+                    page = 1
+                })
+            </li>
+        }
+         </ul>
+    }
+        }
+    </li>
+}

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -10,16 +6,20 @@ namespace FurnitureShop.Controllers
 {   
     public class SpecialOffersController : Controller
     {
-		private readonly ISpecialOfferRepository specialofferRepository;
+		private readonly ISpecialOfferRepository _specialofferRepository;
+        private readonly IProductRepository _productRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public SpecialOffersController() : this(new SpecialOfferRepository())
-        {
-        }
+        //public SpecialOffersController() : this(new SpecialOfferRepository())
+        //{
+        //}
 
-        public SpecialOffersController(ISpecialOfferRepository specialofferRepository)
+        public SpecialOffersController(
+            ISpecialOfferRepository specialofferRepository,
+            IProductRepository productRepository)
         {
-			this.specialofferRepository = specialofferRepository;
+			this._specialofferRepository = specialofferRepository;
+            this._productRepository = productRepository;
         }
 
         //
@@ -27,7 +27,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(specialofferRepository.All);
+            return View(_specialofferRepository.All);
         }
 
         //
@@ -35,7 +35,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(specialofferRepository.Find(id));
+            return View(_specialofferRepository.Find(id));
         }
 
         //
@@ -52,9 +52,12 @@ namespace FurnitureShop.Controllers
         [HttpPost]
         public ActionResult Create(SpecialOffer specialoffer)
         {
+            ViewBag.PossibleProducts = _productRepository.All;
+            ViewBag.PossibleSProducts = _specialofferRepository.All;
+
             if (ModelState.IsValid) {
-                specialofferRepository.InsertOrUpdate(specialoffer);
-                specialofferRepository.Save();
+                _specialofferRepository.InsertOrUpdate(specialoffer);
+                _specialofferRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -66,7 +69,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
-             return View(specialofferRepository.Find(id));
+             return View(_specialofferRepository.Find(id));
         }
 
         //
@@ -76,8 +79,8 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(SpecialOffer specialoffer)
         {
             if (ModelState.IsValid) {
-                specialofferRepository.InsertOrUpdate(specialoffer);
-                specialofferRepository.Save();
+                _specialofferRepository.InsertOrUpdate(specialoffer);
+                _specialofferRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -89,7 +92,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View(specialofferRepository.Find(id));
+            return View(_specialofferRepository.Find(id));
         }
 
         //
@@ -98,8 +101,8 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            specialofferRepository.Delete(id);
-            specialofferRepository.Save();
+            _specialofferRepository.Delete(id);
+            _specialofferRepository.Save();
 
             return RedirectToAction("Index");
         }
@@ -107,7 +110,7 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                specialofferRepository.Dispose();
+                _specialofferRepository.Dispose();
             }
             base.Dispose(disposing);
         }

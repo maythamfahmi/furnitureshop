@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace FurnitureShop.Models
 {
     public class Cart
     {
-        private List<CartLine> lineCollection = new List<CartLine>();
+        private readonly List<CartLine> _lineCollection = new List<CartLine>();
         public void AddItem(Product product, int quantity)
         {
-            CartLine line = lineCollection
+            CartLine line = _lineCollection
                 .Where(p => p.Product.ProductId == product.ProductId)
                 .FirstOrDefault();
 
             if (line == null)
             {
-                lineCollection.Add(new CartLine
+                _lineCollection.Add(new CartLine
                 {
                     Product = product,
                     Quantity = quantity
@@ -28,24 +26,51 @@ namespace FurnitureShop.Models
             }
         }
 
+        public void RemoveItem(Product product, int quantity)
+        {
+            CartLine line = _lineCollection
+                .Where(p => p.Product.ProductId == product.ProductId)
+                .FirstOrDefault();
+
+            if (line == null)
+            {
+                _lineCollection.Add(new CartLine
+                {
+                    Product = product,
+                    Quantity = quantity
+                });
+            }
+            else
+            {
+                if (line.Quantity > 1)
+                {
+                    line.Quantity -= quantity;
+                }
+                else
+                {
+                    _lineCollection.Clear();
+                }
+            }
+        }
+
         public void RemoveLine(Product product)
         {
-            lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
+            _lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId);
         }
 
         public decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(e => e.Product.Price * e.Quantity);
+            return _lineCollection.Sum(e => e.Product.Price * e.Quantity);
         }
 
         public void Clear()
         {
-            lineCollection.Clear();
+            _lineCollection.Clear();
         }
 
         public IEnumerable<CartLine> Lines
         {
-            get { return lineCollection; }
+            get { return _lineCollection; }
         }
     }
 

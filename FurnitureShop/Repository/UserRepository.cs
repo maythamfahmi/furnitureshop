@@ -1,26 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using FurnitureShop.Models;
 
 namespace FurnitureShop.Repository
 { 
     public class UserRepository : IUserRepository
     {
-        FurnitureShopContext context = new FurnitureShopContext();
+        readonly FurnitureShopContext _context = new FurnitureShopContext();
 
         public IQueryable<User> All
         {
-            get { return context.Users; }
+            get { return _context.Users; }
         }
 
         public IQueryable<User> AllIncluding(params Expression<Func<User, object>>[] includeProperties)
         {
-            IQueryable<User> query = context.Users;
+            IQueryable<User> query = _context.Users;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,34 +26,34 @@ namespace FurnitureShop.Repository
 
         public User Find(int id)
         {
-            return context.Users.Find(id);
+            return _context.Users.Find(id);
         }
 
         public void InsertOrUpdate(User user)
         {
             if (user.UserId == default(int)) {
                 // New entity
-                context.Users.Add(user);
+                _context.Users.Add(user);
             } else {
                 // Existing entity
-                context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                _context.Entry(user).State = System.Data.Entity.EntityState.Modified;
             }
         }
 
         public void Delete(int id)
         {
-            var user = context.Users.Find(id);
-            context.Users.Remove(user);
+            var user = _context.Users.Find(id);
+            _context.Users.Remove(user);
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose() 
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 

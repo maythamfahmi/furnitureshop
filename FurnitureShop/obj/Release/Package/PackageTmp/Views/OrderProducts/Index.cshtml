@@ -1,0 +1,53 @@
+@model IEnumerable<FurnitureShop.Models.OrderProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            OProdcutId
+        </th>
+        <th>
+            OProdcutName
+        </th>
+        <th>
+            OProdcutQty
+        </th>
+        <th>
+            OProdcutPrice
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrderProdcutId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderProdcutId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrderProdcutId })
+        </td>
+        <td>
+			@item.OProdcutId
+        </td>
+        <td>
+			@item.OProdcutName
+        </td>
+        <td>
+			@item.OProdcutQty
+        </td>
+        <td>
+			@item.OProdcutPrice
+        </td>
+    </tr>
+}
+
+</table>
+
+

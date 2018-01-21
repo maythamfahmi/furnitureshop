@@ -1,0 +1,16 @@
+﻿@model FurnitureShop.Models.Address
+
+@{
+    ViewBag.Title = "AddAddress";
+}
+
+<h2>AddAddress</h2>
+@using (Html.BeginForm()) {
+@Html.EditorForModel(Model)
+<div class="editor-float-none">
+    <p>
+         @Html.ActionLink("Cancel", "MyAccount")
+        <input type="submit" value="Add address" class="actionButtons" />
+    </p>
+</div>
+}

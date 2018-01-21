@@ -1,0 +1,32 @@
+@model FurnitureShop.Models.OrderProduct
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>OrderProduct</legend>
+
+    <div class="display-label">OProdcutId</div>
+    <div class="display-field">@Model.OProdcutId</div>
+
+    <div class="display-label">OProdcutName</div>
+    <div class="display-field">@Model.OProdcutName</div>
+
+    <div class="display-label">OProdcutQty</div>
+    <div class="display-field">@Model.OProdcutQty</div>
+
+    <div class="display-label">OProdcutPrice</div>
+    <div class="display-field">@Model.OProdcutPrice</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

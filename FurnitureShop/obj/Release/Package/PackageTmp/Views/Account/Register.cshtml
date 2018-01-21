@@ -1,0 +1,36 @@
+﻿@model FurnitureShop.Models.User
+
+<h4 class="title"><span class="text"><strong>Register</strong> Form</span></h4>
+@using (Html.BeginForm("Register", "Account")){
+	<fieldset>
+		<div class="control-group">
+			<label class="control-label">Username</label>
+			<div class="controls">
+                @Html.EditorFor(m => m.Name, new {@class="input-xlarge", placeholder="Enter your username"  })
+                 @Html.ValidationMessageFor(m => m.Name)
+				<!--<input type="text" placeholder="Enter your username" class="input-xlarge">-->
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Email address:</label>
+			<div class="controls">
+                @Html.EditorFor(m => m.Email, new{@class="input-xlarge", placeholder="Enter your email"})
+                @Html.ValidationMessageFor(m => m.Email)
+				<!--<input type="password" placeholder="Enter your email" class="input-xlarge">-->
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Password:</label>
+			<div class="controls">
+                @Html.EditorFor(m => m.Password, new{@class="input-xlarge", placeholder= "Enter your password"})
+                 @Html.ValidationMessageFor(m => m.Password)
+				<!--<input type="password" placeholder="Enter your password" class="input-xlarge">-->
+			</div>
+		</div>							                            
+		<div class="control-group">
+			
+		</div>
+		<hr>
+		<div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Create your account"></div>
+	</fieldset>
+}

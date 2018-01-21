@@ -1,0 +1,20 @@
+@model FurnitureShop.Models.UserRole
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserRole</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UserRoleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

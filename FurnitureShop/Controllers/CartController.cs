@@ -1,23 +1,20 @@
 ﻿using FurnitureShop.Interface;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FurnitureShop.Controllers
 {
     public class CartController : Controller
     {
-        private IProductRepository productRepository;
-        private IOrderProcessor orderProcessor;
-        private IOrderRepository orderRepository;
-        private IOrderProductRepository orderproductRepository;
-        private readonly IOrderDeliveryRepository orderdeliveryRepository;
-        private IUserRepository userRepository;
-        private IAddressRepository addressRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IOrderProcessor _orderProcessor;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IOrderProductRepository _orderproductRepository;
+        private readonly IOrderDeliveryRepository _orderdeliveryRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAddressRepository _addressRepository;
         public CartController(
             IProductRepository productRepository,
             IOrderProcessor orderProcessor,
@@ -28,13 +25,13 @@ namespace FurnitureShop.Controllers
             IAddressRepository addressRepository
             )
         {
-            this.productRepository = productRepository;
-            this.orderProcessor = orderProcessor;
-            this.orderRepository = orderRepository;
-            this.orderproductRepository = orderproductRepository;
-            this.orderdeliveryRepository = orderdeliveryRepository;
-            this.userRepository = userRepository;
-            this.addressRepository = addressRepository;
+            this._productRepository = productRepository;
+            this._orderProcessor = orderProcessor;
+            this._orderRepository = orderRepository;
+            this._orderproductRepository = orderproductRepository;
+            this._orderdeliveryRepository = orderdeliveryRepository;
+            this._userRepository = userRepository;
+            this._addressRepository = addressRepository;
         }
 
         // new content added
@@ -49,7 +46,7 @@ namespace FurnitureShop.Controllers
 
         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
-            Product product = productRepository.All
+            Product product = _productRepository.All
             .FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
@@ -58,9 +55,20 @@ namespace FurnitureShop.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
+        public RedirectToRouteResult RemoveItemFromCart(Cart cart, int productId, string returnUrl)
+        {
+            Product product = _productRepository.All
+            .FirstOrDefault(p => p.ProductId == productId);
+            if (product != null)
+            {
+                cart.RemoveItem(product, 1); //GetCart()
+            }
+            return RedirectToAction("Index", new { returnUrl });
+        }
+
         public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
         {
-            Product product = productRepository.All
+            Product product = _productRepository.All
             .FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
@@ -88,7 +96,7 @@ namespace FurnitureShop.Controllers
         }
 
         [HttpPost]
-		[Authorize]
+        [Authorize]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails, Order order, OrderProduct orderproduct)
         {
 
@@ -98,17 +106,16 @@ namespace FurnitureShop.Controllers
             }
             if (ModelState.IsValid)
             {
-                orderProcessor.ProcessOrder(cart, shippingDetails);
+                _orderProcessor.ProcessOrder(cart, shippingDetails);
 
-                // create new order
+                // create new order // the 2 auth line should be disbaled in case error fri test
                 string userName = HttpContext.User.Identity.Name;
-                User user = userRepository.All.FirstOrDefault(u => u.Name == userName);
+                User user = _userRepository.All.FirstOrDefault(u => u.Name == userName);
                 order.UserId = (int)user.UserId;
-                order.OrderDate = System.DateTime.Today;
+                order.OrderDate = System.DateTime.Now; // Today;
                 order.OrderDeliveryId = order.OrderDeliveryId; // henter shipping info fra dropdown
-
-                orderRepository.InsertOrUpdate(order);
-                orderRepository.Save();
+                _orderRepository.InsertOrUpdate(order);
+                _orderRepository.Save();
                 //
 
                 // save cart contents to order products
@@ -119,9 +126,9 @@ namespace FurnitureShop.Controllers
                     orderproduct.OProdcutName = line.Product.Name;
                     orderproduct.OProdcutQty = line.Quantity;
                     orderproduct.OProdcutPrice = (int)line.Product.Price;
-                    orderproductRepository.InsertOrUpdate(orderproduct);
+                    _orderproductRepository.InsertOrUpdate(orderproduct);
+                    _orderproductRepository.Save();
                 }
-                orderproductRepository.Save();
                 //
 
                 cart.Clear();
@@ -133,12 +140,12 @@ namespace FurnitureShop.Controllers
             }
         }
 
-		[Authorize]
+        [Authorize]
         public ViewResult Checkout()
         {
             string userName = HttpContext.User.Identity.Name;
-            User user = userRepository.All.FirstOrDefault(u => u.Name == userName); //"maytham"); //userName
-            Address address = addressRepository.All.FirstOrDefault(u => u.UserId == user.UserId); //"maytham"); //userName
+            User user = _userRepository.All.FirstOrDefault(u => u.Name == userName); //"maytham"); //userName
+            Address address = _addressRepository.All.FirstOrDefault(u => u.UserId == user.UserId); //"maytham"); //userName
             //TempData.Remove("UserFirstName");
             //TempData.Add("UserFirstName", user.FirstName);
             //ViewBag.userName = (string)TempData["UserName"];
@@ -149,7 +156,7 @@ namespace FurnitureShop.Controllers
             ViewBag.City = (string)address.City;
             ViewBag.Postal = (string)address.Postal;
             ViewBag.Country = (string)address.Country;
-            ViewBag.PossibleOrderDeliveries = orderdeliveryRepository.All;
+            ViewBag.PossibleOrderDeliveries = _orderdeliveryRepository.All;
 
             //ViewBag.SelectedUser = userRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);
             //ViewBag.SelectedAddress = addressRepository.All.ToList().FirstOrDefault(o => o.UserId == 1);

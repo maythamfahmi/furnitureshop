@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FurnitureShop.Models;
 using FurnitureShop.Repository;
@@ -11,13 +7,13 @@ namespace FurnitureShop.Controllers
 	//[Authorize]
     public class UserRolesController : Controller
     {
-		private readonly IUserRoleRepository userroleRepository;
-		private readonly IUserRepository userRepository;
+		private readonly IUserRoleRepository _userroleRepository;
+		private readonly IUserRepository _userRepository;
 
         public UserRolesController(IUserRoleRepository userroleRepository, IUserRepository userRepository)
         {
-			this.userroleRepository = userroleRepository;
-			this.userRepository = userRepository;
+			this._userroleRepository = userroleRepository;
+			this._userRepository = userRepository;
         }
 
         //
@@ -25,7 +21,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Index()
         {
-            return View(userroleRepository.All);
+            return View(_userroleRepository.All);
         }
 
         //
@@ -33,7 +29,7 @@ namespace FurnitureShop.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(userroleRepository.Find(id));
+            return View(_userroleRepository.Find(id));
         }
 
         //
@@ -51,8 +47,8 @@ namespace FurnitureShop.Controllers
         public ActionResult Create(UserRole userrole)
         {
             if (ModelState.IsValid) {
-                userroleRepository.InsertOrUpdate(userrole);
-                userroleRepository.Save();
+                _userroleRepository.InsertOrUpdate(userrole);
+                _userroleRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -64,7 +60,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Edit(int id)
         {
-             return View(userroleRepository.Find(id));
+             return View(_userroleRepository.Find(id));
         }
 
         //
@@ -74,8 +70,8 @@ namespace FurnitureShop.Controllers
         public ActionResult Edit(UserRole userrole)
         {
             if (ModelState.IsValid) {
-                userroleRepository.InsertOrUpdate(userrole);
-                userroleRepository.Save();
+                _userroleRepository.InsertOrUpdate(userrole);
+                _userroleRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
@@ -87,7 +83,7 @@ namespace FurnitureShop.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View(userroleRepository.Find(id));
+            return View(_userroleRepository.Find(id));
         }
 
         //
@@ -96,8 +92,8 @@ namespace FurnitureShop.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            userroleRepository.Delete(id);
-            userroleRepository.Save();
+            _userroleRepository.Delete(id);
+            _userroleRepository.Save();
 
             return RedirectToAction("Index");
         }
@@ -105,7 +101,7 @@ namespace FurnitureShop.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                userroleRepository.Dispose();
+                _userroleRepository.Dispose();
             }
             base.Dispose(disposing);
         }

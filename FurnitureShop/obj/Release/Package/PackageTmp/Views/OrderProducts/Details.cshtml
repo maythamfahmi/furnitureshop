@@ -1,0 +1,29 @@
+@model FurnitureShop.Models.OrderProduct
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>OrderProduct</legend>
+
+    <div class="display-label">OProdcutId</div>
+    <div class="display-field">@Model.OProdcutId</div>
+
+    <div class="display-label">OProdcutName</div>
+    <div class="display-field">@Model.OProdcutName</div>
+
+    <div class="display-label">OProdcutQty</div>
+    <div class="display-field">@Model.OProdcutQty</div>
+
+    <div class="display-label">OProdcutPrice</div>
+    <div class="display-field">@Model.OProdcutPrice</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrderProdcutId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

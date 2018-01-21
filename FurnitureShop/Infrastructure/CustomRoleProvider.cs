@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 using Ninject;
 using FurnitureShop.Repository;
@@ -11,8 +10,8 @@ namespace FurnitureShop.Infrastructure
 {
 	public class CustomRoleProvider : RoleProvider
 	{
-		private static List<User> AccountRoles = new List<User>();
-		private static List<UserRole> Roles = new List<UserRole>();
+		private static List<User> _accountRoles = new List<User>();
+		private static List<UserRole> _roles = new List<UserRole>();
 
 		[Inject]
 		public IUserRepository UserRepository { get; set; }
@@ -58,29 +57,29 @@ namespace FurnitureShop.Infrastructure
 
 		public override string[] GetRolesForUser(string username)
 		{
-			AccountRoles = UserRepository.All.ToList();
+			_accountRoles = UserRepository.All.ToList();
 
-			string[] roles = AccountRoles.FindAll(u => u.Name == username).Select(u => u.UserRole.Name).ToArray();
+			string[] roles = _accountRoles.FindAll(u => u.Name == username).Select(u => u.UserRole.Name).ToArray();
 
 			return roles;
 		}
 
 		public override string[] GetUsersInRole(string roleName)
 		{
-			AccountRoles = UserRepository.All.ToList();
+			_accountRoles = UserRepository.All.ToList();
 
-			string[] users = AccountRoles.FindAll(u => u.UserRole.Name == roleName).Select(u => u.Name).ToArray();
+			string[] users = _accountRoles.FindAll(u => u.UserRole.Name == roleName).Select(u => u.Name).ToArray();
 
 			return users;
 		}
 
 		public override bool IsUserInRole(string username, string roleName)
 		{
-			AccountRoles = UserRepository.All.ToList();
+			_accountRoles = UserRepository.All.ToList();
 
-			bool UserIsInrole = AccountRoles.FindAll(u => u.Name == username).FirstOrDefault(u => u.UserRole.Name == roleName).UserRole.Name == roleName;
+			bool userIsInrole = _accountRoles.FindAll(u => u.Name == username).FirstOrDefault(u => u.UserRole.Name == roleName).UserRole.Name == roleName;
 
-			return UserIsInrole;
+			return userIsInrole;
 		}
 
 		public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
@@ -90,9 +89,9 @@ namespace FurnitureShop.Infrastructure
 
 		public override bool RoleExists(string roleName)
 		{
-			Roles = RoleRepository.All.ToList();
+			_roles = RoleRepository.All.ToList();
 
-			bool roleExist = Roles.Find(r => r.Name == roleName) != null;
+			bool roleExist = _roles.Find(r => r.Name == roleName) != null;
 
 			return roleExist;
 		}
